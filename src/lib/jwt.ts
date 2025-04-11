@@ -1,16 +1,14 @@
-import jwt from "jsonwebtoken";
-
-const JWT_SECRET_KEY = "your-secret-key"; // Change this to a secure, random key
+import { sign, verify } from 'hono/jwt';
 
 // Function to generate JWT token
-export function generateToken(userId: string) {
-  return jwt.sign({ userId }, JWT_SECRET_KEY, { expiresIn: "1h" });
+export function generateToken(userId: string, secret: string) {
+  return sign({ userId }, secret);
 }
 
 // Function to verify JWT token
-export function verifyToken(token: string) {
+export function verifyToken(token: string, secret: string) {
   try {
-    return jwt.verify(token, JWT_SECRET_KEY);
+    return verify(token, secret);
   } catch (error) {
     return null;
   }
