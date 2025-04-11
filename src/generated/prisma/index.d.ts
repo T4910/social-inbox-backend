@@ -2093,6 +2093,7 @@ export namespace Prisma {
     platform: $Enums.Platform | null
     userId: string | null
     accessToken: string | null
+    refreshToken: string | null
     linkedAt: Date | null
     updatedAt: Date | null
   }
@@ -2102,6 +2103,7 @@ export namespace Prisma {
     platform: $Enums.Platform | null
     userId: string | null
     accessToken: string | null
+    refreshToken: string | null
     linkedAt: Date | null
     updatedAt: Date | null
   }
@@ -2111,6 +2113,7 @@ export namespace Prisma {
     platform: number
     userId: number
     accessToken: number
+    refreshToken: number
     linkedAt: number
     updatedAt: number
     _all: number
@@ -2122,6 +2125,7 @@ export namespace Prisma {
     platform?: true
     userId?: true
     accessToken?: true
+    refreshToken?: true
     linkedAt?: true
     updatedAt?: true
   }
@@ -2131,6 +2135,7 @@ export namespace Prisma {
     platform?: true
     userId?: true
     accessToken?: true
+    refreshToken?: true
     linkedAt?: true
     updatedAt?: true
   }
@@ -2140,6 +2145,7 @@ export namespace Prisma {
     platform?: true
     userId?: true
     accessToken?: true
+    refreshToken?: true
     linkedAt?: true
     updatedAt?: true
     _all?: true
@@ -2222,6 +2228,7 @@ export namespace Prisma {
     platform: $Enums.Platform
     userId: string
     accessToken: string
+    refreshToken: string
     linkedAt: Date
     updatedAt: Date
     _count: AccountCountAggregateOutputType | null
@@ -2248,6 +2255,7 @@ export namespace Prisma {
     platform?: boolean
     userId?: boolean
     accessToken?: boolean
+    refreshToken?: boolean
     linkedAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2258,6 +2266,7 @@ export namespace Prisma {
     platform?: boolean
     userId?: boolean
     accessToken?: boolean
+    refreshToken?: boolean
     linkedAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2268,6 +2277,7 @@ export namespace Prisma {
     platform?: boolean
     userId?: boolean
     accessToken?: boolean
+    refreshToken?: boolean
     linkedAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2278,11 +2288,12 @@ export namespace Prisma {
     platform?: boolean
     userId?: boolean
     accessToken?: boolean
+    refreshToken?: boolean
     linkedAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "platform" | "userId" | "accessToken" | "linkedAt" | "updatedAt", ExtArgs["result"]["account"]>
+  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "platform" | "userId" | "accessToken" | "refreshToken" | "linkedAt" | "updatedAt", ExtArgs["result"]["account"]>
   export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2303,6 +2314,7 @@ export namespace Prisma {
       platform: $Enums.Platform
       userId: string
       accessToken: string
+      refreshToken: string
       linkedAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["account"]>
@@ -2733,6 +2745,7 @@ export namespace Prisma {
     readonly platform: FieldRef<"Account", 'Platform'>
     readonly userId: FieldRef<"Account", 'String'>
     readonly accessToken: FieldRef<"Account", 'String'>
+    readonly refreshToken: FieldRef<"Account", 'String'>
     readonly linkedAt: FieldRef<"Account", 'DateTime'>
     readonly updatedAt: FieldRef<"Account", 'DateTime'>
   }
@@ -3179,6 +3192,7 @@ export namespace Prisma {
     platform: 'platform',
     userId: 'userId',
     accessToken: 'accessToken',
+    refreshToken: 'refreshToken',
     linkedAt: 'linkedAt',
     updatedAt: 'updatedAt'
   };
@@ -3329,6 +3343,7 @@ export namespace Prisma {
     platform?: EnumPlatformFilter<"Account"> | $Enums.Platform
     userId?: StringFilter<"Account"> | string
     accessToken?: StringFilter<"Account"> | string
+    refreshToken?: StringFilter<"Account"> | string
     linkedAt?: DateTimeFilter<"Account"> | Date | string
     updatedAt?: DateTimeFilter<"Account"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -3339,6 +3354,7 @@ export namespace Prisma {
     platform?: SortOrder
     userId?: SortOrder
     accessToken?: SortOrder
+    refreshToken?: SortOrder
     linkedAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -3352,6 +3368,7 @@ export namespace Prisma {
     platform?: EnumPlatformFilter<"Account"> | $Enums.Platform
     userId?: StringFilter<"Account"> | string
     accessToken?: StringFilter<"Account"> | string
+    refreshToken?: StringFilter<"Account"> | string
     linkedAt?: DateTimeFilter<"Account"> | Date | string
     updatedAt?: DateTimeFilter<"Account"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -3362,6 +3379,7 @@ export namespace Prisma {
     platform?: SortOrder
     userId?: SortOrder
     accessToken?: SortOrder
+    refreshToken?: SortOrder
     linkedAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AccountCountOrderByAggregateInput
@@ -3377,6 +3395,7 @@ export namespace Prisma {
     platform?: EnumPlatformWithAggregatesFilter<"Account"> | $Enums.Platform
     userId?: StringWithAggregatesFilter<"Account"> | string
     accessToken?: StringWithAggregatesFilter<"Account"> | string
+    refreshToken?: StringWithAggregatesFilter<"Account"> | string
     linkedAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
   }
@@ -3445,6 +3464,7 @@ export namespace Prisma {
     id?: string
     platform: $Enums.Platform
     accessToken: string
+    refreshToken: string
     linkedAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutAccountsInput
@@ -3455,6 +3475,7 @@ export namespace Prisma {
     platform: $Enums.Platform
     userId: string
     accessToken: string
+    refreshToken: string
     linkedAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3463,6 +3484,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     platform?: EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
     accessToken?: StringFieldUpdateOperationsInput | string
+    refreshToken?: StringFieldUpdateOperationsInput | string
     linkedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutAccountsNestedInput
@@ -3473,6 +3495,7 @@ export namespace Prisma {
     platform?: EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
     userId?: StringFieldUpdateOperationsInput | string
     accessToken?: StringFieldUpdateOperationsInput | string
+    refreshToken?: StringFieldUpdateOperationsInput | string
     linkedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3482,6 +3505,7 @@ export namespace Prisma {
     platform: $Enums.Platform
     userId: string
     accessToken: string
+    refreshToken: string
     linkedAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3490,6 +3514,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     platform?: EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
     accessToken?: StringFieldUpdateOperationsInput | string
+    refreshToken?: StringFieldUpdateOperationsInput | string
     linkedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3499,6 +3524,7 @@ export namespace Prisma {
     platform?: EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
     userId?: StringFieldUpdateOperationsInput | string
     accessToken?: StringFieldUpdateOperationsInput | string
+    refreshToken?: StringFieldUpdateOperationsInput | string
     linkedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3624,6 +3650,7 @@ export namespace Prisma {
     platform?: SortOrder
     userId?: SortOrder
     accessToken?: SortOrder
+    refreshToken?: SortOrder
     linkedAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3633,6 +3660,7 @@ export namespace Prisma {
     platform?: SortOrder
     userId?: SortOrder
     accessToken?: SortOrder
+    refreshToken?: SortOrder
     linkedAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3642,6 +3670,7 @@ export namespace Prisma {
     platform?: SortOrder
     userId?: SortOrder
     accessToken?: SortOrder
+    refreshToken?: SortOrder
     linkedAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3852,6 +3881,7 @@ export namespace Prisma {
     id?: string
     platform: $Enums.Platform
     accessToken: string
+    refreshToken: string
     linkedAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3860,6 +3890,7 @@ export namespace Prisma {
     id?: string
     platform: $Enums.Platform
     accessToken: string
+    refreshToken: string
     linkedAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3898,6 +3929,7 @@ export namespace Prisma {
     platform?: EnumPlatformFilter<"Account"> | $Enums.Platform
     userId?: StringFilter<"Account"> | string
     accessToken?: StringFilter<"Account"> | string
+    refreshToken?: StringFilter<"Account"> | string
     linkedAt?: DateTimeFilter<"Account"> | Date | string
     updatedAt?: DateTimeFilter<"Account"> | Date | string
   }
@@ -3954,6 +3986,7 @@ export namespace Prisma {
     id?: string
     platform: $Enums.Platform
     accessToken: string
+    refreshToken: string
     linkedAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3962,6 +3995,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     platform?: EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
     accessToken?: StringFieldUpdateOperationsInput | string
+    refreshToken?: StringFieldUpdateOperationsInput | string
     linkedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3970,6 +4004,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     platform?: EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
     accessToken?: StringFieldUpdateOperationsInput | string
+    refreshToken?: StringFieldUpdateOperationsInput | string
     linkedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3978,6 +4013,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     platform?: EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
     accessToken?: StringFieldUpdateOperationsInput | string
+    refreshToken?: StringFieldUpdateOperationsInput | string
     linkedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

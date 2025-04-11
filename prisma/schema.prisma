@@ -31,6 +31,7 @@ model Account {
   userId    String   // The user that owns this account
   user      User     @relation(fields: [userId], references: [id])
   accessToken String // Stored access token for API interaction with social media platform
+  refreshToken String // Stored access token for API interaction with social media platform
   linkedAt  DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

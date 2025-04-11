@@ -130,6 +130,7 @@ exports.Prisma.AccountScalarFieldEnum = {
   platform: 'platform',
   userId: 'userId',
   accessToken: 'accessToken',
+  refreshToken: 'refreshToken',
   linkedAt: 'linkedAt',
   updatedAt: 'updatedAt'
 };

@@ -26,13 +26,14 @@ model User {
 
 // Account model representing a linked social media account (Facebook, Instagram, LinkedIn)
 model Account {
-  id          String   @id @default(uuid()) @db.Uuid
-  platform    Platform // e.g. 'facebook', 'instagram', 'linkedin'
-  userId      String // The user that owns this account
-  user        User     @relation(fields: [userId], references: [id])
-  accessToken String // Stored access token for API interaction with social media platform
-  linkedAt    DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String   @id @default(uuid()) @db.Uuid
+  platform     Platform // e.g. 'facebook', 'instagram', 'linkedin'
+  userId       String // The user that owns this account
+  user         User     @relation(fields: [userId], references: [id])
+  accessToken  String // Stored access token for API interaction with social media platform
+  refreshToken String // Stored access token for API interaction with social media platform
+  linkedAt     DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 enum Platform {
