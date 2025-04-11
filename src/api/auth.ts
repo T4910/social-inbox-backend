@@ -24,8 +24,8 @@ auth.get("/me", async (ctx) => {
   console.log(decoded)
 
   // Fetch the user from the database using the user ID from the decoded token
-  const user = await db.user.findUnique({ where: { id: decoded.userId }, select: { id: true, email: true } });
-
+  const user = await db.user.findUnique({ where: { id: decoded.userId }, select: { id: true, email: true, roles: true } });
+  // ctx.var.userId = decoded.userId
   if (!user) {
     return ctx.json({message: "User not found", status: 404});
   }
@@ -46,11 +46,11 @@ auth.post("/logout", async (ctx) => {
 auth.use(preventLoggedInUser)
 
 auth.post("/register", async (ctx) => {
-  console.log(ctx.env)
+  // console.log(ctx.env)
   const db = getPrisma(ctx.env.DATABASE_URL)
   const { email, password } = await ctx.req.json();
 
-  console.log(email, password)
+  // console.log(email, password)
 
   // Check if the user already exists in the database
   const existingUser = await db.user.findUnique({ where: { email } });
@@ -58,16 +58,22 @@ auth.post("/register", async (ctx) => {
     return ctx.json({message: "User already exists", status: 400});
   }
 
+  const defaultRole = await db.roles.findFirst({ where: { name: "viewer" } });
+  console.log(defaultRole, 76)
+
   // Create a new user in the database
   const newUser = await db.user.create({
     data: {
       email,
-      password // Store the hashed password
+      password, // Store the hashed password
+      roles: {
+        connect: { id: defaultRole?.id } // Connect to the default role
+      }
     },
   });
 
   // Generate JWT token
-  const token = await generateToken(newUser.id, ctx.env.JWT_SECRET);
+  const token = await generateToken(newUser.id, defaultRole?.id || '', ctx.env.JWT_SECRET);
 
   // Set the token in an HttpOnly cookie
   setCookie(ctx, "auth_token", token, {
@@ -84,14 +90,16 @@ auth.post("/login", async (ctx) => {
   const db = getPrisma(ctx.env.DATABASE_URL)
   const { email, password } = await ctx.req.json();
 
-  // Find the user by email
-  const user = await db.user.findUnique({ where: { email } });
-  if (!user || user.password !== password) {
-    return ctx.text("Invalid credentials", 401);
-  }
 
+  // Find the user by email
+  const user = await db.user.findUnique({ where: { email }, include: { roles: true } });
+  if (!user || user.password !== password) {
+    return ctx.json({message: "Invalid credentials", status: 401});
+  }
+  
+  console.log(email, password, user)
   // Generate JWT token
-  const token = await generateToken(user.id, ctx.env.JWT_SECRET);
+  const token = await generateToken(user.id, user.roles[0].id || '',  ctx.env.JWT_SECRET);
 
   // Set the token in an HttpOnly cookie
   setCookie(ctx, "auth_token", token, {
@@ -101,7 +109,7 @@ auth.post("/login", async (ctx) => {
     path: "/", // Make it available across the entire site
   });
 
-  return ctx.json({ message: "Logged in successfully" });
+  return ctx.json({ message: "Logged in successfully", status: 200 });
 });
 
 

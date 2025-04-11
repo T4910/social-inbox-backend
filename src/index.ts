@@ -1,6 +1,8 @@
 import { Hono } from "hono";
 import { cors } from 'hono/cors';
 import auth from "./api/auth";
+import { seed } from "./api/seed";
+import { tasks } from "./api/task";
 import { getPrisma } from "./lib/db";
 
 export type AppBindings = {
@@ -33,16 +35,14 @@ app.use(
   }
 );
 
+app.route('/api/seed/', seed);
 app.route('/api/auth/', auth);
+app.route('/api/tasks/', tasks);
 
 
 app.get("/", async (c) => {
-  const db = getPrisma(c.env.DATABASE_URL)
 
-  const users = await db.user.findMany()
-
-  if(c.var.userId) console.log('User ID:', c.var.userId)
-  return c.json({ hi: "Hello Hono!", users });
+  return c.json({ hi: "Hello Hono!" });
 });
 
 export default app;

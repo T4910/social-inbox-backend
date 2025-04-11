@@ -155,30 +155,6 @@ exports.Prisma.RolesScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.UserTaskScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  taskId: 'taskId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.RolePermissionsScalarFieldEnum = {
-  id: 'id',
-  roleId: 'roleId',
-  permissionId: 'permissionId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.UserRolesScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  roleId: 'roleId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.PermissionsScalarFieldEnum = {
   id: 'id',
   resource: 'resource',
@@ -219,9 +195,6 @@ exports.Prisma.ModelName = {
   Task: 'Task',
   TaskComment: 'TaskComment',
   Roles: 'Roles',
-  UserTask: 'UserTask',
-  RolePermissions: 'RolePermissions',
-  UserRoles: 'UserRoles',
   Permissions: 'Permissions'
 };
 

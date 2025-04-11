@@ -13,3 +13,5 @@ export const preventLoggedInUser = createMiddleware(async (c, next) => {
     }
     await next();
 })
+
+// rbacMiddleware(role: 'admin' | 'editor' | 'viewer')
