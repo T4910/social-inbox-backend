@@ -21,23 +21,103 @@ model User {
   password  String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  accounts  Account[] // One user can have multiple social media accounts linked
+
+  tasks     UserTask[]
+  roles     UserRoles[] 
+  comments  TaskComment[]
 }
 
-// Account model representing a linked social media account (Facebook, Instagram, LinkedIn)
-model Account {
-  id        String   @id @default(uuid()) @db.Uuid
-  platform  Platform   // e.g. 'facebook', 'instagram', 'linkedin'
-  userId    String   // The user that owns this account
-  user      User     @relation(fields: [userId], references: [id])
-  accessToken String // Stored access token for API interaction with social media platform
-  refreshToken String // Stored access token for API interaction with social media platform
-  linkedAt  DateTime @default(now())
+model Task {
+  id        String   @id @default(uuid())
+  title     String
+  description String
+  status    TaskStatus
+  priority  TaskPriority
+  assigneeId String?
+  createdById String
+  dueDate   DateTime?
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  users     UserTask[]
+  comments  TaskComment[]
 }
 
-enum Platform {
-  FACEBOOK
-  INSTAGRAM
-  LINKEDIN
+model TaskComment {
+  id        String   @id @default(uuid())
+  taskId    String
+  userId    String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  task Task @relation(fields: [taskId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+}
+
+enum TaskStatus {
+  PENDING
+  IN_PROGRESS
+  REVIEW
+  DONE
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model Roles {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  description String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users       UserRoles[]
+  permissions RolePermissions[]
+}
+
+model UserTask {
+  id        String   @id @default(uuid())
+  userId    String
+  taskId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  task Task @relation(fields: [taskId], references: [id])
+}
+
+model RolePermissions {
+  id        String   @id @default(uuid())
+  roleId    String
+  permissionId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  role Roles @relation(fields: [roleId], references: [id])
+  permission Permissions @relation(fields: [permissionId], references: [id])
+}
+
+model UserRoles {
+  id        String   @id @default(uuid())
+  userId    String
+  roleId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  role Roles @relation(fields: [roleId], references: [id])
+}
+
+model Permissions {
+  id        String   @id @default(uuid())
+  resource  String
+  action    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  roles       RolePermissions[]
 }

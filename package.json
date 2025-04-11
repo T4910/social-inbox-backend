@@ -3,9 +3,9 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",
-    "generate:db": "prisma generate --no-engine",
-    "push:db": "prisma db push --accept-data-loss",
-    "migrate:db": "prisma migrate dev --name init --create-only",
+    "db:generate": "prisma generate --no-engine",
+    "db:push": "prisma db push --accept-data-loss",
+    "db:migrate": "prisma migrate dev --name init --create-only",
     "migrate:apply": "prisma migrate deploy",
     "migrate:reset": "prisma migrate reset --force --skip-seed"
   },
@@ -13,7 +13,8 @@
     "@prisma/client": "^6.6.0",
     "@prisma/extension-accelerate": "^1.3.0",
     "backend": "link:",
-    "hono": "^4.7.6"
+    "hono": "^4.7.6",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250214.0",
