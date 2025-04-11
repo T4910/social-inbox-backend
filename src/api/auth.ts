@@ -7,9 +7,11 @@ import { preventLoggedInUser } from "../middleware/authMiddleware";
 
 const auth = new Hono<AppBindings>();
 
-auth.get("/me", async (ctx) => {
+auth.post("/me", async (ctx) => {
   const db = getPrisma(ctx.env.DATABASE_URL)
-  const token = getCookie(ctx, "auth_token");
+  const {token} = await ctx.req.json()
+  
+  console.log(token, 'token')
 
   if (!token) {
     return ctx.json({message: "Not authenticated", status: 401});
@@ -18,10 +20,8 @@ auth.get("/me", async (ctx) => {
   // Verify the token
   const decoded = await verifyToken(token, ctx.env.JWT_SECRET) as { userId: string } | null;
   if (!decoded) {
-    return ctx.json({message: "Invalid or expired token", status: 401});
+    return ctx.json({message: "Invalid or expired token", status: 401, ok: false});
   }
-
-  console.log(decoded)
 
   // Fetch the user from the database using the user ID from the decoded token
   const user = await db.user.findUnique({ where: { id: decoded.userId }, select: { id: true, email: true, roles: true } });
@@ -30,7 +30,7 @@ auth.get("/me", async (ctx) => {
     return ctx.json({message: "User not found", status: 404});
   }
 
-  return ctx.json({ user });
+  return ctx.json({ data: user, status: 200 });
 });
 
 auth.post("/logout", async (ctx) => {
@@ -50,7 +50,7 @@ auth.post("/register", async (ctx) => {
   const db = getPrisma(ctx.env.DATABASE_URL)
   const { email, password } = await ctx.req.json();
 
-  // console.log(email, password)
+  console.log(email, password)
 
   // Check if the user already exists in the database
   const existingUser = await db.user.findUnique({ where: { email } });
@@ -75,15 +75,7 @@ auth.post("/register", async (ctx) => {
   // Generate JWT token
   const token = await generateToken(newUser.id, defaultRole?.id || '', ctx.env.JWT_SECRET);
 
-  // Set the token in an HttpOnly cookie
-  setCookie(ctx, "auth_token", token, {
-    httpOnly: true,
-    secure: ctx.env.ENVIRONMENT === "production", // set to true in production with HTTPS
-    maxAge: 60 * 60, // 1 hour expiration
-    path: "/", // Make it available across the entire site
-  });
-
-  return ctx.json({ message: "User registered successfully, log user in", status: 200 });
+  return ctx.json({ message: token, status: 200 });
 });
 
 auth.post("/login", async (ctx) => {
@@ -101,15 +93,7 @@ auth.post("/login", async (ctx) => {
   // Generate JWT token
   const token = await generateToken(user.id, user.roles[0].id || '',  ctx.env.JWT_SECRET);
 
-  // Set the token in an HttpOnly cookie
-  setCookie(ctx, "auth_token", token, {
-    httpOnly: true,
-    secure: ctx.env.ENVIRONMENT === "production",
-    maxAge: 60 * 60, // 1 hour expiration
-    path: "/", // Make it available across the entire site
-  });
-
-  return ctx.json({ message: "Logged in successfully", status: 200 });
+  return ctx.json({ message: token, status: 200 });
 });
 
 
