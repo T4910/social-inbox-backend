@@ -6,7 +6,7 @@ import { getPrisma } from '../lib/db';
 
 const users = new Hono<AppBindings>();
 
-const updateUserSchema = {
+const updateUserSchema = z.object({
     user: z.object({
         name: z.string(),
         email: z.string(),
@@ -14,7 +14,7 @@ const updateUserSchema = {
     role: z.object({
         name: z.string(),
     })
-}
+})
 
 // Get all users
 users.get('/users', async (c) => {
@@ -63,13 +63,15 @@ users.get('/users/:id', async (c) => {
 // Update a user by ID
 users.put('/users/:id', 
         zValidator('json', z.object({
-        body: z.object(updateUserSchema)
+        body: updateUserSchema
     })),
     async (c) => {
     const db = getPrisma(c.env.DATABASE_URL);
 
     const id = c.req.param('id');
-    const body = c.req.valid('json');
+    const { body } = c.req.valid('json');
+        console.log(body)
+
     try {
         const updatedUser = await db.user.update({
             where: { id },
