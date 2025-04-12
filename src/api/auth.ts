@@ -9,12 +9,10 @@ const auth = new Hono<AppBindings>();
 
 auth.post("/me", async (ctx) => {
   const db = getPrisma(ctx.env.DATABASE_URL)
-  const {token} = await ctx.req.json()
+  const { token } = await ctx.req.json()
   
-  console.log(token, 'token')
-
   if (!token) {
-    return ctx.json({message: "Not authenticated", status: 401});
+    return ctx.json({message: "Not authenticated", status: 401, ok: false});
   }
 
   // Verify the token
@@ -27,39 +25,25 @@ auth.post("/me", async (ctx) => {
   const user = await db.user.findUnique({ where: { id: decoded.userId }, select: { id: true, email: true, roles: true } });
   // ctx.var.userId = decoded.userId
   if (!user) {
-    return ctx.json({message: "User not found", status: 404});
+    return ctx.json({message: "User not found", status: 404, ok: false});
   }
 
-  return ctx.json({ data: user, status: 200 });
+  return ctx.json({ data: user, status: 200, ok: true });
 });
-
-auth.post("/logout", async (ctx) => {
-  deleteCookie(ctx, 'banana', {
-    path: '/',
-    secure: ctx.env.ENVIRONMENT === "production",
-    domain: 'example.com',
-  })
-
-  return ctx.json({message: "Logged out successfully"});
-})
 
 auth.use(preventLoggedInUser)
 
 auth.post("/register", async (ctx) => {
-  // console.log(ctx.env)
   const db = getPrisma(ctx.env.DATABASE_URL)
   const { email, password } = await ctx.req.json();
-
-  console.log(email, password)
 
   // Check if the user already exists in the database
   const existingUser = await db.user.findUnique({ where: { email } });
   if (existingUser) {
-    return ctx.json({message: "User already exists", status: 400});
+    return ctx.json({message: "User already exists", status: 400, ok: false});
   }
 
   const defaultRole = await db.roles.findFirst({ where: { name: "viewer" } });
-  console.log(defaultRole, 76)
 
   // Create a new user in the database
   const newUser = await db.user.create({
@@ -75,7 +59,7 @@ auth.post("/register", async (ctx) => {
   // Generate JWT token
   const token = await generateToken(newUser.id, defaultRole?.id || '', ctx.env.JWT_SECRET);
 
-  return ctx.json({ message: token, status: 200 });
+  return ctx.json({ data: token, status: 200, ok: true });
 });
 
 auth.post("/login", async (ctx) => {
@@ -86,14 +70,13 @@ auth.post("/login", async (ctx) => {
   // Find the user by email
   const user = await db.user.findUnique({ where: { email }, include: { roles: true } });
   if (!user || user.password !== password) {
-    return ctx.json({message: "Invalid credentials", status: 401});
+    return ctx.json({message: "Invalid credentials", status: 401, ok: false});
   }
   
-  console.log(email, password, user)
   // Generate JWT token
   const token = await generateToken(user.id, user.roles[0].id || '',  ctx.env.JWT_SECRET);
 
-  return ctx.json({ message: token, status: 200 });
+  return ctx.json({ data: token, status: 200, ok: true });
 });
 
 
