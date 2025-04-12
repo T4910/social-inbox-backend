@@ -5,34 +5,30 @@ import { AppBindings } from "..";
 import { getPrisma } from "../lib/db";
 
 const createRolesSchema = z.object({
-  role: z.object({
-    name: z.string(),
-    description: z.string(),
-    permissions: z.array(
-      z.object({
-        resource: z.enum(["tasks", "projects", "users", "roles"]),
-        action: z.enum(["create", "read", "update", "delete"]),
-      })
-    ),
-  }),
+  name: z.string(),
+  description: z.string(),
+  permissions: z.array(
+    z.object({
+      resource: z.enum(["tasks", "users", "roles"]),
+      action: z.enum(["create", "read", "update", "delete"]),
+    })
+  ),
 });
 
 const updateRolesSchema = z.object({
-  role: z.object({
-    id: z.string(),
-    name: z.string(),
-    permissions: z.array(
-      z.object({
-        resource: z.enum(["tasks", "projects", "users", "roles"]),
-        action: z.enum(["create", "read", "update", "delete"]),
-      })
-    ),
-  }),
+  id: z.string(),
+  name: z.string(),
+  permissions: z.array(
+    z.object({
+      resource: z.enum(["tasks", "users", "roles"]),
+      action: z.enum(["create", "read", "update", "delete"]),
+    })
+  ),
 });
 
 export const roles = new Hono<AppBindings>();
 
-roles.get("/roles", async (c) => {
+roles.get("/", async (c) => {
   const db = getPrisma(c.env.DATABASE_URL);
 
   const roles = await db.roles.findMany({
@@ -42,76 +38,54 @@ roles.get("/roles", async (c) => {
   return c.json({ data: roles, status: 200, ok: true }, 200);
 });
 
-roles.post(
-  "/roles",
-  zValidator(
-    "json",
-    z.object({
-      body: createRolesSchema,
-    })
-  ),
-  async (c) => {
-    const db = getPrisma(c.env.DATABASE_URL);
+roles.post("/", zValidator("json", createRolesSchema), async (c) => {
+  const db = getPrisma(c.env.DATABASE_URL);
 
-    const {
-      body: { role },
-    } = c.req.valid("json");
-    console.log(role);
+  const role = c.req.valid("json");
+  console.log(role);
 
-    const newRole = await db.roles.create({
-      include: { permissions: true },
-      data: {
-        name: role.name,
-        description: role.description,
-        permissions: {
-          create: role.permissions.map((permission) => ({
-            resource: permission.resource,
-            action: permission.action,
-          })),
-        },
+  const newRole = await db.roles.create({
+    include: { permissions: true },
+    data: {
+      name: role.name,
+      description: role.description,
+      permissions: {
+        create: role.permissions.map((permission) => ({
+          resource: permission.resource,
+          action: permission.action,
+        })),
       },
-    });
+    },
+  });
 
-    return c.json({ data: newRole, status: 201, ok: true }, 201);
-  }
-);
+  return c.json({ data: newRole, status: 201, ok: true }, 201);
+});
 
-roles.put(
-  "/roles/:id/",
-  zValidator(
-    "json",
-    z.object({
-      body: updateRolesSchema,
-    })
-  ),
-  async (c) => {
-    const db = getPrisma(c.env.DATABASE_URL);
+roles.put("/:id", zValidator("json", updateRolesSchema), async (c) => {
+  const db = getPrisma(c.env.DATABASE_URL);
 
-    const id = c.req.param("id");
-    const {
-      body: { role },
-    } = c.req.valid("json");
+  const id = c.req.param("id");
+  const role = c.req.valid("json");
 
-    const updated = await db.roles.update({
-      where: { id },
-      include: { permissions: true },
-      data: {
-        name: role.name,
-        permissions: {
-          deleteMany: {}, // Delete existing permissions
-          create: role.permissions.map((permission) => ({
-            resource: permission.resource,
-            action: permission.action,
-          })),
-        },
+  const updated = await db.roles.update({
+    where: { id },
+    include: { permissions: true },
+    data: {
+      name: role.name,
+      permissions: {
+        deleteMany: {}, // Delete existing permissions
+        create: role.permissions.map((permission) => ({
+          resource: permission.resource,
+          action: permission.action,
+        })),
       },
-    });
+    },
+  });
 
-    return c.json({ data: updated, status: 200, ok: true }, 200);
-  }
-);
+  return c.json({ data: updated, status: 200, ok: true }, 200);
+});
 
-roles.delete("/roles/:id", async (c) => {
+roles.delete("/:id", async (c) => {
   const db = getPrisma(c.env.DATABASE_URL);
 
   const id = c.req.param("id");

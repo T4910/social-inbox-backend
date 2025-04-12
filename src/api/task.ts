@@ -77,61 +77,45 @@ tasks.get("/:id", async (c) => {
 });
 
 // POST /tasks - create a new task
-tasks.post(
-  "/",
-  zValidator(
-    "json",
-    z.object({
-      body: createTaskSchema,
-    })
-  ),
-  async (c) => {
-    const db = getPrisma(c.env.DATABASE_URL);
-    const { body } = c.req.valid("json");
+tasks.post("/", zValidator("json", createTaskSchema), async (c) => {
+  const db = getPrisma(c.env.DATABASE_URL);
+  const body = c.req.valid("json");
 
-    const newTask = await db.task.create({
-      data: {
-        ...body,
-        comments: {
-          create:
-            body.comment?.map((comment) => ({
-              userId: comment.userId,
-              content: comment.content,
-            })) || [],
-        },
+  console.log(body, "body");
+
+  const newTask = await db.task.create({
+    data: {
+      ...body,
+      comments: {
+        create:
+          body.comment?.map((comment) => ({
+            userId: comment.userId,
+            content: comment.content,
+          })) || [],
       },
-    });
+    },
+  });
 
-    return c.json({ data: newTask, status: 200, ok: true });
-  }
-);
+  return c.json({ data: newTask, status: 200, ok: true });
+});
 
 // PUT /tasks/:id - update a task
-tasks.put(
-  "/:id",
-  zValidator(
-    "json",
-    z.object({
-      body: updateTaskSchemea,
-    })
-  ),
-  async (c) => {
-    const db = getPrisma(c.env.DATABASE_URL);
+tasks.put("/:id", zValidator("json", updateTaskSchemea), async (c) => {
+  const db = getPrisma(c.env.DATABASE_URL);
 
-    const id = c.req.param("id");
-    const { body } = c.req.valid("json");
+  const id = c.req.param("id");
+  const body = c.req.valid("json");
 
-    // taskWithoutComments
-    const newTask = await db.task.update({
-      where: { id },
-      data: {
-        ...body,
-      },
-    });
+  // taskWithoutComments
+  const newTask = await db.task.update({
+    where: { id },
+    data: {
+      ...body,
+    },
+  });
 
-    return c.json({ data: newTask, status: 200, ok: true });
-  }
-);
+  return c.json({ data: newTask, status: 200, ok: true });
+});
 
 // DELETE /tasks/:id - delete a task
 tasks.delete("/:id", async (c) => {
@@ -147,16 +131,11 @@ tasks.delete("/:id", async (c) => {
 // POST /tasks/:id/comments - add a comment to a task
 tasks.post(
   "/:id/comments",
-  zValidator(
-    "json",
-    z.object({
-      body: createCommentSchema,
-    })
-  ),
+  zValidator("json", createCommentSchema),
   async (c) => {
     const db = getPrisma(c.env.DATABASE_URL);
     const id = c.req.param("id");
-    const { body } = c.req.valid("json");
+    const body = c.req.valid("json");
 
     const newComment = await db.taskComment.create({
       data: {
