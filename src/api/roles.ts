@@ -1,15 +1,34 @@
+import { zValidator } from '@hono/zod-validator';
 import { Hono } from 'hono';
 import { z } from 'zod';
 import { AppBindings } from '..';
 import { getPrisma } from '../lib/db';
 // import { checkRole } from '../middleware/rbac';
 
+const createRolesSchema = {
+  role: z.object({
+      name: z.string(),
+      description: z.string(),
+      permissions: z.array(z.object({
+          resource: z.enum(['tasks', 'projects', 'users', 'roles']),
+          action: z.enum(['create', 'read', 'update', 'delete']),
+      })),
+  })
+}
+
+const updateRolesSchema = {
+  role: z.object({
+      id: z.string(),
+      name: z.string(),
+      permissions: z.array(z.object({
+          resource: z.enum(['tasks', 'projects', 'users', 'roles']),
+          action: z.enum(['create', 'read', 'update', 'delete']),
+      })),
+  })
+}
+
 export const roles = new Hono<AppBindings>();
 
-// Only ADMINs should be allowed to access these routes
-// roles.use('*', checkRole(['ADMIN']));
-
-// Get list of all users with roles
 roles.get('/roles', async (c) => {
           const db = getPrisma(c.env.DATABASE_URL)
     
@@ -17,23 +36,59 @@ roles.get('/roles', async (c) => {
     include: { permissions: true },
   });
 
-  return c.json(roles);
+  return c.json({data: roles, status: 200, ok: true}, 200);
 });
 
-// 
-// roles.put('/roles/:id/', async (c) => {
-//   const id = c.req.param('id');
-//   const body = await c.req.json();
-//   const result = roleSchema.safeParse(body);
+roles.post('/roles',
+  zValidator('json', z.object({
+    body: z.object(createRolesSchema)
+  })),
+  async (c) => {
+  const db = getPrisma(c.env.DATABASE_URL)
 
-//   if (!result.success) {
-//     return c.json({ error: result.error.flatten() }, 400);
-//   }
+  const {body: {role}} = c.req.valid('json');
 
-//   const updated = await db.user.update({
-//     where: { id },
-//     data: { role: result.data.role },
-//   });
 
-//   return c.json(updated);
-// });
+  const newRole = await db.roles.create({
+    data: {
+      name: role.name,
+      description: role.description,
+      permissions: {
+        create: role.permissions.map((permission) => ({
+          resource: permission.resource,
+          action: permission.action,
+        })),
+      },
+    }
+  });
+
+  return c.json(newRole, 201);
+})
+
+
+roles.put('/roles/:id/', 
+  zValidator('json', z.object({
+    body: z.object(updateRolesSchema)
+  })),
+  async (c) => {
+  const db = getPrisma(c.env.DATABASE_URL)
+
+  const id = c.req.param('id');
+  const {body: {role}} = c.req.valid('json');
+
+  const updated = await db.roles.update({
+    where: { id },
+    data: { 
+      name: role.name,
+      permissions: {
+        deleteMany: {}, // Delete existing permissions
+        create: role.permissions.map((permission) => ({
+          resource: permission.resource,
+          action: permission.action,
+        })),
+      },
+     },
+  });
+
+  return c.json({data: updated, status: 200, ok: true}, 200);
+});
