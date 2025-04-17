@@ -1,8 +1,12 @@
-import { sign, verify } from 'hono/jwt';
+import { sign, verify } from "hono/jwt";
 
 // Function to generate JWT token
-export function generateToken(userId: string, roleId: string, secret: string) {
-  return sign({ userId, roleId }, secret);
+export function generateToken(
+  userId: string,
+  currentOrgId: string,
+  secret: string
+) {
+  return sign({ userId, currentOrgId }, secret);
 }
 
 // Function to verify JWT token

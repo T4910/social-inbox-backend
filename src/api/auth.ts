@@ -30,7 +30,7 @@ auth.post("/me", async (ctx) => {
   // Fetch the user from the database using the user ID from the decoded token
   const user = await db.user.findUnique({
     where: { id: decoded.userId },
-    select: { id: true, email: true, roles: true },
+    select: { id: true, email: true },
   });
   // ctx.var.userId = decoded.userId
   if (!user) {
@@ -40,54 +40,54 @@ auth.post("/me", async (ctx) => {
   return ctx.json({ data: user, status: 200, ok: true });
 });
 
-auth.post("/checkPermissions", async (ctx) => {
-  const db = getPrisma(ctx.env.DATABASE_URL);
-  const { token, actions, resources } = (await ctx.req.json()) as {
-    token: string;
-    actions: string[];
-    resources: string[];
-  };
+// auth.post("/checkPermissions", async (ctx) => {
+//   const db = getPrisma(ctx.env.DATABASE_URL);
+//   const { token, actions, resources } = (await ctx.req.json()) as {
+//     token: string;
+//     actions: string[];
+//     resources: string[];
+//   };
 
-  if (!token) {
-    return ctx.json({ message: "Not authenticated", status: 401, ok: false });
-  }
+//   if (!token) {
+//     return ctx.json({ message: "Not authenticated", status: 401, ok: false });
+//   }
 
-  // Verify the token
-  const decoded = (await verifyToken(token, ctx.env.JWT_SECRET)) as {
-    userId: string;
-  } | null;
-  if (!decoded) {
-    return ctx.json({
-      message: "Invalid or expired token",
-      status: 401,
-      ok: false,
-    });
-  }
+//   // Verify the token
+//   const decoded = (await verifyToken(token, ctx.env.JWT_SECRET)) as {
+//     userId: string;
+//   } | null;
+//   if (!decoded) {
+//     return ctx.json({
+//       message: "Invalid or expired token",
+//       status: 401,
+//       ok: false,
+//     });
+//   }
 
-  // Fetch the user from the database using the user ID from the decoded token
-  const user = await db.user.findUnique({
-    where: { id: decoded.userId },
-    include: { roles: { include: { permissions: true } } },
-  });
-  // ctx.var.userId = decoded.userId
-  if (!user) {
-    return ctx.json({ message: "User not found", status: 404, ok: false });
-  }
+//   // Fetch the user from the database using the user ID from the decoded token
+//   const user = await db.user.findUnique({
+//     where: { id: decoded.userId },
+//     include: { roles: { include: { permissions: true } } },
+//   });
+//   // ctx.var.userId = decoded.userId
+//   if (!user) {
+//     return ctx.json({ message: "User not found", status: 404, ok: false });
+//   }
 
-  // Check if the user has the required permissions
-  const hasPermission = user.roles[0].permissions.some((permission) => {
-    return (
-      actions.includes(permission.action) &&
-      resources.includes(permission.resource)
-    );
-  });
+//   // Check if the user has the required permissions
+//   const hasPermission = user.roles[0].permissions.some((permission) => {
+//     return (
+//       actions.includes(permission.action) &&
+//       resources.includes(permission.resource)
+//     );
+//   });
 
-  if (!hasPermission) {
-    return ctx.json({ message: "Forbidden", status: 403, ok: false });
-  }
+//   if (!hasPermission) {
+//     return ctx.json({ message: "Forbidden", status: 403, ok: false });
+//   }
 
-  return ctx.json({ data: true, status: 200, ok: true });
-});
+//   return ctx.json({ data: true, status: 200, ok: true });
+// });
 
 auth.use(preventLoggedInUser);
 
@@ -101,27 +101,15 @@ auth.post("/register", async (ctx) => {
     return ctx.json({ message: "User already exists", status: 400, ok: false });
   }
 
-  const defaultRole = await db.roles.findFirst({ where: { name: "viewer" } });
-
   // Create a new user in the database
   const newUser = await db.user.create({
     data: {
       email,
       password, // Store the hashed password
-      roles: {
-        connect: { id: defaultRole?.id }, // Connect to the default role
-      },
     },
   });
 
-  // Generate JWT token
-  const token = await generateToken(
-    newUser.id,
-    defaultRole?.id || "",
-    ctx.env.JWT_SECRET
-  );
-
-  return ctx.json({ data: token, status: 200, ok: true });
+  return ctx.json({ data: { userId: newUser.id }, status: 200, ok: true });
 });
 
 auth.post("/login", async (ctx) => {
@@ -131,7 +119,7 @@ auth.post("/login", async (ctx) => {
   // Find the user by email
   const user = await db.user.findUnique({
     where: { email },
-    include: { roles: true },
+    include: { memberships: true },
   });
   if (!user || user.password !== password) {
     return ctx.json({ message: "Invalid credentials", status: 401, ok: false });
@@ -140,11 +128,11 @@ auth.post("/login", async (ctx) => {
   // Generate JWT token
   const token = await generateToken(
     user.id,
-    user.roles[0].id || "",
+    user.memberships[0].organizationId,
     ctx.env.JWT_SECRET
   );
 
-  return ctx.json({ data: token, status: 200, ok: true });
+  return ctx.json({ data: { token }, status: 200, ok: true });
 });
 
 export default auth;

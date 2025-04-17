@@ -38,6 +38,21 @@ export type Roles = $Result.DefaultSelection<Prisma.$RolesPayload>
  * 
  */
 export type Permissions = $Result.DefaultSelection<Prisma.$PermissionsPayload>
+/**
+ * Model Organization
+ * 
+ */
+export type Organization = $Result.DefaultSelection<Prisma.$OrganizationPayload>
+/**
+ * Model UserOrganization
+ * 
+ */
+export type UserOrganization = $Result.DefaultSelection<Prisma.$UserOrganizationPayload>
+/**
+ * Model Invite
+ * 
+ */
+export type Invite = $Result.DefaultSelection<Prisma.$InvitePayload>
 
 /**
  * Enums
@@ -245,6 +260,36 @@ export class PrismaClient<
     * ```
     */
   get permissions(): Prisma.PermissionsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.organization`: Exposes CRUD operations for the **Organization** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Organizations
+    * const organizations = await prisma.organization.findMany()
+    * ```
+    */
+  get organization(): Prisma.OrganizationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userOrganization`: Exposes CRUD operations for the **UserOrganization** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserOrganizations
+    * const userOrganizations = await prisma.userOrganization.findMany()
+    * ```
+    */
+  get userOrganization(): Prisma.UserOrganizationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.invite`: Exposes CRUD operations for the **Invite** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Invites
+    * const invites = await prisma.invite.findMany()
+    * ```
+    */
+  get invite(): Prisma.InviteDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -689,7 +734,10 @@ export namespace Prisma {
     Task: 'Task',
     TaskComment: 'TaskComment',
     Roles: 'Roles',
-    Permissions: 'Permissions'
+    Permissions: 'Permissions',
+    Organization: 'Organization',
+    UserOrganization: 'UserOrganization',
+    Invite: 'Invite'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -708,7 +756,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "task" | "taskComment" | "roles" | "permissions"
+      modelProps: "user" | "task" | "taskComment" | "roles" | "permissions" | "organization" | "userOrganization" | "invite"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1082,6 +1130,228 @@ export namespace Prisma {
           }
         }
       }
+      Organization: {
+        payload: Prisma.$OrganizationPayload<ExtArgs>
+        fields: Prisma.OrganizationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OrganizationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OrganizationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload>
+          }
+          findFirst: {
+            args: Prisma.OrganizationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OrganizationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload>
+          }
+          findMany: {
+            args: Prisma.OrganizationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload>[]
+          }
+          create: {
+            args: Prisma.OrganizationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload>
+          }
+          createMany: {
+            args: Prisma.OrganizationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OrganizationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload>[]
+          }
+          delete: {
+            args: Prisma.OrganizationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload>
+          }
+          update: {
+            args: Prisma.OrganizationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload>
+          }
+          deleteMany: {
+            args: Prisma.OrganizationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OrganizationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.OrganizationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload>[]
+          }
+          upsert: {
+            args: Prisma.OrganizationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganizationPayload>
+          }
+          aggregate: {
+            args: Prisma.OrganizationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOrganization>
+          }
+          groupBy: {
+            args: Prisma.OrganizationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OrganizationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OrganizationCountArgs<ExtArgs>
+            result: $Utils.Optional<OrganizationCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserOrganization: {
+        payload: Prisma.$UserOrganizationPayload<ExtArgs>
+        fields: Prisma.UserOrganizationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserOrganizationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserOrganizationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserOrganizationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserOrganizationPayload>
+          }
+          findFirst: {
+            args: Prisma.UserOrganizationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserOrganizationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserOrganizationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserOrganizationPayload>
+          }
+          findMany: {
+            args: Prisma.UserOrganizationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserOrganizationPayload>[]
+          }
+          create: {
+            args: Prisma.UserOrganizationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserOrganizationPayload>
+          }
+          createMany: {
+            args: Prisma.UserOrganizationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserOrganizationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserOrganizationPayload>[]
+          }
+          delete: {
+            args: Prisma.UserOrganizationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserOrganizationPayload>
+          }
+          update: {
+            args: Prisma.UserOrganizationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserOrganizationPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserOrganizationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserOrganizationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserOrganizationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserOrganizationPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserOrganizationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserOrganizationPayload>
+          }
+          aggregate: {
+            args: Prisma.UserOrganizationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserOrganization>
+          }
+          groupBy: {
+            args: Prisma.UserOrganizationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserOrganizationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserOrganizationCountArgs<ExtArgs>
+            result: $Utils.Optional<UserOrganizationCountAggregateOutputType> | number
+          }
+        }
+      }
+      Invite: {
+        payload: Prisma.$InvitePayload<ExtArgs>
+        fields: Prisma.InviteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InviteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InviteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitePayload>
+          }
+          findFirst: {
+            args: Prisma.InviteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InviteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitePayload>
+          }
+          findMany: {
+            args: Prisma.InviteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitePayload>[]
+          }
+          create: {
+            args: Prisma.InviteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitePayload>
+          }
+          createMany: {
+            args: Prisma.InviteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InviteCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitePayload>[]
+          }
+          delete: {
+            args: Prisma.InviteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitePayload>
+          }
+          update: {
+            args: Prisma.InviteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitePayload>
+          }
+          deleteMany: {
+            args: Prisma.InviteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InviteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InviteUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitePayload>[]
+          }
+          upsert: {
+            args: Prisma.InviteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitePayload>
+          }
+          aggregate: {
+            args: Prisma.InviteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInvite>
+          }
+          groupBy: {
+            args: Prisma.InviteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InviteGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InviteCountArgs<ExtArgs>
+            result: $Utils.Optional<InviteCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1171,6 +1441,9 @@ export namespace Prisma {
     taskComment?: TaskCommentOmit
     roles?: RolesOmit
     permissions?: PermissionsOmit
+    organization?: OrganizationOmit
+    userOrganization?: UserOrganizationOmit
+    invite?: InviteOmit
   }
 
   /* Types for Logging */
@@ -1267,15 +1540,17 @@ export namespace Prisma {
   export type UserCountOutputType = {
     assignedTasks: number
     createdTasks: number
-    roles: number
+    invitations: number
     comments: number
+    memberships: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assignedTasks?: boolean | UserCountOutputTypeCountAssignedTasksArgs
     createdTasks?: boolean | UserCountOutputTypeCountCreatedTasksArgs
-    roles?: boolean | UserCountOutputTypeCountRolesArgs
+    invitations?: boolean | UserCountOutputTypeCountInvitationsArgs
     comments?: boolean | UserCountOutputTypeCountCommentsArgs
+    memberships?: boolean | UserCountOutputTypeCountMembershipsArgs
   }
 
   // Custom InputTypes
@@ -1306,8 +1581,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: RolesWhereInput
+  export type UserCountOutputTypeCountInvitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InviteWhereInput
   }
 
   /**
@@ -1315,6 +1590,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TaskCommentWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMembershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserOrganizationWhereInput
   }
 
 
@@ -1354,13 +1636,13 @@ export namespace Prisma {
    */
 
   export type RolesCountOutputType = {
-    users: number
     permissions: number
+    memberships: number
   }
 
   export type RolesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    users?: boolean | RolesCountOutputTypeCountUsersArgs
     permissions?: boolean | RolesCountOutputTypeCountPermissionsArgs
+    memberships?: boolean | RolesCountOutputTypeCountMembershipsArgs
   }
 
   // Custom InputTypes
@@ -1377,15 +1659,15 @@ export namespace Prisma {
   /**
    * RolesCountOutputType without action
    */
-  export type RolesCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserWhereInput
+  export type RolesCountOutputTypeCountPermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PermissionsWhereInput
   }
 
   /**
    * RolesCountOutputType without action
    */
-  export type RolesCountOutputTypeCountPermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PermissionsWhereInput
+  export type RolesCountOutputTypeCountMembershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserOrganizationWhereInput
   }
 
 
@@ -1417,6 +1699,64 @@ export namespace Prisma {
    */
   export type PermissionsCountOutputTypeCountRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RolesWhereInput
+  }
+
+
+  /**
+   * Count Type OrganizationCountOutputType
+   */
+
+  export type OrganizationCountOutputType = {
+    memberships: number
+    tasks: number
+    roles: number
+    invites: number
+  }
+
+  export type OrganizationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    memberships?: boolean | OrganizationCountOutputTypeCountMembershipsArgs
+    tasks?: boolean | OrganizationCountOutputTypeCountTasksArgs
+    roles?: boolean | OrganizationCountOutputTypeCountRolesArgs
+    invites?: boolean | OrganizationCountOutputTypeCountInvitesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * OrganizationCountOutputType without action
+   */
+  export type OrganizationCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrganizationCountOutputType
+     */
+    select?: OrganizationCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * OrganizationCountOutputType without action
+   */
+  export type OrganizationCountOutputTypeCountMembershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserOrganizationWhereInput
+  }
+
+  /**
+   * OrganizationCountOutputType without action
+   */
+  export type OrganizationCountOutputTypeCountTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TaskWhereInput
+  }
+
+  /**
+   * OrganizationCountOutputType without action
+   */
+  export type OrganizationCountOutputTypeCountRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RolesWhereInput
+  }
+
+  /**
+   * OrganizationCountOutputType without action
+   */
+  export type OrganizationCountOutputTypeCountInvitesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InviteWhereInput
   }
 
 
@@ -1590,8 +1930,9 @@ export namespace Prisma {
     updatedAt?: boolean
     assignedTasks?: boolean | User$assignedTasksArgs<ExtArgs>
     createdTasks?: boolean | User$createdTasksArgs<ExtArgs>
-    roles?: boolean | User$rolesArgs<ExtArgs>
+    invitations?: boolean | User$invitationsArgs<ExtArgs>
     comments?: boolean | User$commentsArgs<ExtArgs>
+    memberships?: boolean | User$membershipsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1623,8 +1964,9 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assignedTasks?: boolean | User$assignedTasksArgs<ExtArgs>
     createdTasks?: boolean | User$createdTasksArgs<ExtArgs>
-    roles?: boolean | User$rolesArgs<ExtArgs>
+    invitations?: boolean | User$invitationsArgs<ExtArgs>
     comments?: boolean | User$commentsArgs<ExtArgs>
+    memberships?: boolean | User$membershipsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1635,8 +1977,9 @@ export namespace Prisma {
     objects: {
       assignedTasks: Prisma.$TaskPayload<ExtArgs>[]
       createdTasks: Prisma.$TaskPayload<ExtArgs>[]
-      roles: Prisma.$RolesPayload<ExtArgs>[]
+      invitations: Prisma.$InvitePayload<ExtArgs>[]
       comments: Prisma.$TaskCommentPayload<ExtArgs>[]
+      memberships: Prisma.$UserOrganizationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2040,8 +2383,9 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     assignedTasks<T extends User$assignedTasksArgs<ExtArgs> = {}>(args?: Subset<T, User$assignedTasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     createdTasks<T extends User$createdTasksArgs<ExtArgs> = {}>(args?: Subset<T, User$createdTasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    roles<T extends User$rolesArgs<ExtArgs> = {}>(args?: Subset<T, User$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    invitations<T extends User$invitationsArgs<ExtArgs> = {}>(args?: Subset<T, User$invitationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     comments<T extends User$commentsArgs<ExtArgs> = {}>(args?: Subset<T, User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    memberships<T extends User$membershipsArgs<ExtArgs> = {}>(args?: Subset<T, User$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserOrganizationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2512,27 +2856,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.roles
+   * User.invitations
    */
-  export type User$rolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$invitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Roles
+     * Select specific fields to fetch from the Invite
      */
-    select?: RolesSelect<ExtArgs> | null
+    select?: InviteSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Roles
+     * Omit specific fields from the Invite
      */
-    omit?: RolesOmit<ExtArgs> | null
+    omit?: InviteOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RolesInclude<ExtArgs> | null
-    where?: RolesWhereInput
-    orderBy?: RolesOrderByWithRelationInput | RolesOrderByWithRelationInput[]
-    cursor?: RolesWhereUniqueInput
+    include?: InviteInclude<ExtArgs> | null
+    where?: InviteWhereInput
+    orderBy?: InviteOrderByWithRelationInput | InviteOrderByWithRelationInput[]
+    cursor?: InviteWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: RolesScalarFieldEnum | RolesScalarFieldEnum[]
+    distinct?: InviteScalarFieldEnum | InviteScalarFieldEnum[]
   }
 
   /**
@@ -2557,6 +2901,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TaskCommentScalarFieldEnum | TaskCommentScalarFieldEnum[]
+  }
+
+  /**
+   * User.memberships
+   */
+  export type User$membershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserOrganization
+     */
+    select?: UserOrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserOrganization
+     */
+    omit?: UserOrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserOrganizationInclude<ExtArgs> | null
+    where?: UserOrganizationWhereInput
+    orderBy?: UserOrganizationOrderByWithRelationInput | UserOrganizationOrderByWithRelationInput[]
+    cursor?: UserOrganizationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserOrganizationScalarFieldEnum | UserOrganizationScalarFieldEnum[]
   }
 
   /**
@@ -2599,6 +2967,7 @@ export namespace Prisma {
     dueDate: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    organizationId: string | null
   }
 
   export type TaskMaxAggregateOutputType = {
@@ -2612,6 +2981,7 @@ export namespace Prisma {
     dueDate: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    organizationId: string | null
   }
 
   export type TaskCountAggregateOutputType = {
@@ -2625,6 +2995,7 @@ export namespace Prisma {
     dueDate: number
     createdAt: number
     updatedAt: number
+    organizationId: number
     _all: number
   }
 
@@ -2640,6 +3011,7 @@ export namespace Prisma {
     dueDate?: true
     createdAt?: true
     updatedAt?: true
+    organizationId?: true
   }
 
   export type TaskMaxAggregateInputType = {
@@ -2653,6 +3025,7 @@ export namespace Prisma {
     dueDate?: true
     createdAt?: true
     updatedAt?: true
+    organizationId?: true
   }
 
   export type TaskCountAggregateInputType = {
@@ -2666,6 +3039,7 @@ export namespace Prisma {
     dueDate?: true
     createdAt?: true
     updatedAt?: true
+    organizationId?: true
     _all?: true
   }
 
@@ -2752,6 +3126,7 @@ export namespace Prisma {
     dueDate: Date | null
     createdAt: Date
     updatedAt: Date
+    organizationId: string
     _count: TaskCountAggregateOutputType | null
     _min: TaskMinAggregateOutputType | null
     _max: TaskMaxAggregateOutputType | null
@@ -2782,9 +3157,11 @@ export namespace Prisma {
     dueDate?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    organizationId?: boolean
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
     comments?: boolean | Task$commentsArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
     _count?: boolean | TaskCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["task"]>
 
@@ -2799,8 +3176,10 @@ export namespace Prisma {
     dueDate?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    organizationId?: boolean
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["task"]>
 
   export type TaskSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2814,8 +3193,10 @@ export namespace Prisma {
     dueDate?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    organizationId?: boolean
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["task"]>
 
   export type TaskSelectScalar = {
@@ -2829,22 +3210,26 @@ export namespace Prisma {
     dueDate?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    organizationId?: boolean
   }
 
-  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "status" | "priority" | "assigneeId" | "createdById" | "dueDate" | "createdAt" | "updatedAt", ExtArgs["result"]["task"]>
+  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "status" | "priority" | "assigneeId" | "createdById" | "dueDate" | "createdAt" | "updatedAt" | "organizationId", ExtArgs["result"]["task"]>
   export type TaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
     comments?: boolean | Task$commentsArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
     _count?: boolean | TaskCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TaskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
   }
   export type TaskIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
   }
 
   export type $TaskPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2853,6 +3238,7 @@ export namespace Prisma {
       createdBy: Prisma.$UserPayload<ExtArgs>
       assignee: Prisma.$UserPayload<ExtArgs> | null
       comments: Prisma.$TaskCommentPayload<ExtArgs>[]
+      organization: Prisma.$OrganizationPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2865,6 +3251,7 @@ export namespace Prisma {
       dueDate: Date | null
       createdAt: Date
       updatedAt: Date
+      organizationId: string
     }, ExtArgs["result"]["task"]>
     composites: {}
   }
@@ -3262,6 +3649,7 @@ export namespace Prisma {
     createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     assignee<T extends Task$assigneeArgs<ExtArgs> = {}>(args?: Subset<T, Task$assigneeArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     comments<T extends Task$commentsArgs<ExtArgs> = {}>(args?: Subset<T, Task$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3301,6 +3689,7 @@ export namespace Prisma {
     readonly dueDate: FieldRef<"Task", 'DateTime'>
     readonly createdAt: FieldRef<"Task", 'DateTime'>
     readonly updatedAt: FieldRef<"Task", 'DateTime'>
+    readonly organizationId: FieldRef<"Task", 'String'>
   }
     
 
@@ -4853,6 +5242,7 @@ export namespace Prisma {
     description: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    organizationId: string | null
   }
 
   export type RolesMaxAggregateOutputType = {
@@ -4861,6 +5251,7 @@ export namespace Prisma {
     description: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    organizationId: string | null
   }
 
   export type RolesCountAggregateOutputType = {
@@ -4869,6 +5260,7 @@ export namespace Prisma {
     description: number
     createdAt: number
     updatedAt: number
+    organizationId: number
     _all: number
   }
 
@@ -4879,6 +5271,7 @@ export namespace Prisma {
     description?: true
     createdAt?: true
     updatedAt?: true
+    organizationId?: true
   }
 
   export type RolesMaxAggregateInputType = {
@@ -4887,6 +5280,7 @@ export namespace Prisma {
     description?: true
     createdAt?: true
     updatedAt?: true
+    organizationId?: true
   }
 
   export type RolesCountAggregateInputType = {
@@ -4895,6 +5289,7 @@ export namespace Prisma {
     description?: true
     createdAt?: true
     updatedAt?: true
+    organizationId?: true
     _all?: true
   }
 
@@ -4976,6 +5371,7 @@ export namespace Prisma {
     description: string
     createdAt: Date
     updatedAt: Date
+    organizationId: string | null
     _count: RolesCountAggregateOutputType | null
     _min: RolesMinAggregateOutputType | null
     _max: RolesMaxAggregateOutputType | null
@@ -5001,8 +5397,10 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    users?: boolean | Roles$usersArgs<ExtArgs>
+    organizationId?: boolean
     permissions?: boolean | Roles$permissionsArgs<ExtArgs>
+    organization?: boolean | Roles$organizationArgs<ExtArgs>
+    memberships?: boolean | Roles$membershipsArgs<ExtArgs>
     _count?: boolean | RolesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["roles"]>
 
@@ -5012,6 +5410,8 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    organizationId?: boolean
+    organization?: boolean | Roles$organizationArgs<ExtArgs>
   }, ExtArgs["result"]["roles"]>
 
   export type RolesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5020,6 +5420,8 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    organizationId?: boolean
+    organization?: boolean | Roles$organizationArgs<ExtArgs>
   }, ExtArgs["result"]["roles"]>
 
   export type RolesSelectScalar = {
@@ -5028,22 +5430,29 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    organizationId?: boolean
   }
 
-  export type RolesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["roles"]>
+  export type RolesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt" | "organizationId", ExtArgs["result"]["roles"]>
   export type RolesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    users?: boolean | Roles$usersArgs<ExtArgs>
     permissions?: boolean | Roles$permissionsArgs<ExtArgs>
+    organization?: boolean | Roles$organizationArgs<ExtArgs>
+    memberships?: boolean | Roles$membershipsArgs<ExtArgs>
     _count?: boolean | RolesCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type RolesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type RolesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type RolesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | Roles$organizationArgs<ExtArgs>
+  }
+  export type RolesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | Roles$organizationArgs<ExtArgs>
+  }
 
   export type $RolesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Roles"
     objects: {
-      users: Prisma.$UserPayload<ExtArgs>[]
       permissions: Prisma.$PermissionsPayload<ExtArgs>[]
+      organization: Prisma.$OrganizationPayload<ExtArgs> | null
+      memberships: Prisma.$UserOrganizationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5051,6 +5460,7 @@ export namespace Prisma {
       description: string
       createdAt: Date
       updatedAt: Date
+      organizationId: string | null
     }, ExtArgs["result"]["roles"]>
     composites: {}
   }
@@ -5445,8 +5855,9 @@ export namespace Prisma {
    */
   export interface Prisma__RolesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    users<T extends Roles$usersArgs<ExtArgs> = {}>(args?: Subset<T, Roles$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     permissions<T extends Roles$permissionsArgs<ExtArgs> = {}>(args?: Subset<T, Roles$permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermissionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    organization<T extends Roles$organizationArgs<ExtArgs> = {}>(args?: Subset<T, Roles$organizationArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    memberships<T extends Roles$membershipsArgs<ExtArgs> = {}>(args?: Subset<T, Roles$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserOrganizationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5481,6 +5892,7 @@ export namespace Prisma {
     readonly description: FieldRef<"Roles", 'String'>
     readonly createdAt: FieldRef<"Roles", 'DateTime'>
     readonly updatedAt: FieldRef<"Roles", 'DateTime'>
+    readonly organizationId: FieldRef<"Roles", 'String'>
   }
     
 
@@ -5730,6 +6142,10 @@ export namespace Prisma {
      */
     data: RolesCreateManyInput | RolesCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolesIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -5800,6 +6216,10 @@ export namespace Prisma {
      * Limit how many Roles to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolesIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -5869,30 +6289,6 @@ export namespace Prisma {
   }
 
   /**
-   * Roles.users
-   */
-  export type Roles$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
-    cursor?: UserWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
-  }
-
-  /**
    * Roles.permissions
    */
   export type Roles$permissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5914,6 +6310,49 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PermissionsScalarFieldEnum | PermissionsScalarFieldEnum[]
+  }
+
+  /**
+   * Roles.organization
+   */
+  export type Roles$organizationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organization
+     */
+    select?: OrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organization
+     */
+    omit?: OrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationInclude<ExtArgs> | null
+    where?: OrganizationWhereInput
+  }
+
+  /**
+   * Roles.memberships
+   */
+  export type Roles$membershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserOrganization
+     */
+    select?: UserOrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserOrganization
+     */
+    omit?: UserOrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserOrganizationInclude<ExtArgs> | null
+    where?: UserOrganizationWhereInput
+    orderBy?: UserOrganizationOrderByWithRelationInput | UserOrganizationOrderByWithRelationInput[]
+    cursor?: UserOrganizationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserOrganizationScalarFieldEnum | UserOrganizationScalarFieldEnum[]
   }
 
   /**
@@ -7006,6 +7445,3326 @@ export namespace Prisma {
 
 
   /**
+   * Model Organization
+   */
+
+  export type AggregateOrganization = {
+    _count: OrganizationCountAggregateOutputType | null
+    _min: OrganizationMinAggregateOutputType | null
+    _max: OrganizationMaxAggregateOutputType | null
+  }
+
+  export type OrganizationMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type OrganizationMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type OrganizationCountAggregateOutputType = {
+    id: number
+    name: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type OrganizationMinAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type OrganizationMaxAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type OrganizationCountAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type OrganizationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Organization to aggregate.
+     */
+    where?: OrganizationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Organizations to fetch.
+     */
+    orderBy?: OrganizationOrderByWithRelationInput | OrganizationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OrganizationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Organizations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Organizations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Organizations
+    **/
+    _count?: true | OrganizationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OrganizationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OrganizationMaxAggregateInputType
+  }
+
+  export type GetOrganizationAggregateType<T extends OrganizationAggregateArgs> = {
+        [P in keyof T & keyof AggregateOrganization]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOrganization[P]>
+      : GetScalarType<T[P], AggregateOrganization[P]>
+  }
+
+
+
+
+  export type OrganizationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrganizationWhereInput
+    orderBy?: OrganizationOrderByWithAggregationInput | OrganizationOrderByWithAggregationInput[]
+    by: OrganizationScalarFieldEnum[] | OrganizationScalarFieldEnum
+    having?: OrganizationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OrganizationCountAggregateInputType | true
+    _min?: OrganizationMinAggregateInputType
+    _max?: OrganizationMaxAggregateInputType
+  }
+
+  export type OrganizationGroupByOutputType = {
+    id: string
+    name: string
+    createdAt: Date
+    updatedAt: Date
+    _count: OrganizationCountAggregateOutputType | null
+    _min: OrganizationMinAggregateOutputType | null
+    _max: OrganizationMaxAggregateOutputType | null
+  }
+
+  type GetOrganizationGroupByPayload<T extends OrganizationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OrganizationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OrganizationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OrganizationGroupByOutputType[P]>
+            : GetScalarType<T[P], OrganizationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OrganizationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    memberships?: boolean | Organization$membershipsArgs<ExtArgs>
+    tasks?: boolean | Organization$tasksArgs<ExtArgs>
+    roles?: boolean | Organization$rolesArgs<ExtArgs>
+    invites?: boolean | Organization$invitesArgs<ExtArgs>
+    _count?: boolean | OrganizationCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["organization"]>
+
+  export type OrganizationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["organization"]>
+
+  export type OrganizationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["organization"]>
+
+  export type OrganizationSelectScalar = {
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type OrganizationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["organization"]>
+  export type OrganizationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    memberships?: boolean | Organization$membershipsArgs<ExtArgs>
+    tasks?: boolean | Organization$tasksArgs<ExtArgs>
+    roles?: boolean | Organization$rolesArgs<ExtArgs>
+    invites?: boolean | Organization$invitesArgs<ExtArgs>
+    _count?: boolean | OrganizationCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type OrganizationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $OrganizationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Organization"
+    objects: {
+      memberships: Prisma.$UserOrganizationPayload<ExtArgs>[]
+      tasks: Prisma.$TaskPayload<ExtArgs>[]
+      roles: Prisma.$RolesPayload<ExtArgs>[]
+      invites: Prisma.$InvitePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["organization"]>
+    composites: {}
+  }
+
+  type OrganizationGetPayload<S extends boolean | null | undefined | OrganizationDefaultArgs> = $Result.GetResult<Prisma.$OrganizationPayload, S>
+
+  type OrganizationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OrganizationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OrganizationCountAggregateInputType | true
+    }
+
+  export interface OrganizationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Organization'], meta: { name: 'Organization' } }
+    /**
+     * Find zero or one Organization that matches the filter.
+     * @param {OrganizationFindUniqueArgs} args - Arguments to find a Organization
+     * @example
+     * // Get one Organization
+     * const organization = await prisma.organization.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OrganizationFindUniqueArgs>(args: SelectSubset<T, OrganizationFindUniqueArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Organization that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OrganizationFindUniqueOrThrowArgs} args - Arguments to find a Organization
+     * @example
+     * // Get one Organization
+     * const organization = await prisma.organization.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OrganizationFindUniqueOrThrowArgs>(args: SelectSubset<T, OrganizationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Organization that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganizationFindFirstArgs} args - Arguments to find a Organization
+     * @example
+     * // Get one Organization
+     * const organization = await prisma.organization.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OrganizationFindFirstArgs>(args?: SelectSubset<T, OrganizationFindFirstArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Organization that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganizationFindFirstOrThrowArgs} args - Arguments to find a Organization
+     * @example
+     * // Get one Organization
+     * const organization = await prisma.organization.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OrganizationFindFirstOrThrowArgs>(args?: SelectSubset<T, OrganizationFindFirstOrThrowArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Organizations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganizationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Organizations
+     * const organizations = await prisma.organization.findMany()
+     * 
+     * // Get first 10 Organizations
+     * const organizations = await prisma.organization.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const organizationWithIdOnly = await prisma.organization.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends OrganizationFindManyArgs>(args?: SelectSubset<T, OrganizationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Organization.
+     * @param {OrganizationCreateArgs} args - Arguments to create a Organization.
+     * @example
+     * // Create one Organization
+     * const Organization = await prisma.organization.create({
+     *   data: {
+     *     // ... data to create a Organization
+     *   }
+     * })
+     * 
+     */
+    create<T extends OrganizationCreateArgs>(args: SelectSubset<T, OrganizationCreateArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Organizations.
+     * @param {OrganizationCreateManyArgs} args - Arguments to create many Organizations.
+     * @example
+     * // Create many Organizations
+     * const organization = await prisma.organization.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OrganizationCreateManyArgs>(args?: SelectSubset<T, OrganizationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Organizations and returns the data saved in the database.
+     * @param {OrganizationCreateManyAndReturnArgs} args - Arguments to create many Organizations.
+     * @example
+     * // Create many Organizations
+     * const organization = await prisma.organization.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Organizations and only return the `id`
+     * const organizationWithIdOnly = await prisma.organization.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends OrganizationCreateManyAndReturnArgs>(args?: SelectSubset<T, OrganizationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Organization.
+     * @param {OrganizationDeleteArgs} args - Arguments to delete one Organization.
+     * @example
+     * // Delete one Organization
+     * const Organization = await prisma.organization.delete({
+     *   where: {
+     *     // ... filter to delete one Organization
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OrganizationDeleteArgs>(args: SelectSubset<T, OrganizationDeleteArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Organization.
+     * @param {OrganizationUpdateArgs} args - Arguments to update one Organization.
+     * @example
+     * // Update one Organization
+     * const organization = await prisma.organization.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OrganizationUpdateArgs>(args: SelectSubset<T, OrganizationUpdateArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Organizations.
+     * @param {OrganizationDeleteManyArgs} args - Arguments to filter Organizations to delete.
+     * @example
+     * // Delete a few Organizations
+     * const { count } = await prisma.organization.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OrganizationDeleteManyArgs>(args?: SelectSubset<T, OrganizationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Organizations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganizationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Organizations
+     * const organization = await prisma.organization.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OrganizationUpdateManyArgs>(args: SelectSubset<T, OrganizationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Organizations and returns the data updated in the database.
+     * @param {OrganizationUpdateManyAndReturnArgs} args - Arguments to update many Organizations.
+     * @example
+     * // Update many Organizations
+     * const organization = await prisma.organization.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Organizations and only return the `id`
+     * const organizationWithIdOnly = await prisma.organization.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends OrganizationUpdateManyAndReturnArgs>(args: SelectSubset<T, OrganizationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Organization.
+     * @param {OrganizationUpsertArgs} args - Arguments to update or create a Organization.
+     * @example
+     * // Update or create a Organization
+     * const organization = await prisma.organization.upsert({
+     *   create: {
+     *     // ... data to create a Organization
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Organization we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OrganizationUpsertArgs>(args: SelectSubset<T, OrganizationUpsertArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Organizations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganizationCountArgs} args - Arguments to filter Organizations to count.
+     * @example
+     * // Count the number of Organizations
+     * const count = await prisma.organization.count({
+     *   where: {
+     *     // ... the filter for the Organizations we want to count
+     *   }
+     * })
+    **/
+    count<T extends OrganizationCountArgs>(
+      args?: Subset<T, OrganizationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OrganizationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Organization.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganizationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OrganizationAggregateArgs>(args: Subset<T, OrganizationAggregateArgs>): Prisma.PrismaPromise<GetOrganizationAggregateType<T>>
+
+    /**
+     * Group by Organization.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganizationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OrganizationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OrganizationGroupByArgs['orderBy'] }
+        : { orderBy?: OrganizationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OrganizationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOrganizationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Organization model
+   */
+  readonly fields: OrganizationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Organization.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    memberships<T extends Organization$membershipsArgs<ExtArgs> = {}>(args?: Subset<T, Organization$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserOrganizationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    tasks<T extends Organization$tasksArgs<ExtArgs> = {}>(args?: Subset<T, Organization$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    roles<T extends Organization$rolesArgs<ExtArgs> = {}>(args?: Subset<T, Organization$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    invites<T extends Organization$invitesArgs<ExtArgs> = {}>(args?: Subset<T, Organization$invitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Organization model
+   */
+  interface OrganizationFieldRefs {
+    readonly id: FieldRef<"Organization", 'String'>
+    readonly name: FieldRef<"Organization", 'String'>
+    readonly createdAt: FieldRef<"Organization", 'DateTime'>
+    readonly updatedAt: FieldRef<"Organization", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Organization findUnique
+   */
+  export type OrganizationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organization
+     */
+    select?: OrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organization
+     */
+    omit?: OrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationInclude<ExtArgs> | null
+    /**
+     * Filter, which Organization to fetch.
+     */
+    where: OrganizationWhereUniqueInput
+  }
+
+  /**
+   * Organization findUniqueOrThrow
+   */
+  export type OrganizationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organization
+     */
+    select?: OrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organization
+     */
+    omit?: OrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationInclude<ExtArgs> | null
+    /**
+     * Filter, which Organization to fetch.
+     */
+    where: OrganizationWhereUniqueInput
+  }
+
+  /**
+   * Organization findFirst
+   */
+  export type OrganizationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organization
+     */
+    select?: OrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organization
+     */
+    omit?: OrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationInclude<ExtArgs> | null
+    /**
+     * Filter, which Organization to fetch.
+     */
+    where?: OrganizationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Organizations to fetch.
+     */
+    orderBy?: OrganizationOrderByWithRelationInput | OrganizationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Organizations.
+     */
+    cursor?: OrganizationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Organizations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Organizations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Organizations.
+     */
+    distinct?: OrganizationScalarFieldEnum | OrganizationScalarFieldEnum[]
+  }
+
+  /**
+   * Organization findFirstOrThrow
+   */
+  export type OrganizationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organization
+     */
+    select?: OrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organization
+     */
+    omit?: OrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationInclude<ExtArgs> | null
+    /**
+     * Filter, which Organization to fetch.
+     */
+    where?: OrganizationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Organizations to fetch.
+     */
+    orderBy?: OrganizationOrderByWithRelationInput | OrganizationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Organizations.
+     */
+    cursor?: OrganizationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Organizations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Organizations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Organizations.
+     */
+    distinct?: OrganizationScalarFieldEnum | OrganizationScalarFieldEnum[]
+  }
+
+  /**
+   * Organization findMany
+   */
+  export type OrganizationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organization
+     */
+    select?: OrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organization
+     */
+    omit?: OrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationInclude<ExtArgs> | null
+    /**
+     * Filter, which Organizations to fetch.
+     */
+    where?: OrganizationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Organizations to fetch.
+     */
+    orderBy?: OrganizationOrderByWithRelationInput | OrganizationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Organizations.
+     */
+    cursor?: OrganizationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Organizations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Organizations.
+     */
+    skip?: number
+    distinct?: OrganizationScalarFieldEnum | OrganizationScalarFieldEnum[]
+  }
+
+  /**
+   * Organization create
+   */
+  export type OrganizationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organization
+     */
+    select?: OrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organization
+     */
+    omit?: OrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Organization.
+     */
+    data: XOR<OrganizationCreateInput, OrganizationUncheckedCreateInput>
+  }
+
+  /**
+   * Organization createMany
+   */
+  export type OrganizationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Organizations.
+     */
+    data: OrganizationCreateManyInput | OrganizationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Organization createManyAndReturn
+   */
+  export type OrganizationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organization
+     */
+    select?: OrganizationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organization
+     */
+    omit?: OrganizationOmit<ExtArgs> | null
+    /**
+     * The data used to create many Organizations.
+     */
+    data: OrganizationCreateManyInput | OrganizationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Organization update
+   */
+  export type OrganizationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organization
+     */
+    select?: OrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organization
+     */
+    omit?: OrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Organization.
+     */
+    data: XOR<OrganizationUpdateInput, OrganizationUncheckedUpdateInput>
+    /**
+     * Choose, which Organization to update.
+     */
+    where: OrganizationWhereUniqueInput
+  }
+
+  /**
+   * Organization updateMany
+   */
+  export type OrganizationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Organizations.
+     */
+    data: XOR<OrganizationUpdateManyMutationInput, OrganizationUncheckedUpdateManyInput>
+    /**
+     * Filter which Organizations to update
+     */
+    where?: OrganizationWhereInput
+    /**
+     * Limit how many Organizations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Organization updateManyAndReturn
+   */
+  export type OrganizationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organization
+     */
+    select?: OrganizationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organization
+     */
+    omit?: OrganizationOmit<ExtArgs> | null
+    /**
+     * The data used to update Organizations.
+     */
+    data: XOR<OrganizationUpdateManyMutationInput, OrganizationUncheckedUpdateManyInput>
+    /**
+     * Filter which Organizations to update
+     */
+    where?: OrganizationWhereInput
+    /**
+     * Limit how many Organizations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Organization upsert
+   */
+  export type OrganizationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organization
+     */
+    select?: OrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organization
+     */
+    omit?: OrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Organization to update in case it exists.
+     */
+    where: OrganizationWhereUniqueInput
+    /**
+     * In case the Organization found by the `where` argument doesn't exist, create a new Organization with this data.
+     */
+    create: XOR<OrganizationCreateInput, OrganizationUncheckedCreateInput>
+    /**
+     * In case the Organization was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OrganizationUpdateInput, OrganizationUncheckedUpdateInput>
+  }
+
+  /**
+   * Organization delete
+   */
+  export type OrganizationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organization
+     */
+    select?: OrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organization
+     */
+    omit?: OrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationInclude<ExtArgs> | null
+    /**
+     * Filter which Organization to delete.
+     */
+    where: OrganizationWhereUniqueInput
+  }
+
+  /**
+   * Organization deleteMany
+   */
+  export type OrganizationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Organizations to delete
+     */
+    where?: OrganizationWhereInput
+    /**
+     * Limit how many Organizations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Organization.memberships
+   */
+  export type Organization$membershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserOrganization
+     */
+    select?: UserOrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserOrganization
+     */
+    omit?: UserOrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserOrganizationInclude<ExtArgs> | null
+    where?: UserOrganizationWhereInput
+    orderBy?: UserOrganizationOrderByWithRelationInput | UserOrganizationOrderByWithRelationInput[]
+    cursor?: UserOrganizationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserOrganizationScalarFieldEnum | UserOrganizationScalarFieldEnum[]
+  }
+
+  /**
+   * Organization.tasks
+   */
+  export type Organization$tasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Task
+     */
+    select?: TaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Task
+     */
+    omit?: TaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TaskInclude<ExtArgs> | null
+    where?: TaskWhereInput
+    orderBy?: TaskOrderByWithRelationInput | TaskOrderByWithRelationInput[]
+    cursor?: TaskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TaskScalarFieldEnum | TaskScalarFieldEnum[]
+  }
+
+  /**
+   * Organization.roles
+   */
+  export type Organization$rolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Roles
+     */
+    select?: RolesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Roles
+     */
+    omit?: RolesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolesInclude<ExtArgs> | null
+    where?: RolesWhereInput
+    orderBy?: RolesOrderByWithRelationInput | RolesOrderByWithRelationInput[]
+    cursor?: RolesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RolesScalarFieldEnum | RolesScalarFieldEnum[]
+  }
+
+  /**
+   * Organization.invites
+   */
+  export type Organization$invitesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invite
+     */
+    select?: InviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invite
+     */
+    omit?: InviteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InviteInclude<ExtArgs> | null
+    where?: InviteWhereInput
+    orderBy?: InviteOrderByWithRelationInput | InviteOrderByWithRelationInput[]
+    cursor?: InviteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InviteScalarFieldEnum | InviteScalarFieldEnum[]
+  }
+
+  /**
+   * Organization without action
+   */
+  export type OrganizationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organization
+     */
+    select?: OrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organization
+     */
+    omit?: OrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrganizationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserOrganization
+   */
+
+  export type AggregateUserOrganization = {
+    _count: UserOrganizationCountAggregateOutputType | null
+    _min: UserOrganizationMinAggregateOutputType | null
+    _max: UserOrganizationMaxAggregateOutputType | null
+  }
+
+  export type UserOrganizationMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    organizationId: string | null
+    roleId: string | null
+    joinedAt: Date | null
+  }
+
+  export type UserOrganizationMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    organizationId: string | null
+    roleId: string | null
+    joinedAt: Date | null
+  }
+
+  export type UserOrganizationCountAggregateOutputType = {
+    id: number
+    userId: number
+    organizationId: number
+    roleId: number
+    joinedAt: number
+    _all: number
+  }
+
+
+  export type UserOrganizationMinAggregateInputType = {
+    id?: true
+    userId?: true
+    organizationId?: true
+    roleId?: true
+    joinedAt?: true
+  }
+
+  export type UserOrganizationMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    organizationId?: true
+    roleId?: true
+    joinedAt?: true
+  }
+
+  export type UserOrganizationCountAggregateInputType = {
+    id?: true
+    userId?: true
+    organizationId?: true
+    roleId?: true
+    joinedAt?: true
+    _all?: true
+  }
+
+  export type UserOrganizationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserOrganization to aggregate.
+     */
+    where?: UserOrganizationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserOrganizations to fetch.
+     */
+    orderBy?: UserOrganizationOrderByWithRelationInput | UserOrganizationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserOrganizationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserOrganizations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserOrganizations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserOrganizations
+    **/
+    _count?: true | UserOrganizationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserOrganizationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserOrganizationMaxAggregateInputType
+  }
+
+  export type GetUserOrganizationAggregateType<T extends UserOrganizationAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserOrganization]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserOrganization[P]>
+      : GetScalarType<T[P], AggregateUserOrganization[P]>
+  }
+
+
+
+
+  export type UserOrganizationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserOrganizationWhereInput
+    orderBy?: UserOrganizationOrderByWithAggregationInput | UserOrganizationOrderByWithAggregationInput[]
+    by: UserOrganizationScalarFieldEnum[] | UserOrganizationScalarFieldEnum
+    having?: UserOrganizationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserOrganizationCountAggregateInputType | true
+    _min?: UserOrganizationMinAggregateInputType
+    _max?: UserOrganizationMaxAggregateInputType
+  }
+
+  export type UserOrganizationGroupByOutputType = {
+    id: string
+    userId: string
+    organizationId: string
+    roleId: string
+    joinedAt: Date
+    _count: UserOrganizationCountAggregateOutputType | null
+    _min: UserOrganizationMinAggregateOutputType | null
+    _max: UserOrganizationMaxAggregateOutputType | null
+  }
+
+  type GetUserOrganizationGroupByPayload<T extends UserOrganizationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserOrganizationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserOrganizationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserOrganizationGroupByOutputType[P]>
+            : GetScalarType<T[P], UserOrganizationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserOrganizationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    organizationId?: boolean
+    roleId?: boolean
+    joinedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    role?: boolean | RolesDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userOrganization"]>
+
+  export type UserOrganizationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    organizationId?: boolean
+    roleId?: boolean
+    joinedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    role?: boolean | RolesDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userOrganization"]>
+
+  export type UserOrganizationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    organizationId?: boolean
+    roleId?: boolean
+    joinedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    role?: boolean | RolesDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userOrganization"]>
+
+  export type UserOrganizationSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    organizationId?: boolean
+    roleId?: boolean
+    joinedAt?: boolean
+  }
+
+  export type UserOrganizationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "organizationId" | "roleId" | "joinedAt", ExtArgs["result"]["userOrganization"]>
+  export type UserOrganizationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    role?: boolean | RolesDefaultArgs<ExtArgs>
+  }
+  export type UserOrganizationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    role?: boolean | RolesDefaultArgs<ExtArgs>
+  }
+  export type UserOrganizationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    role?: boolean | RolesDefaultArgs<ExtArgs>
+  }
+
+  export type $UserOrganizationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserOrganization"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      organization: Prisma.$OrganizationPayload<ExtArgs>
+      role: Prisma.$RolesPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      organizationId: string
+      roleId: string
+      joinedAt: Date
+    }, ExtArgs["result"]["userOrganization"]>
+    composites: {}
+  }
+
+  type UserOrganizationGetPayload<S extends boolean | null | undefined | UserOrganizationDefaultArgs> = $Result.GetResult<Prisma.$UserOrganizationPayload, S>
+
+  type UserOrganizationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserOrganizationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserOrganizationCountAggregateInputType | true
+    }
+
+  export interface UserOrganizationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserOrganization'], meta: { name: 'UserOrganization' } }
+    /**
+     * Find zero or one UserOrganization that matches the filter.
+     * @param {UserOrganizationFindUniqueArgs} args - Arguments to find a UserOrganization
+     * @example
+     * // Get one UserOrganization
+     * const userOrganization = await prisma.userOrganization.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserOrganizationFindUniqueArgs>(args: SelectSubset<T, UserOrganizationFindUniqueArgs<ExtArgs>>): Prisma__UserOrganizationClient<$Result.GetResult<Prisma.$UserOrganizationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserOrganization that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserOrganizationFindUniqueOrThrowArgs} args - Arguments to find a UserOrganization
+     * @example
+     * // Get one UserOrganization
+     * const userOrganization = await prisma.userOrganization.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserOrganizationFindUniqueOrThrowArgs>(args: SelectSubset<T, UserOrganizationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserOrganizationClient<$Result.GetResult<Prisma.$UserOrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserOrganization that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserOrganizationFindFirstArgs} args - Arguments to find a UserOrganization
+     * @example
+     * // Get one UserOrganization
+     * const userOrganization = await prisma.userOrganization.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserOrganizationFindFirstArgs>(args?: SelectSubset<T, UserOrganizationFindFirstArgs<ExtArgs>>): Prisma__UserOrganizationClient<$Result.GetResult<Prisma.$UserOrganizationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserOrganization that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserOrganizationFindFirstOrThrowArgs} args - Arguments to find a UserOrganization
+     * @example
+     * // Get one UserOrganization
+     * const userOrganization = await prisma.userOrganization.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserOrganizationFindFirstOrThrowArgs>(args?: SelectSubset<T, UserOrganizationFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserOrganizationClient<$Result.GetResult<Prisma.$UserOrganizationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserOrganizations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserOrganizationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserOrganizations
+     * const userOrganizations = await prisma.userOrganization.findMany()
+     * 
+     * // Get first 10 UserOrganizations
+     * const userOrganizations = await prisma.userOrganization.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userOrganizationWithIdOnly = await prisma.userOrganization.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserOrganizationFindManyArgs>(args?: SelectSubset<T, UserOrganizationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserOrganizationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserOrganization.
+     * @param {UserOrganizationCreateArgs} args - Arguments to create a UserOrganization.
+     * @example
+     * // Create one UserOrganization
+     * const UserOrganization = await prisma.userOrganization.create({
+     *   data: {
+     *     // ... data to create a UserOrganization
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserOrganizationCreateArgs>(args: SelectSubset<T, UserOrganizationCreateArgs<ExtArgs>>): Prisma__UserOrganizationClient<$Result.GetResult<Prisma.$UserOrganizationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserOrganizations.
+     * @param {UserOrganizationCreateManyArgs} args - Arguments to create many UserOrganizations.
+     * @example
+     * // Create many UserOrganizations
+     * const userOrganization = await prisma.userOrganization.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserOrganizationCreateManyArgs>(args?: SelectSubset<T, UserOrganizationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserOrganizations and returns the data saved in the database.
+     * @param {UserOrganizationCreateManyAndReturnArgs} args - Arguments to create many UserOrganizations.
+     * @example
+     * // Create many UserOrganizations
+     * const userOrganization = await prisma.userOrganization.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserOrganizations and only return the `id`
+     * const userOrganizationWithIdOnly = await prisma.userOrganization.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserOrganizationCreateManyAndReturnArgs>(args?: SelectSubset<T, UserOrganizationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserOrganizationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserOrganization.
+     * @param {UserOrganizationDeleteArgs} args - Arguments to delete one UserOrganization.
+     * @example
+     * // Delete one UserOrganization
+     * const UserOrganization = await prisma.userOrganization.delete({
+     *   where: {
+     *     // ... filter to delete one UserOrganization
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserOrganizationDeleteArgs>(args: SelectSubset<T, UserOrganizationDeleteArgs<ExtArgs>>): Prisma__UserOrganizationClient<$Result.GetResult<Prisma.$UserOrganizationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserOrganization.
+     * @param {UserOrganizationUpdateArgs} args - Arguments to update one UserOrganization.
+     * @example
+     * // Update one UserOrganization
+     * const userOrganization = await prisma.userOrganization.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserOrganizationUpdateArgs>(args: SelectSubset<T, UserOrganizationUpdateArgs<ExtArgs>>): Prisma__UserOrganizationClient<$Result.GetResult<Prisma.$UserOrganizationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserOrganizations.
+     * @param {UserOrganizationDeleteManyArgs} args - Arguments to filter UserOrganizations to delete.
+     * @example
+     * // Delete a few UserOrganizations
+     * const { count } = await prisma.userOrganization.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserOrganizationDeleteManyArgs>(args?: SelectSubset<T, UserOrganizationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserOrganizations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserOrganizationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserOrganizations
+     * const userOrganization = await prisma.userOrganization.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserOrganizationUpdateManyArgs>(args: SelectSubset<T, UserOrganizationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserOrganizations and returns the data updated in the database.
+     * @param {UserOrganizationUpdateManyAndReturnArgs} args - Arguments to update many UserOrganizations.
+     * @example
+     * // Update many UserOrganizations
+     * const userOrganization = await prisma.userOrganization.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserOrganizations and only return the `id`
+     * const userOrganizationWithIdOnly = await prisma.userOrganization.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserOrganizationUpdateManyAndReturnArgs>(args: SelectSubset<T, UserOrganizationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserOrganizationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserOrganization.
+     * @param {UserOrganizationUpsertArgs} args - Arguments to update or create a UserOrganization.
+     * @example
+     * // Update or create a UserOrganization
+     * const userOrganization = await prisma.userOrganization.upsert({
+     *   create: {
+     *     // ... data to create a UserOrganization
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserOrganization we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserOrganizationUpsertArgs>(args: SelectSubset<T, UserOrganizationUpsertArgs<ExtArgs>>): Prisma__UserOrganizationClient<$Result.GetResult<Prisma.$UserOrganizationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserOrganizations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserOrganizationCountArgs} args - Arguments to filter UserOrganizations to count.
+     * @example
+     * // Count the number of UserOrganizations
+     * const count = await prisma.userOrganization.count({
+     *   where: {
+     *     // ... the filter for the UserOrganizations we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserOrganizationCountArgs>(
+      args?: Subset<T, UserOrganizationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserOrganizationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserOrganization.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserOrganizationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserOrganizationAggregateArgs>(args: Subset<T, UserOrganizationAggregateArgs>): Prisma.PrismaPromise<GetUserOrganizationAggregateType<T>>
+
+    /**
+     * Group by UserOrganization.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserOrganizationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserOrganizationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserOrganizationGroupByArgs['orderBy'] }
+        : { orderBy?: UserOrganizationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserOrganizationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserOrganizationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserOrganization model
+   */
+  readonly fields: UserOrganizationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserOrganization.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserOrganizationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    role<T extends RolesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RolesDefaultArgs<ExtArgs>>): Prisma__RolesClient<$Result.GetResult<Prisma.$RolesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserOrganization model
+   */
+  interface UserOrganizationFieldRefs {
+    readonly id: FieldRef<"UserOrganization", 'String'>
+    readonly userId: FieldRef<"UserOrganization", 'String'>
+    readonly organizationId: FieldRef<"UserOrganization", 'String'>
+    readonly roleId: FieldRef<"UserOrganization", 'String'>
+    readonly joinedAt: FieldRef<"UserOrganization", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserOrganization findUnique
+   */
+  export type UserOrganizationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserOrganization
+     */
+    select?: UserOrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserOrganization
+     */
+    omit?: UserOrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserOrganizationInclude<ExtArgs> | null
+    /**
+     * Filter, which UserOrganization to fetch.
+     */
+    where: UserOrganizationWhereUniqueInput
+  }
+
+  /**
+   * UserOrganization findUniqueOrThrow
+   */
+  export type UserOrganizationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserOrganization
+     */
+    select?: UserOrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserOrganization
+     */
+    omit?: UserOrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserOrganizationInclude<ExtArgs> | null
+    /**
+     * Filter, which UserOrganization to fetch.
+     */
+    where: UserOrganizationWhereUniqueInput
+  }
+
+  /**
+   * UserOrganization findFirst
+   */
+  export type UserOrganizationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserOrganization
+     */
+    select?: UserOrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserOrganization
+     */
+    omit?: UserOrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserOrganizationInclude<ExtArgs> | null
+    /**
+     * Filter, which UserOrganization to fetch.
+     */
+    where?: UserOrganizationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserOrganizations to fetch.
+     */
+    orderBy?: UserOrganizationOrderByWithRelationInput | UserOrganizationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserOrganizations.
+     */
+    cursor?: UserOrganizationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserOrganizations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserOrganizations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserOrganizations.
+     */
+    distinct?: UserOrganizationScalarFieldEnum | UserOrganizationScalarFieldEnum[]
+  }
+
+  /**
+   * UserOrganization findFirstOrThrow
+   */
+  export type UserOrganizationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserOrganization
+     */
+    select?: UserOrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserOrganization
+     */
+    omit?: UserOrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserOrganizationInclude<ExtArgs> | null
+    /**
+     * Filter, which UserOrganization to fetch.
+     */
+    where?: UserOrganizationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserOrganizations to fetch.
+     */
+    orderBy?: UserOrganizationOrderByWithRelationInput | UserOrganizationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserOrganizations.
+     */
+    cursor?: UserOrganizationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserOrganizations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserOrganizations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserOrganizations.
+     */
+    distinct?: UserOrganizationScalarFieldEnum | UserOrganizationScalarFieldEnum[]
+  }
+
+  /**
+   * UserOrganization findMany
+   */
+  export type UserOrganizationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserOrganization
+     */
+    select?: UserOrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserOrganization
+     */
+    omit?: UserOrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserOrganizationInclude<ExtArgs> | null
+    /**
+     * Filter, which UserOrganizations to fetch.
+     */
+    where?: UserOrganizationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserOrganizations to fetch.
+     */
+    orderBy?: UserOrganizationOrderByWithRelationInput | UserOrganizationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserOrganizations.
+     */
+    cursor?: UserOrganizationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserOrganizations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserOrganizations.
+     */
+    skip?: number
+    distinct?: UserOrganizationScalarFieldEnum | UserOrganizationScalarFieldEnum[]
+  }
+
+  /**
+   * UserOrganization create
+   */
+  export type UserOrganizationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserOrganization
+     */
+    select?: UserOrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserOrganization
+     */
+    omit?: UserOrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserOrganizationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserOrganization.
+     */
+    data: XOR<UserOrganizationCreateInput, UserOrganizationUncheckedCreateInput>
+  }
+
+  /**
+   * UserOrganization createMany
+   */
+  export type UserOrganizationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserOrganizations.
+     */
+    data: UserOrganizationCreateManyInput | UserOrganizationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserOrganization createManyAndReturn
+   */
+  export type UserOrganizationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserOrganization
+     */
+    select?: UserOrganizationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserOrganization
+     */
+    omit?: UserOrganizationOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserOrganizations.
+     */
+    data: UserOrganizationCreateManyInput | UserOrganizationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserOrganizationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserOrganization update
+   */
+  export type UserOrganizationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserOrganization
+     */
+    select?: UserOrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserOrganization
+     */
+    omit?: UserOrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserOrganizationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserOrganization.
+     */
+    data: XOR<UserOrganizationUpdateInput, UserOrganizationUncheckedUpdateInput>
+    /**
+     * Choose, which UserOrganization to update.
+     */
+    where: UserOrganizationWhereUniqueInput
+  }
+
+  /**
+   * UserOrganization updateMany
+   */
+  export type UserOrganizationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserOrganizations.
+     */
+    data: XOR<UserOrganizationUpdateManyMutationInput, UserOrganizationUncheckedUpdateManyInput>
+    /**
+     * Filter which UserOrganizations to update
+     */
+    where?: UserOrganizationWhereInput
+    /**
+     * Limit how many UserOrganizations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserOrganization updateManyAndReturn
+   */
+  export type UserOrganizationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserOrganization
+     */
+    select?: UserOrganizationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserOrganization
+     */
+    omit?: UserOrganizationOmit<ExtArgs> | null
+    /**
+     * The data used to update UserOrganizations.
+     */
+    data: XOR<UserOrganizationUpdateManyMutationInput, UserOrganizationUncheckedUpdateManyInput>
+    /**
+     * Filter which UserOrganizations to update
+     */
+    where?: UserOrganizationWhereInput
+    /**
+     * Limit how many UserOrganizations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserOrganizationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserOrganization upsert
+   */
+  export type UserOrganizationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserOrganization
+     */
+    select?: UserOrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserOrganization
+     */
+    omit?: UserOrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserOrganizationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserOrganization to update in case it exists.
+     */
+    where: UserOrganizationWhereUniqueInput
+    /**
+     * In case the UserOrganization found by the `where` argument doesn't exist, create a new UserOrganization with this data.
+     */
+    create: XOR<UserOrganizationCreateInput, UserOrganizationUncheckedCreateInput>
+    /**
+     * In case the UserOrganization was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserOrganizationUpdateInput, UserOrganizationUncheckedUpdateInput>
+  }
+
+  /**
+   * UserOrganization delete
+   */
+  export type UserOrganizationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserOrganization
+     */
+    select?: UserOrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserOrganization
+     */
+    omit?: UserOrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserOrganizationInclude<ExtArgs> | null
+    /**
+     * Filter which UserOrganization to delete.
+     */
+    where: UserOrganizationWhereUniqueInput
+  }
+
+  /**
+   * UserOrganization deleteMany
+   */
+  export type UserOrganizationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserOrganizations to delete
+     */
+    where?: UserOrganizationWhereInput
+    /**
+     * Limit how many UserOrganizations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserOrganization without action
+   */
+  export type UserOrganizationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserOrganization
+     */
+    select?: UserOrganizationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserOrganization
+     */
+    omit?: UserOrganizationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserOrganizationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Invite
+   */
+
+  export type AggregateInvite = {
+    _count: InviteCountAggregateOutputType | null
+    _min: InviteMinAggregateOutputType | null
+    _max: InviteMaxAggregateOutputType | null
+  }
+
+  export type InviteMinAggregateOutputType = {
+    id: string | null
+    email: string | null
+    organizationId: string | null
+    invitedById: string | null
+    token: string | null
+    accepted: boolean | null
+    createdAt: Date | null
+    expiresAt: Date | null
+  }
+
+  export type InviteMaxAggregateOutputType = {
+    id: string | null
+    email: string | null
+    organizationId: string | null
+    invitedById: string | null
+    token: string | null
+    accepted: boolean | null
+    createdAt: Date | null
+    expiresAt: Date | null
+  }
+
+  export type InviteCountAggregateOutputType = {
+    id: number
+    email: number
+    organizationId: number
+    invitedById: number
+    token: number
+    accepted: number
+    createdAt: number
+    expiresAt: number
+    _all: number
+  }
+
+
+  export type InviteMinAggregateInputType = {
+    id?: true
+    email?: true
+    organizationId?: true
+    invitedById?: true
+    token?: true
+    accepted?: true
+    createdAt?: true
+    expiresAt?: true
+  }
+
+  export type InviteMaxAggregateInputType = {
+    id?: true
+    email?: true
+    organizationId?: true
+    invitedById?: true
+    token?: true
+    accepted?: true
+    createdAt?: true
+    expiresAt?: true
+  }
+
+  export type InviteCountAggregateInputType = {
+    id?: true
+    email?: true
+    organizationId?: true
+    invitedById?: true
+    token?: true
+    accepted?: true
+    createdAt?: true
+    expiresAt?: true
+    _all?: true
+  }
+
+  export type InviteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Invite to aggregate.
+     */
+    where?: InviteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invites to fetch.
+     */
+    orderBy?: InviteOrderByWithRelationInput | InviteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InviteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invites.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Invites
+    **/
+    _count?: true | InviteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InviteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InviteMaxAggregateInputType
+  }
+
+  export type GetInviteAggregateType<T extends InviteAggregateArgs> = {
+        [P in keyof T & keyof AggregateInvite]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInvite[P]>
+      : GetScalarType<T[P], AggregateInvite[P]>
+  }
+
+
+
+
+  export type InviteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InviteWhereInput
+    orderBy?: InviteOrderByWithAggregationInput | InviteOrderByWithAggregationInput[]
+    by: InviteScalarFieldEnum[] | InviteScalarFieldEnum
+    having?: InviteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InviteCountAggregateInputType | true
+    _min?: InviteMinAggregateInputType
+    _max?: InviteMaxAggregateInputType
+  }
+
+  export type InviteGroupByOutputType = {
+    id: string
+    email: string
+    organizationId: string
+    invitedById: string
+    token: string
+    accepted: boolean
+    createdAt: Date
+    expiresAt: Date
+    _count: InviteCountAggregateOutputType | null
+    _min: InviteMinAggregateOutputType | null
+    _max: InviteMaxAggregateOutputType | null
+  }
+
+  type GetInviteGroupByPayload<T extends InviteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InviteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InviteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InviteGroupByOutputType[P]>
+            : GetScalarType<T[P], InviteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InviteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    organizationId?: boolean
+    invitedById?: boolean
+    token?: boolean
+    accepted?: boolean
+    createdAt?: boolean
+    expiresAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    invitedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["invite"]>
+
+  export type InviteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    organizationId?: boolean
+    invitedById?: boolean
+    token?: boolean
+    accepted?: boolean
+    createdAt?: boolean
+    expiresAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    invitedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["invite"]>
+
+  export type InviteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    organizationId?: boolean
+    invitedById?: boolean
+    token?: boolean
+    accepted?: boolean
+    createdAt?: boolean
+    expiresAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    invitedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["invite"]>
+
+  export type InviteSelectScalar = {
+    id?: boolean
+    email?: boolean
+    organizationId?: boolean
+    invitedById?: boolean
+    token?: boolean
+    accepted?: boolean
+    createdAt?: boolean
+    expiresAt?: boolean
+  }
+
+  export type InviteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "organizationId" | "invitedById" | "token" | "accepted" | "createdAt" | "expiresAt", ExtArgs["result"]["invite"]>
+  export type InviteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    invitedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type InviteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    invitedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type InviteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    invitedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $InvitePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Invite"
+    objects: {
+      organization: Prisma.$OrganizationPayload<ExtArgs>
+      invitedBy: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      email: string
+      organizationId: string
+      invitedById: string
+      token: string
+      accepted: boolean
+      createdAt: Date
+      expiresAt: Date
+    }, ExtArgs["result"]["invite"]>
+    composites: {}
+  }
+
+  type InviteGetPayload<S extends boolean | null | undefined | InviteDefaultArgs> = $Result.GetResult<Prisma.$InvitePayload, S>
+
+  type InviteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InviteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InviteCountAggregateInputType | true
+    }
+
+  export interface InviteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Invite'], meta: { name: 'Invite' } }
+    /**
+     * Find zero or one Invite that matches the filter.
+     * @param {InviteFindUniqueArgs} args - Arguments to find a Invite
+     * @example
+     * // Get one Invite
+     * const invite = await prisma.invite.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InviteFindUniqueArgs>(args: SelectSubset<T, InviteFindUniqueArgs<ExtArgs>>): Prisma__InviteClient<$Result.GetResult<Prisma.$InvitePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Invite that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InviteFindUniqueOrThrowArgs} args - Arguments to find a Invite
+     * @example
+     * // Get one Invite
+     * const invite = await prisma.invite.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InviteFindUniqueOrThrowArgs>(args: SelectSubset<T, InviteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InviteClient<$Result.GetResult<Prisma.$InvitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Invite that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InviteFindFirstArgs} args - Arguments to find a Invite
+     * @example
+     * // Get one Invite
+     * const invite = await prisma.invite.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InviteFindFirstArgs>(args?: SelectSubset<T, InviteFindFirstArgs<ExtArgs>>): Prisma__InviteClient<$Result.GetResult<Prisma.$InvitePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Invite that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InviteFindFirstOrThrowArgs} args - Arguments to find a Invite
+     * @example
+     * // Get one Invite
+     * const invite = await prisma.invite.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InviteFindFirstOrThrowArgs>(args?: SelectSubset<T, InviteFindFirstOrThrowArgs<ExtArgs>>): Prisma__InviteClient<$Result.GetResult<Prisma.$InvitePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Invites that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InviteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Invites
+     * const invites = await prisma.invite.findMany()
+     * 
+     * // Get first 10 Invites
+     * const invites = await prisma.invite.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const inviteWithIdOnly = await prisma.invite.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InviteFindManyArgs>(args?: SelectSubset<T, InviteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Invite.
+     * @param {InviteCreateArgs} args - Arguments to create a Invite.
+     * @example
+     * // Create one Invite
+     * const Invite = await prisma.invite.create({
+     *   data: {
+     *     // ... data to create a Invite
+     *   }
+     * })
+     * 
+     */
+    create<T extends InviteCreateArgs>(args: SelectSubset<T, InviteCreateArgs<ExtArgs>>): Prisma__InviteClient<$Result.GetResult<Prisma.$InvitePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Invites.
+     * @param {InviteCreateManyArgs} args - Arguments to create many Invites.
+     * @example
+     * // Create many Invites
+     * const invite = await prisma.invite.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InviteCreateManyArgs>(args?: SelectSubset<T, InviteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Invites and returns the data saved in the database.
+     * @param {InviteCreateManyAndReturnArgs} args - Arguments to create many Invites.
+     * @example
+     * // Create many Invites
+     * const invite = await prisma.invite.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Invites and only return the `id`
+     * const inviteWithIdOnly = await prisma.invite.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InviteCreateManyAndReturnArgs>(args?: SelectSubset<T, InviteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Invite.
+     * @param {InviteDeleteArgs} args - Arguments to delete one Invite.
+     * @example
+     * // Delete one Invite
+     * const Invite = await prisma.invite.delete({
+     *   where: {
+     *     // ... filter to delete one Invite
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InviteDeleteArgs>(args: SelectSubset<T, InviteDeleteArgs<ExtArgs>>): Prisma__InviteClient<$Result.GetResult<Prisma.$InvitePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Invite.
+     * @param {InviteUpdateArgs} args - Arguments to update one Invite.
+     * @example
+     * // Update one Invite
+     * const invite = await prisma.invite.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InviteUpdateArgs>(args: SelectSubset<T, InviteUpdateArgs<ExtArgs>>): Prisma__InviteClient<$Result.GetResult<Prisma.$InvitePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Invites.
+     * @param {InviteDeleteManyArgs} args - Arguments to filter Invites to delete.
+     * @example
+     * // Delete a few Invites
+     * const { count } = await prisma.invite.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InviteDeleteManyArgs>(args?: SelectSubset<T, InviteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Invites.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InviteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Invites
+     * const invite = await prisma.invite.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InviteUpdateManyArgs>(args: SelectSubset<T, InviteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Invites and returns the data updated in the database.
+     * @param {InviteUpdateManyAndReturnArgs} args - Arguments to update many Invites.
+     * @example
+     * // Update many Invites
+     * const invite = await prisma.invite.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Invites and only return the `id`
+     * const inviteWithIdOnly = await prisma.invite.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InviteUpdateManyAndReturnArgs>(args: SelectSubset<T, InviteUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Invite.
+     * @param {InviteUpsertArgs} args - Arguments to update or create a Invite.
+     * @example
+     * // Update or create a Invite
+     * const invite = await prisma.invite.upsert({
+     *   create: {
+     *     // ... data to create a Invite
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Invite we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InviteUpsertArgs>(args: SelectSubset<T, InviteUpsertArgs<ExtArgs>>): Prisma__InviteClient<$Result.GetResult<Prisma.$InvitePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Invites.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InviteCountArgs} args - Arguments to filter Invites to count.
+     * @example
+     * // Count the number of Invites
+     * const count = await prisma.invite.count({
+     *   where: {
+     *     // ... the filter for the Invites we want to count
+     *   }
+     * })
+    **/
+    count<T extends InviteCountArgs>(
+      args?: Subset<T, InviteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InviteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Invite.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InviteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InviteAggregateArgs>(args: Subset<T, InviteAggregateArgs>): Prisma.PrismaPromise<GetInviteAggregateType<T>>
+
+    /**
+     * Group by Invite.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InviteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InviteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InviteGroupByArgs['orderBy'] }
+        : { orderBy?: InviteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InviteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInviteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Invite model
+   */
+  readonly fields: InviteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Invite.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InviteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    invitedBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Invite model
+   */
+  interface InviteFieldRefs {
+    readonly id: FieldRef<"Invite", 'String'>
+    readonly email: FieldRef<"Invite", 'String'>
+    readonly organizationId: FieldRef<"Invite", 'String'>
+    readonly invitedById: FieldRef<"Invite", 'String'>
+    readonly token: FieldRef<"Invite", 'String'>
+    readonly accepted: FieldRef<"Invite", 'Boolean'>
+    readonly createdAt: FieldRef<"Invite", 'DateTime'>
+    readonly expiresAt: FieldRef<"Invite", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Invite findUnique
+   */
+  export type InviteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invite
+     */
+    select?: InviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invite
+     */
+    omit?: InviteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InviteInclude<ExtArgs> | null
+    /**
+     * Filter, which Invite to fetch.
+     */
+    where: InviteWhereUniqueInput
+  }
+
+  /**
+   * Invite findUniqueOrThrow
+   */
+  export type InviteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invite
+     */
+    select?: InviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invite
+     */
+    omit?: InviteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InviteInclude<ExtArgs> | null
+    /**
+     * Filter, which Invite to fetch.
+     */
+    where: InviteWhereUniqueInput
+  }
+
+  /**
+   * Invite findFirst
+   */
+  export type InviteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invite
+     */
+    select?: InviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invite
+     */
+    omit?: InviteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InviteInclude<ExtArgs> | null
+    /**
+     * Filter, which Invite to fetch.
+     */
+    where?: InviteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invites to fetch.
+     */
+    orderBy?: InviteOrderByWithRelationInput | InviteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Invites.
+     */
+    cursor?: InviteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invites.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Invites.
+     */
+    distinct?: InviteScalarFieldEnum | InviteScalarFieldEnum[]
+  }
+
+  /**
+   * Invite findFirstOrThrow
+   */
+  export type InviteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invite
+     */
+    select?: InviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invite
+     */
+    omit?: InviteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InviteInclude<ExtArgs> | null
+    /**
+     * Filter, which Invite to fetch.
+     */
+    where?: InviteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invites to fetch.
+     */
+    orderBy?: InviteOrderByWithRelationInput | InviteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Invites.
+     */
+    cursor?: InviteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invites.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Invites.
+     */
+    distinct?: InviteScalarFieldEnum | InviteScalarFieldEnum[]
+  }
+
+  /**
+   * Invite findMany
+   */
+  export type InviteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invite
+     */
+    select?: InviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invite
+     */
+    omit?: InviteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InviteInclude<ExtArgs> | null
+    /**
+     * Filter, which Invites to fetch.
+     */
+    where?: InviteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invites to fetch.
+     */
+    orderBy?: InviteOrderByWithRelationInput | InviteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Invites.
+     */
+    cursor?: InviteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invites.
+     */
+    skip?: number
+    distinct?: InviteScalarFieldEnum | InviteScalarFieldEnum[]
+  }
+
+  /**
+   * Invite create
+   */
+  export type InviteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invite
+     */
+    select?: InviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invite
+     */
+    omit?: InviteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InviteInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Invite.
+     */
+    data: XOR<InviteCreateInput, InviteUncheckedCreateInput>
+  }
+
+  /**
+   * Invite createMany
+   */
+  export type InviteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Invites.
+     */
+    data: InviteCreateManyInput | InviteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Invite createManyAndReturn
+   */
+  export type InviteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invite
+     */
+    select?: InviteSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invite
+     */
+    omit?: InviteOmit<ExtArgs> | null
+    /**
+     * The data used to create many Invites.
+     */
+    data: InviteCreateManyInput | InviteCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InviteIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Invite update
+   */
+  export type InviteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invite
+     */
+    select?: InviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invite
+     */
+    omit?: InviteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InviteInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Invite.
+     */
+    data: XOR<InviteUpdateInput, InviteUncheckedUpdateInput>
+    /**
+     * Choose, which Invite to update.
+     */
+    where: InviteWhereUniqueInput
+  }
+
+  /**
+   * Invite updateMany
+   */
+  export type InviteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Invites.
+     */
+    data: XOR<InviteUpdateManyMutationInput, InviteUncheckedUpdateManyInput>
+    /**
+     * Filter which Invites to update
+     */
+    where?: InviteWhereInput
+    /**
+     * Limit how many Invites to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Invite updateManyAndReturn
+   */
+  export type InviteUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invite
+     */
+    select?: InviteSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invite
+     */
+    omit?: InviteOmit<ExtArgs> | null
+    /**
+     * The data used to update Invites.
+     */
+    data: XOR<InviteUpdateManyMutationInput, InviteUncheckedUpdateManyInput>
+    /**
+     * Filter which Invites to update
+     */
+    where?: InviteWhereInput
+    /**
+     * Limit how many Invites to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InviteIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Invite upsert
+   */
+  export type InviteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invite
+     */
+    select?: InviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invite
+     */
+    omit?: InviteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InviteInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Invite to update in case it exists.
+     */
+    where: InviteWhereUniqueInput
+    /**
+     * In case the Invite found by the `where` argument doesn't exist, create a new Invite with this data.
+     */
+    create: XOR<InviteCreateInput, InviteUncheckedCreateInput>
+    /**
+     * In case the Invite was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InviteUpdateInput, InviteUncheckedUpdateInput>
+  }
+
+  /**
+   * Invite delete
+   */
+  export type InviteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invite
+     */
+    select?: InviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invite
+     */
+    omit?: InviteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InviteInclude<ExtArgs> | null
+    /**
+     * Filter which Invite to delete.
+     */
+    where: InviteWhereUniqueInput
+  }
+
+  /**
+   * Invite deleteMany
+   */
+  export type InviteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Invites to delete
+     */
+    where?: InviteWhereInput
+    /**
+     * Limit how many Invites to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Invite without action
+   */
+  export type InviteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invite
+     */
+    select?: InviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invite
+     */
+    omit?: InviteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InviteInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -7040,7 +10799,8 @@ export namespace Prisma {
     createdById: 'createdById',
     dueDate: 'dueDate',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    organizationId: 'organizationId'
   };
 
   export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
@@ -7063,7 +10823,8 @@ export namespace Prisma {
     name: 'name',
     description: 'description',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    organizationId: 'organizationId'
   };
 
   export type RolesScalarFieldEnum = (typeof RolesScalarFieldEnum)[keyof typeof RolesScalarFieldEnum]
@@ -7078,6 +10839,41 @@ export namespace Prisma {
   };
 
   export type PermissionsScalarFieldEnum = (typeof PermissionsScalarFieldEnum)[keyof typeof PermissionsScalarFieldEnum]
+
+
+  export const OrganizationScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
+
+
+  export const UserOrganizationScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    organizationId: 'organizationId',
+    roleId: 'roleId',
+    joinedAt: 'joinedAt'
+  };
+
+  export type UserOrganizationScalarFieldEnum = (typeof UserOrganizationScalarFieldEnum)[keyof typeof UserOrganizationScalarFieldEnum]
+
+
+  export const InviteScalarFieldEnum: {
+    id: 'id',
+    email: 'email',
+    organizationId: 'organizationId',
+    invitedById: 'invitedById',
+    token: 'token',
+    accepted: 'accepted',
+    createdAt: 'createdAt',
+    expiresAt: 'expiresAt'
+  };
+
+  export type InviteScalarFieldEnum = (typeof InviteScalarFieldEnum)[keyof typeof InviteScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7166,6 +10962,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -7193,8 +10996,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     assignedTasks?: TaskListRelationFilter
     createdTasks?: TaskListRelationFilter
-    roles?: RolesListRelationFilter
+    invitations?: InviteListRelationFilter
     comments?: TaskCommentListRelationFilter
+    memberships?: UserOrganizationListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -7205,8 +11009,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
     assignedTasks?: TaskOrderByRelationAggregateInput
     createdTasks?: TaskOrderByRelationAggregateInput
-    roles?: RolesOrderByRelationAggregateInput
+    invitations?: InviteOrderByRelationAggregateInput
     comments?: TaskCommentOrderByRelationAggregateInput
+    memberships?: UserOrganizationOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -7220,8 +11025,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     assignedTasks?: TaskListRelationFilter
     createdTasks?: TaskListRelationFilter
-    roles?: RolesListRelationFilter
+    invitations?: InviteListRelationFilter
     comments?: TaskCommentListRelationFilter
+    memberships?: UserOrganizationListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -7260,9 +11066,11 @@ export namespace Prisma {
     dueDate?: DateTimeNullableFilter<"Task"> | Date | string | null
     createdAt?: DateTimeFilter<"Task"> | Date | string
     updatedAt?: DateTimeFilter<"Task"> | Date | string
+    organizationId?: StringFilter<"Task"> | string
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     assignee?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     comments?: TaskCommentListRelationFilter
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
   }
 
   export type TaskOrderByWithRelationInput = {
@@ -7276,9 +11084,11 @@ export namespace Prisma {
     dueDate?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    organizationId?: SortOrder
     createdBy?: UserOrderByWithRelationInput
     assignee?: UserOrderByWithRelationInput
     comments?: TaskCommentOrderByRelationAggregateInput
+    organization?: OrganizationOrderByWithRelationInput
   }
 
   export type TaskWhereUniqueInput = Prisma.AtLeast<{
@@ -7295,9 +11105,11 @@ export namespace Prisma {
     dueDate?: DateTimeNullableFilter<"Task"> | Date | string | null
     createdAt?: DateTimeFilter<"Task"> | Date | string
     updatedAt?: DateTimeFilter<"Task"> | Date | string
+    organizationId?: StringFilter<"Task"> | string
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     assignee?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     comments?: TaskCommentListRelationFilter
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
   }, "id">
 
   export type TaskOrderByWithAggregationInput = {
@@ -7311,6 +11123,7 @@ export namespace Prisma {
     dueDate?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    organizationId?: SortOrder
     _count?: TaskCountOrderByAggregateInput
     _max?: TaskMaxOrderByAggregateInput
     _min?: TaskMinOrderByAggregateInput
@@ -7330,6 +11143,7 @@ export namespace Prisma {
     dueDate?: DateTimeNullableWithAggregatesFilter<"Task"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Task"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Task"> | Date | string
+    organizationId?: StringWithAggregatesFilter<"Task"> | string
   }
 
   export type TaskCommentWhereInput = {
@@ -7404,8 +11218,10 @@ export namespace Prisma {
     description?: StringFilter<"Roles"> | string
     createdAt?: DateTimeFilter<"Roles"> | Date | string
     updatedAt?: DateTimeFilter<"Roles"> | Date | string
-    users?: UserListRelationFilter
+    organizationId?: StringNullableFilter<"Roles"> | string | null
     permissions?: PermissionsListRelationFilter
+    organization?: XOR<OrganizationNullableScalarRelationFilter, OrganizationWhereInput> | null
+    memberships?: UserOrganizationListRelationFilter
   }
 
   export type RolesOrderByWithRelationInput = {
@@ -7414,8 +11230,10 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    users?: UserOrderByRelationAggregateInput
+    organizationId?: SortOrderInput | SortOrder
     permissions?: PermissionsOrderByRelationAggregateInput
+    organization?: OrganizationOrderByWithRelationInput
+    memberships?: UserOrganizationOrderByRelationAggregateInput
   }
 
   export type RolesWhereUniqueInput = Prisma.AtLeast<{
@@ -7427,8 +11245,10 @@ export namespace Prisma {
     description?: StringFilter<"Roles"> | string
     createdAt?: DateTimeFilter<"Roles"> | Date | string
     updatedAt?: DateTimeFilter<"Roles"> | Date | string
-    users?: UserListRelationFilter
+    organizationId?: StringNullableFilter<"Roles"> | string | null
     permissions?: PermissionsListRelationFilter
+    organization?: XOR<OrganizationNullableScalarRelationFilter, OrganizationWhereInput> | null
+    memberships?: UserOrganizationListRelationFilter
   }, "id" | "name">
 
   export type RolesOrderByWithAggregationInput = {
@@ -7437,6 +11257,7 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    organizationId?: SortOrderInput | SortOrder
     _count?: RolesCountOrderByAggregateInput
     _max?: RolesMaxOrderByAggregateInput
     _min?: RolesMinOrderByAggregateInput
@@ -7451,6 +11272,7 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Roles"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Roles"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Roles"> | Date | string
+    organizationId?: StringNullableWithAggregatesFilter<"Roles"> | string | null
   }
 
   export type PermissionsWhereInput = {
@@ -7508,6 +11330,199 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Permissions"> | Date | string
   }
 
+  export type OrganizationWhereInput = {
+    AND?: OrganizationWhereInput | OrganizationWhereInput[]
+    OR?: OrganizationWhereInput[]
+    NOT?: OrganizationWhereInput | OrganizationWhereInput[]
+    id?: StringFilter<"Organization"> | string
+    name?: StringFilter<"Organization"> | string
+    createdAt?: DateTimeFilter<"Organization"> | Date | string
+    updatedAt?: DateTimeFilter<"Organization"> | Date | string
+    memberships?: UserOrganizationListRelationFilter
+    tasks?: TaskListRelationFilter
+    roles?: RolesListRelationFilter
+    invites?: InviteListRelationFilter
+  }
+
+  export type OrganizationOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    memberships?: UserOrganizationOrderByRelationAggregateInput
+    tasks?: TaskOrderByRelationAggregateInput
+    roles?: RolesOrderByRelationAggregateInput
+    invites?: InviteOrderByRelationAggregateInput
+  }
+
+  export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: OrganizationWhereInput | OrganizationWhereInput[]
+    OR?: OrganizationWhereInput[]
+    NOT?: OrganizationWhereInput | OrganizationWhereInput[]
+    name?: StringFilter<"Organization"> | string
+    createdAt?: DateTimeFilter<"Organization"> | Date | string
+    updatedAt?: DateTimeFilter<"Organization"> | Date | string
+    memberships?: UserOrganizationListRelationFilter
+    tasks?: TaskListRelationFilter
+    roles?: RolesListRelationFilter
+    invites?: InviteListRelationFilter
+  }, "id">
+
+  export type OrganizationOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: OrganizationCountOrderByAggregateInput
+    _max?: OrganizationMaxOrderByAggregateInput
+    _min?: OrganizationMinOrderByAggregateInput
+  }
+
+  export type OrganizationScalarWhereWithAggregatesInput = {
+    AND?: OrganizationScalarWhereWithAggregatesInput | OrganizationScalarWhereWithAggregatesInput[]
+    OR?: OrganizationScalarWhereWithAggregatesInput[]
+    NOT?: OrganizationScalarWhereWithAggregatesInput | OrganizationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Organization"> | string
+    name?: StringWithAggregatesFilter<"Organization"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Organization"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Organization"> | Date | string
+  }
+
+  export type UserOrganizationWhereInput = {
+    AND?: UserOrganizationWhereInput | UserOrganizationWhereInput[]
+    OR?: UserOrganizationWhereInput[]
+    NOT?: UserOrganizationWhereInput | UserOrganizationWhereInput[]
+    id?: StringFilter<"UserOrganization"> | string
+    userId?: StringFilter<"UserOrganization"> | string
+    organizationId?: StringFilter<"UserOrganization"> | string
+    roleId?: StringFilter<"UserOrganization"> | string
+    joinedAt?: DateTimeFilter<"UserOrganization"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+    role?: XOR<RolesScalarRelationFilter, RolesWhereInput>
+  }
+
+  export type UserOrganizationOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    organizationId?: SortOrder
+    roleId?: SortOrder
+    joinedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    organization?: OrganizationOrderByWithRelationInput
+    role?: RolesOrderByWithRelationInput
+  }
+
+  export type UserOrganizationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: UserOrganizationWhereInput | UserOrganizationWhereInput[]
+    OR?: UserOrganizationWhereInput[]
+    NOT?: UserOrganizationWhereInput | UserOrganizationWhereInput[]
+    userId?: StringFilter<"UserOrganization"> | string
+    organizationId?: StringFilter<"UserOrganization"> | string
+    roleId?: StringFilter<"UserOrganization"> | string
+    joinedAt?: DateTimeFilter<"UserOrganization"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+    role?: XOR<RolesScalarRelationFilter, RolesWhereInput>
+  }, "id">
+
+  export type UserOrganizationOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    organizationId?: SortOrder
+    roleId?: SortOrder
+    joinedAt?: SortOrder
+    _count?: UserOrganizationCountOrderByAggregateInput
+    _max?: UserOrganizationMaxOrderByAggregateInput
+    _min?: UserOrganizationMinOrderByAggregateInput
+  }
+
+  export type UserOrganizationScalarWhereWithAggregatesInput = {
+    AND?: UserOrganizationScalarWhereWithAggregatesInput | UserOrganizationScalarWhereWithAggregatesInput[]
+    OR?: UserOrganizationScalarWhereWithAggregatesInput[]
+    NOT?: UserOrganizationScalarWhereWithAggregatesInput | UserOrganizationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserOrganization"> | string
+    userId?: StringWithAggregatesFilter<"UserOrganization"> | string
+    organizationId?: StringWithAggregatesFilter<"UserOrganization"> | string
+    roleId?: StringWithAggregatesFilter<"UserOrganization"> | string
+    joinedAt?: DateTimeWithAggregatesFilter<"UserOrganization"> | Date | string
+  }
+
+  export type InviteWhereInput = {
+    AND?: InviteWhereInput | InviteWhereInput[]
+    OR?: InviteWhereInput[]
+    NOT?: InviteWhereInput | InviteWhereInput[]
+    id?: StringFilter<"Invite"> | string
+    email?: StringFilter<"Invite"> | string
+    organizationId?: StringFilter<"Invite"> | string
+    invitedById?: StringFilter<"Invite"> | string
+    token?: StringFilter<"Invite"> | string
+    accepted?: BoolFilter<"Invite"> | boolean
+    createdAt?: DateTimeFilter<"Invite"> | Date | string
+    expiresAt?: DateTimeFilter<"Invite"> | Date | string
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+    invitedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type InviteOrderByWithRelationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    organizationId?: SortOrder
+    invitedById?: SortOrder
+    token?: SortOrder
+    accepted?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+    organization?: OrganizationOrderByWithRelationInput
+    invitedBy?: UserOrderByWithRelationInput
+  }
+
+  export type InviteWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    token?: string
+    AND?: InviteWhereInput | InviteWhereInput[]
+    OR?: InviteWhereInput[]
+    NOT?: InviteWhereInput | InviteWhereInput[]
+    email?: StringFilter<"Invite"> | string
+    organizationId?: StringFilter<"Invite"> | string
+    invitedById?: StringFilter<"Invite"> | string
+    accepted?: BoolFilter<"Invite"> | boolean
+    createdAt?: DateTimeFilter<"Invite"> | Date | string
+    expiresAt?: DateTimeFilter<"Invite"> | Date | string
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+    invitedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "token">
+
+  export type InviteOrderByWithAggregationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    organizationId?: SortOrder
+    invitedById?: SortOrder
+    token?: SortOrder
+    accepted?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+    _count?: InviteCountOrderByAggregateInput
+    _max?: InviteMaxOrderByAggregateInput
+    _min?: InviteMinOrderByAggregateInput
+  }
+
+  export type InviteScalarWhereWithAggregatesInput = {
+    AND?: InviteScalarWhereWithAggregatesInput | InviteScalarWhereWithAggregatesInput[]
+    OR?: InviteScalarWhereWithAggregatesInput[]
+    NOT?: InviteScalarWhereWithAggregatesInput | InviteScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Invite"> | string
+    email?: StringWithAggregatesFilter<"Invite"> | string
+    organizationId?: StringWithAggregatesFilter<"Invite"> | string
+    invitedById?: StringWithAggregatesFilter<"Invite"> | string
+    token?: StringWithAggregatesFilter<"Invite"> | string
+    accepted?: BoolWithAggregatesFilter<"Invite"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Invite"> | Date | string
+    expiresAt?: DateTimeWithAggregatesFilter<"Invite"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -7516,8 +11531,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
     createdTasks?: TaskCreateNestedManyWithoutCreatedByInput
-    roles?: RolesCreateNestedManyWithoutUsersInput
+    invitations?: InviteCreateNestedManyWithoutInvitedByInput
     comments?: TaskCommentCreateNestedManyWithoutUserInput
+    memberships?: UserOrganizationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -7528,8 +11544,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
     createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatedByInput
-    roles?: RolesUncheckedCreateNestedManyWithoutUsersInput
+    invitations?: InviteUncheckedCreateNestedManyWithoutInvitedByInput
     comments?: TaskCommentUncheckedCreateNestedManyWithoutUserInput
+    memberships?: UserOrganizationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -7540,8 +11557,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
     createdTasks?: TaskUpdateManyWithoutCreatedByNestedInput
-    roles?: RolesUpdateManyWithoutUsersNestedInput
+    invitations?: InviteUpdateManyWithoutInvitedByNestedInput
     comments?: TaskCommentUpdateManyWithoutUserNestedInput
+    memberships?: UserOrganizationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -7552,8 +11570,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
     createdTasks?: TaskUncheckedUpdateManyWithoutCreatedByNestedInput
-    roles?: RolesUncheckedUpdateManyWithoutUsersNestedInput
+    invitations?: InviteUncheckedUpdateManyWithoutInvitedByNestedInput
     comments?: TaskCommentUncheckedUpdateManyWithoutUserNestedInput
+    memberships?: UserOrganizationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -7592,6 +11611,7 @@ export namespace Prisma {
     createdBy: UserCreateNestedOneWithoutCreatedTasksInput
     assignee?: UserCreateNestedOneWithoutAssignedTasksInput
     comments?: TaskCommentCreateNestedManyWithoutTaskInput
+    organization: OrganizationCreateNestedOneWithoutTasksInput
   }
 
   export type TaskUncheckedCreateInput = {
@@ -7605,6 +11625,7 @@ export namespace Prisma {
     dueDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    organizationId: string
     comments?: TaskCommentUncheckedCreateNestedManyWithoutTaskInput
   }
 
@@ -7620,6 +11641,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneRequiredWithoutCreatedTasksNestedInput
     assignee?: UserUpdateOneWithoutAssignedTasksNestedInput
     comments?: TaskCommentUpdateManyWithoutTaskNestedInput
+    organization?: OrganizationUpdateOneRequiredWithoutTasksNestedInput
   }
 
   export type TaskUncheckedUpdateInput = {
@@ -7633,6 +11655,7 @@ export namespace Prisma {
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationId?: StringFieldUpdateOperationsInput | string
     comments?: TaskCommentUncheckedUpdateManyWithoutTaskNestedInput
   }
 
@@ -7647,6 +11670,7 @@ export namespace Prisma {
     dueDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    organizationId: string
   }
 
   export type TaskUpdateManyMutationInput = {
@@ -7671,6 +11695,7 @@ export namespace Prisma {
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationId?: StringFieldUpdateOperationsInput | string
   }
 
   export type TaskCommentCreateInput = {
@@ -7740,8 +11765,9 @@ export namespace Prisma {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    users?: UserCreateNestedManyWithoutRolesInput
     permissions?: PermissionsCreateNestedManyWithoutRolesInput
+    organization?: OrganizationCreateNestedOneWithoutRolesInput
+    memberships?: UserOrganizationCreateNestedManyWithoutRoleInput
   }
 
   export type RolesUncheckedCreateInput = {
@@ -7750,8 +11776,9 @@ export namespace Prisma {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    users?: UserUncheckedCreateNestedManyWithoutRolesInput
+    organizationId?: string | null
     permissions?: PermissionsUncheckedCreateNestedManyWithoutRolesInput
+    memberships?: UserOrganizationUncheckedCreateNestedManyWithoutRoleInput
   }
 
   export type RolesUpdateInput = {
@@ -7760,8 +11787,9 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserUpdateManyWithoutRolesNestedInput
     permissions?: PermissionsUpdateManyWithoutRolesNestedInput
+    organization?: OrganizationUpdateOneWithoutRolesNestedInput
+    memberships?: UserOrganizationUpdateManyWithoutRoleNestedInput
   }
 
   export type RolesUncheckedUpdateInput = {
@@ -7770,8 +11798,9 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserUncheckedUpdateManyWithoutRolesNestedInput
+    organizationId?: NullableStringFieldUpdateOperationsInput | string | null
     permissions?: PermissionsUncheckedUpdateManyWithoutRolesNestedInput
+    memberships?: UserOrganizationUncheckedUpdateManyWithoutRoleNestedInput
   }
 
   export type RolesCreateManyInput = {
@@ -7780,6 +11809,7 @@ export namespace Prisma {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    organizationId?: string | null
   }
 
   export type RolesUpdateManyMutationInput = {
@@ -7796,6 +11826,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PermissionsCreateInput = {
@@ -7858,6 +11889,199 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type OrganizationCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    memberships?: UserOrganizationCreateNestedManyWithoutOrganizationInput
+    tasks?: TaskCreateNestedManyWithoutOrganizationInput
+    roles?: RolesCreateNestedManyWithoutOrganizationInput
+    invites?: InviteCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationUncheckedCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    memberships?: UserOrganizationUncheckedCreateNestedManyWithoutOrganizationInput
+    tasks?: TaskUncheckedCreateNestedManyWithoutOrganizationInput
+    roles?: RolesUncheckedCreateNestedManyWithoutOrganizationInput
+    invites?: InviteUncheckedCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    memberships?: UserOrganizationUpdateManyWithoutOrganizationNestedInput
+    tasks?: TaskUpdateManyWithoutOrganizationNestedInput
+    roles?: RolesUpdateManyWithoutOrganizationNestedInput
+    invites?: InviteUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    memberships?: UserOrganizationUncheckedUpdateManyWithoutOrganizationNestedInput
+    tasks?: TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+    roles?: RolesUncheckedUpdateManyWithoutOrganizationNestedInput
+    invites?: InviteUncheckedUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationCreateManyInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OrganizationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrganizationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserOrganizationCreateInput = {
+    id?: string
+    joinedAt?: Date | string
+    user: UserCreateNestedOneWithoutMembershipsInput
+    organization: OrganizationCreateNestedOneWithoutMembershipsInput
+    role: RolesCreateNestedOneWithoutMembershipsInput
+  }
+
+  export type UserOrganizationUncheckedCreateInput = {
+    id?: string
+    userId: string
+    organizationId: string
+    roleId: string
+    joinedAt?: Date | string
+  }
+
+  export type UserOrganizationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutMembershipsNestedInput
+    organization?: OrganizationUpdateOneRequiredWithoutMembershipsNestedInput
+    role?: RolesUpdateOneRequiredWithoutMembershipsNestedInput
+  }
+
+  export type UserOrganizationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    roleId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserOrganizationCreateManyInput = {
+    id?: string
+    userId: string
+    organizationId: string
+    roleId: string
+    joinedAt?: Date | string
+  }
+
+  export type UserOrganizationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserOrganizationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    roleId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InviteCreateInput = {
+    id?: string
+    email: string
+    token: string
+    accepted?: boolean
+    createdAt?: Date | string
+    expiresAt: Date | string
+    organization: OrganizationCreateNestedOneWithoutInvitesInput
+    invitedBy: UserCreateNestedOneWithoutInvitationsInput
+  }
+
+  export type InviteUncheckedCreateInput = {
+    id?: string
+    email: string
+    organizationId: string
+    invitedById: string
+    token: string
+    accepted?: boolean
+    createdAt?: Date | string
+    expiresAt: Date | string
+  }
+
+  export type InviteUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    accepted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutInvitesNestedInput
+    invitedBy?: UserUpdateOneRequiredWithoutInvitationsNestedInput
+  }
+
+  export type InviteUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    invitedById?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    accepted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InviteCreateManyInput = {
+    id?: string
+    email: string
+    organizationId: string
+    invitedById: string
+    token: string
+    accepted?: boolean
+    createdAt?: Date | string
+    expiresAt: Date | string
+  }
+
+  export type InviteUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    accepted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InviteUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    invitedById?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    accepted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -7890,10 +12114,10 @@ export namespace Prisma {
     none?: TaskWhereInput
   }
 
-  export type RolesListRelationFilter = {
-    every?: RolesWhereInput
-    some?: RolesWhereInput
-    none?: RolesWhereInput
+  export type InviteListRelationFilter = {
+    every?: InviteWhereInput
+    some?: InviteWhereInput
+    none?: InviteWhereInput
   }
 
   export type TaskCommentListRelationFilter = {
@@ -7902,15 +12126,25 @@ export namespace Prisma {
     none?: TaskCommentWhereInput
   }
 
+  export type UserOrganizationListRelationFilter = {
+    every?: UserOrganizationWhereInput
+    some?: UserOrganizationWhereInput
+    none?: UserOrganizationWhereInput
+  }
+
   export type TaskOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type RolesOrderByRelationAggregateInput = {
+  export type InviteOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type TaskCommentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserOrganizationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -8020,6 +12254,11 @@ export namespace Prisma {
     isNot?: UserWhereInput | null
   }
 
+  export type OrganizationScalarRelationFilter = {
+    is?: OrganizationWhereInput
+    isNot?: OrganizationWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -8036,6 +12275,7 @@ export namespace Prisma {
     dueDate?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    organizationId?: SortOrder
   }
 
   export type TaskMaxOrderByAggregateInput = {
@@ -8049,6 +12289,7 @@ export namespace Prisma {
     dueDate?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    organizationId?: SortOrder
   }
 
   export type TaskMinOrderByAggregateInput = {
@@ -8062,6 +12303,7 @@ export namespace Prisma {
     dueDate?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    organizationId?: SortOrder
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -8148,20 +12390,15 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type UserListRelationFilter = {
-    every?: UserWhereInput
-    some?: UserWhereInput
-    none?: UserWhereInput
-  }
-
   export type PermissionsListRelationFilter = {
     every?: PermissionsWhereInput
     some?: PermissionsWhereInput
     none?: PermissionsWhereInput
   }
 
-  export type UserOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type OrganizationNullableScalarRelationFilter = {
+    is?: OrganizationWhereInput | null
+    isNot?: OrganizationWhereInput | null
   }
 
   export type PermissionsOrderByRelationAggregateInput = {
@@ -8174,6 +12411,7 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    organizationId?: SortOrder
   }
 
   export type RolesMaxOrderByAggregateInput = {
@@ -8182,6 +12420,7 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    organizationId?: SortOrder
   }
 
   export type RolesMinOrderByAggregateInput = {
@@ -8190,6 +12429,17 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    organizationId?: SortOrder
+  }
+
+  export type RolesListRelationFilter = {
+    every?: RolesWhereInput
+    some?: RolesWhereInput
+    none?: RolesWhereInput
+  }
+
+  export type RolesOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type PermissionsCountOrderByAggregateInput = {
@@ -8216,6 +12466,102 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type OrganizationCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OrganizationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OrganizationMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RolesScalarRelationFilter = {
+    is?: RolesWhereInput
+    isNot?: RolesWhereInput
+  }
+
+  export type UserOrganizationCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    organizationId?: SortOrder
+    roleId?: SortOrder
+    joinedAt?: SortOrder
+  }
+
+  export type UserOrganizationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    organizationId?: SortOrder
+    roleId?: SortOrder
+    joinedAt?: SortOrder
+  }
+
+  export type UserOrganizationMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    organizationId?: SortOrder
+    roleId?: SortOrder
+    joinedAt?: SortOrder
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type InviteCountOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    organizationId?: SortOrder
+    invitedById?: SortOrder
+    token?: SortOrder
+    accepted?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type InviteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    organizationId?: SortOrder
+    invitedById?: SortOrder
+    token?: SortOrder
+    accepted?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type InviteMinOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    organizationId?: SortOrder
+    invitedById?: SortOrder
+    token?: SortOrder
+    accepted?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type TaskCreateNestedManyWithoutAssigneeInput = {
     create?: XOR<TaskCreateWithoutAssigneeInput, TaskUncheckedCreateWithoutAssigneeInput> | TaskCreateWithoutAssigneeInput[] | TaskUncheckedCreateWithoutAssigneeInput[]
     connectOrCreate?: TaskCreateOrConnectWithoutAssigneeInput | TaskCreateOrConnectWithoutAssigneeInput[]
@@ -8230,10 +12576,11 @@ export namespace Prisma {
     connect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
   }
 
-  export type RolesCreateNestedManyWithoutUsersInput = {
-    create?: XOR<RolesCreateWithoutUsersInput, RolesUncheckedCreateWithoutUsersInput> | RolesCreateWithoutUsersInput[] | RolesUncheckedCreateWithoutUsersInput[]
-    connectOrCreate?: RolesCreateOrConnectWithoutUsersInput | RolesCreateOrConnectWithoutUsersInput[]
-    connect?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
+  export type InviteCreateNestedManyWithoutInvitedByInput = {
+    create?: XOR<InviteCreateWithoutInvitedByInput, InviteUncheckedCreateWithoutInvitedByInput> | InviteCreateWithoutInvitedByInput[] | InviteUncheckedCreateWithoutInvitedByInput[]
+    connectOrCreate?: InviteCreateOrConnectWithoutInvitedByInput | InviteCreateOrConnectWithoutInvitedByInput[]
+    createMany?: InviteCreateManyInvitedByInputEnvelope
+    connect?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
   }
 
   export type TaskCommentCreateNestedManyWithoutUserInput = {
@@ -8241,6 +12588,13 @@ export namespace Prisma {
     connectOrCreate?: TaskCommentCreateOrConnectWithoutUserInput | TaskCommentCreateOrConnectWithoutUserInput[]
     createMany?: TaskCommentCreateManyUserInputEnvelope
     connect?: TaskCommentWhereUniqueInput | TaskCommentWhereUniqueInput[]
+  }
+
+  export type UserOrganizationCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserOrganizationCreateWithoutUserInput, UserOrganizationUncheckedCreateWithoutUserInput> | UserOrganizationCreateWithoutUserInput[] | UserOrganizationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserOrganizationCreateOrConnectWithoutUserInput | UserOrganizationCreateOrConnectWithoutUserInput[]
+    createMany?: UserOrganizationCreateManyUserInputEnvelope
+    connect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
   }
 
   export type TaskUncheckedCreateNestedManyWithoutAssigneeInput = {
@@ -8257,10 +12611,11 @@ export namespace Prisma {
     connect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
   }
 
-  export type RolesUncheckedCreateNestedManyWithoutUsersInput = {
-    create?: XOR<RolesCreateWithoutUsersInput, RolesUncheckedCreateWithoutUsersInput> | RolesCreateWithoutUsersInput[] | RolesUncheckedCreateWithoutUsersInput[]
-    connectOrCreate?: RolesCreateOrConnectWithoutUsersInput | RolesCreateOrConnectWithoutUsersInput[]
-    connect?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
+  export type InviteUncheckedCreateNestedManyWithoutInvitedByInput = {
+    create?: XOR<InviteCreateWithoutInvitedByInput, InviteUncheckedCreateWithoutInvitedByInput> | InviteCreateWithoutInvitedByInput[] | InviteUncheckedCreateWithoutInvitedByInput[]
+    connectOrCreate?: InviteCreateOrConnectWithoutInvitedByInput | InviteCreateOrConnectWithoutInvitedByInput[]
+    createMany?: InviteCreateManyInvitedByInputEnvelope
+    connect?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
   }
 
   export type TaskCommentUncheckedCreateNestedManyWithoutUserInput = {
@@ -8268,6 +12623,13 @@ export namespace Prisma {
     connectOrCreate?: TaskCommentCreateOrConnectWithoutUserInput | TaskCommentCreateOrConnectWithoutUserInput[]
     createMany?: TaskCommentCreateManyUserInputEnvelope
     connect?: TaskCommentWhereUniqueInput | TaskCommentWhereUniqueInput[]
+  }
+
+  export type UserOrganizationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserOrganizationCreateWithoutUserInput, UserOrganizationUncheckedCreateWithoutUserInput> | UserOrganizationCreateWithoutUserInput[] | UserOrganizationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserOrganizationCreateOrConnectWithoutUserInput | UserOrganizationCreateOrConnectWithoutUserInput[]
+    createMany?: UserOrganizationCreateManyUserInputEnvelope
+    connect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8306,17 +12668,18 @@ export namespace Prisma {
     deleteMany?: TaskScalarWhereInput | TaskScalarWhereInput[]
   }
 
-  export type RolesUpdateManyWithoutUsersNestedInput = {
-    create?: XOR<RolesCreateWithoutUsersInput, RolesUncheckedCreateWithoutUsersInput> | RolesCreateWithoutUsersInput[] | RolesUncheckedCreateWithoutUsersInput[]
-    connectOrCreate?: RolesCreateOrConnectWithoutUsersInput | RolesCreateOrConnectWithoutUsersInput[]
-    upsert?: RolesUpsertWithWhereUniqueWithoutUsersInput | RolesUpsertWithWhereUniqueWithoutUsersInput[]
-    set?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
-    disconnect?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
-    delete?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
-    connect?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
-    update?: RolesUpdateWithWhereUniqueWithoutUsersInput | RolesUpdateWithWhereUniqueWithoutUsersInput[]
-    updateMany?: RolesUpdateManyWithWhereWithoutUsersInput | RolesUpdateManyWithWhereWithoutUsersInput[]
-    deleteMany?: RolesScalarWhereInput | RolesScalarWhereInput[]
+  export type InviteUpdateManyWithoutInvitedByNestedInput = {
+    create?: XOR<InviteCreateWithoutInvitedByInput, InviteUncheckedCreateWithoutInvitedByInput> | InviteCreateWithoutInvitedByInput[] | InviteUncheckedCreateWithoutInvitedByInput[]
+    connectOrCreate?: InviteCreateOrConnectWithoutInvitedByInput | InviteCreateOrConnectWithoutInvitedByInput[]
+    upsert?: InviteUpsertWithWhereUniqueWithoutInvitedByInput | InviteUpsertWithWhereUniqueWithoutInvitedByInput[]
+    createMany?: InviteCreateManyInvitedByInputEnvelope
+    set?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+    disconnect?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+    delete?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+    connect?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+    update?: InviteUpdateWithWhereUniqueWithoutInvitedByInput | InviteUpdateWithWhereUniqueWithoutInvitedByInput[]
+    updateMany?: InviteUpdateManyWithWhereWithoutInvitedByInput | InviteUpdateManyWithWhereWithoutInvitedByInput[]
+    deleteMany?: InviteScalarWhereInput | InviteScalarWhereInput[]
   }
 
   export type TaskCommentUpdateManyWithoutUserNestedInput = {
@@ -8331,6 +12694,20 @@ export namespace Prisma {
     update?: TaskCommentUpdateWithWhereUniqueWithoutUserInput | TaskCommentUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: TaskCommentUpdateManyWithWhereWithoutUserInput | TaskCommentUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: TaskCommentScalarWhereInput | TaskCommentScalarWhereInput[]
+  }
+
+  export type UserOrganizationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserOrganizationCreateWithoutUserInput, UserOrganizationUncheckedCreateWithoutUserInput> | UserOrganizationCreateWithoutUserInput[] | UserOrganizationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserOrganizationCreateOrConnectWithoutUserInput | UserOrganizationCreateOrConnectWithoutUserInput[]
+    upsert?: UserOrganizationUpsertWithWhereUniqueWithoutUserInput | UserOrganizationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserOrganizationCreateManyUserInputEnvelope
+    set?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    disconnect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    delete?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    connect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    update?: UserOrganizationUpdateWithWhereUniqueWithoutUserInput | UserOrganizationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserOrganizationUpdateManyWithWhereWithoutUserInput | UserOrganizationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserOrganizationScalarWhereInput | UserOrganizationScalarWhereInput[]
   }
 
   export type TaskUncheckedUpdateManyWithoutAssigneeNestedInput = {
@@ -8361,17 +12738,18 @@ export namespace Prisma {
     deleteMany?: TaskScalarWhereInput | TaskScalarWhereInput[]
   }
 
-  export type RolesUncheckedUpdateManyWithoutUsersNestedInput = {
-    create?: XOR<RolesCreateWithoutUsersInput, RolesUncheckedCreateWithoutUsersInput> | RolesCreateWithoutUsersInput[] | RolesUncheckedCreateWithoutUsersInput[]
-    connectOrCreate?: RolesCreateOrConnectWithoutUsersInput | RolesCreateOrConnectWithoutUsersInput[]
-    upsert?: RolesUpsertWithWhereUniqueWithoutUsersInput | RolesUpsertWithWhereUniqueWithoutUsersInput[]
-    set?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
-    disconnect?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
-    delete?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
-    connect?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
-    update?: RolesUpdateWithWhereUniqueWithoutUsersInput | RolesUpdateWithWhereUniqueWithoutUsersInput[]
-    updateMany?: RolesUpdateManyWithWhereWithoutUsersInput | RolesUpdateManyWithWhereWithoutUsersInput[]
-    deleteMany?: RolesScalarWhereInput | RolesScalarWhereInput[]
+  export type InviteUncheckedUpdateManyWithoutInvitedByNestedInput = {
+    create?: XOR<InviteCreateWithoutInvitedByInput, InviteUncheckedCreateWithoutInvitedByInput> | InviteCreateWithoutInvitedByInput[] | InviteUncheckedCreateWithoutInvitedByInput[]
+    connectOrCreate?: InviteCreateOrConnectWithoutInvitedByInput | InviteCreateOrConnectWithoutInvitedByInput[]
+    upsert?: InviteUpsertWithWhereUniqueWithoutInvitedByInput | InviteUpsertWithWhereUniqueWithoutInvitedByInput[]
+    createMany?: InviteCreateManyInvitedByInputEnvelope
+    set?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+    disconnect?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+    delete?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+    connect?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+    update?: InviteUpdateWithWhereUniqueWithoutInvitedByInput | InviteUpdateWithWhereUniqueWithoutInvitedByInput[]
+    updateMany?: InviteUpdateManyWithWhereWithoutInvitedByInput | InviteUpdateManyWithWhereWithoutInvitedByInput[]
+    deleteMany?: InviteScalarWhereInput | InviteScalarWhereInput[]
   }
 
   export type TaskCommentUncheckedUpdateManyWithoutUserNestedInput = {
@@ -8386,6 +12764,20 @@ export namespace Prisma {
     update?: TaskCommentUpdateWithWhereUniqueWithoutUserInput | TaskCommentUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: TaskCommentUpdateManyWithWhereWithoutUserInput | TaskCommentUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: TaskCommentScalarWhereInput | TaskCommentScalarWhereInput[]
+  }
+
+  export type UserOrganizationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserOrganizationCreateWithoutUserInput, UserOrganizationUncheckedCreateWithoutUserInput> | UserOrganizationCreateWithoutUserInput[] | UserOrganizationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserOrganizationCreateOrConnectWithoutUserInput | UserOrganizationCreateOrConnectWithoutUserInput[]
+    upsert?: UserOrganizationUpsertWithWhereUniqueWithoutUserInput | UserOrganizationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserOrganizationCreateManyUserInputEnvelope
+    set?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    disconnect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    delete?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    connect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    update?: UserOrganizationUpdateWithWhereUniqueWithoutUserInput | UserOrganizationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserOrganizationUpdateManyWithWhereWithoutUserInput | UserOrganizationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserOrganizationScalarWhereInput | UserOrganizationScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutCreatedTasksInput = {
@@ -8405,6 +12797,12 @@ export namespace Prisma {
     connectOrCreate?: TaskCommentCreateOrConnectWithoutTaskInput | TaskCommentCreateOrConnectWithoutTaskInput[]
     createMany?: TaskCommentCreateManyTaskInputEnvelope
     connect?: TaskCommentWhereUniqueInput | TaskCommentWhereUniqueInput[]
+  }
+
+  export type OrganizationCreateNestedOneWithoutTasksInput = {
+    create?: XOR<OrganizationCreateWithoutTasksInput, OrganizationUncheckedCreateWithoutTasksInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutTasksInput
+    connect?: OrganizationWhereUniqueInput
   }
 
   export type TaskCommentUncheckedCreateNestedManyWithoutTaskInput = {
@@ -8462,6 +12860,14 @@ export namespace Prisma {
     deleteMany?: TaskCommentScalarWhereInput | TaskCommentScalarWhereInput[]
   }
 
+  export type OrganizationUpdateOneRequiredWithoutTasksNestedInput = {
+    create?: XOR<OrganizationCreateWithoutTasksInput, OrganizationUncheckedCreateWithoutTasksInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutTasksInput
+    upsert?: OrganizationUpsertWithoutTasksInput
+    connect?: OrganizationWhereUniqueInput
+    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutTasksInput, OrganizationUpdateWithoutTasksInput>, OrganizationUncheckedUpdateWithoutTasksInput>
+  }
+
   export type TaskCommentUncheckedUpdateManyWithoutTaskNestedInput = {
     create?: XOR<TaskCommentCreateWithoutTaskInput, TaskCommentUncheckedCreateWithoutTaskInput> | TaskCommentCreateWithoutTaskInput[] | TaskCommentUncheckedCreateWithoutTaskInput[]
     connectOrCreate?: TaskCommentCreateOrConnectWithoutTaskInput | TaskCommentCreateOrConnectWithoutTaskInput[]
@@ -8504,22 +12910,23 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCommentsInput, UserUpdateWithoutCommentsInput>, UserUncheckedUpdateWithoutCommentsInput>
   }
 
-  export type UserCreateNestedManyWithoutRolesInput = {
-    create?: XOR<UserCreateWithoutRolesInput, UserUncheckedCreateWithoutRolesInput> | UserCreateWithoutRolesInput[] | UserUncheckedCreateWithoutRolesInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutRolesInput | UserCreateOrConnectWithoutRolesInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-  }
-
   export type PermissionsCreateNestedManyWithoutRolesInput = {
     create?: XOR<PermissionsCreateWithoutRolesInput, PermissionsUncheckedCreateWithoutRolesInput> | PermissionsCreateWithoutRolesInput[] | PermissionsUncheckedCreateWithoutRolesInput[]
     connectOrCreate?: PermissionsCreateOrConnectWithoutRolesInput | PermissionsCreateOrConnectWithoutRolesInput[]
     connect?: PermissionsWhereUniqueInput | PermissionsWhereUniqueInput[]
   }
 
-  export type UserUncheckedCreateNestedManyWithoutRolesInput = {
-    create?: XOR<UserCreateWithoutRolesInput, UserUncheckedCreateWithoutRolesInput> | UserCreateWithoutRolesInput[] | UserUncheckedCreateWithoutRolesInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutRolesInput | UserCreateOrConnectWithoutRolesInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  export type OrganizationCreateNestedOneWithoutRolesInput = {
+    create?: XOR<OrganizationCreateWithoutRolesInput, OrganizationUncheckedCreateWithoutRolesInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutRolesInput
+    connect?: OrganizationWhereUniqueInput
+  }
+
+  export type UserOrganizationCreateNestedManyWithoutRoleInput = {
+    create?: XOR<UserOrganizationCreateWithoutRoleInput, UserOrganizationUncheckedCreateWithoutRoleInput> | UserOrganizationCreateWithoutRoleInput[] | UserOrganizationUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: UserOrganizationCreateOrConnectWithoutRoleInput | UserOrganizationCreateOrConnectWithoutRoleInput[]
+    createMany?: UserOrganizationCreateManyRoleInputEnvelope
+    connect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
   }
 
   export type PermissionsUncheckedCreateNestedManyWithoutRolesInput = {
@@ -8528,17 +12935,11 @@ export namespace Prisma {
     connect?: PermissionsWhereUniqueInput | PermissionsWhereUniqueInput[]
   }
 
-  export type UserUpdateManyWithoutRolesNestedInput = {
-    create?: XOR<UserCreateWithoutRolesInput, UserUncheckedCreateWithoutRolesInput> | UserCreateWithoutRolesInput[] | UserUncheckedCreateWithoutRolesInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutRolesInput | UserCreateOrConnectWithoutRolesInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutRolesInput | UserUpsertWithWhereUniqueWithoutRolesInput[]
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutRolesInput | UserUpdateWithWhereUniqueWithoutRolesInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutRolesInput | UserUpdateManyWithWhereWithoutRolesInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  export type UserOrganizationUncheckedCreateNestedManyWithoutRoleInput = {
+    create?: XOR<UserOrganizationCreateWithoutRoleInput, UserOrganizationUncheckedCreateWithoutRoleInput> | UserOrganizationCreateWithoutRoleInput[] | UserOrganizationUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: UserOrganizationCreateOrConnectWithoutRoleInput | UserOrganizationCreateOrConnectWithoutRoleInput[]
+    createMany?: UserOrganizationCreateManyRoleInputEnvelope
+    connect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
   }
 
   export type PermissionsUpdateManyWithoutRolesNestedInput = {
@@ -8554,17 +12955,28 @@ export namespace Prisma {
     deleteMany?: PermissionsScalarWhereInput | PermissionsScalarWhereInput[]
   }
 
-  export type UserUncheckedUpdateManyWithoutRolesNestedInput = {
-    create?: XOR<UserCreateWithoutRolesInput, UserUncheckedCreateWithoutRolesInput> | UserCreateWithoutRolesInput[] | UserUncheckedCreateWithoutRolesInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutRolesInput | UserCreateOrConnectWithoutRolesInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutRolesInput | UserUpsertWithWhereUniqueWithoutRolesInput[]
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutRolesInput | UserUpdateWithWhereUniqueWithoutRolesInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutRolesInput | UserUpdateManyWithWhereWithoutRolesInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  export type OrganizationUpdateOneWithoutRolesNestedInput = {
+    create?: XOR<OrganizationCreateWithoutRolesInput, OrganizationUncheckedCreateWithoutRolesInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutRolesInput
+    upsert?: OrganizationUpsertWithoutRolesInput
+    disconnect?: OrganizationWhereInput | boolean
+    delete?: OrganizationWhereInput | boolean
+    connect?: OrganizationWhereUniqueInput
+    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutRolesInput, OrganizationUpdateWithoutRolesInput>, OrganizationUncheckedUpdateWithoutRolesInput>
+  }
+
+  export type UserOrganizationUpdateManyWithoutRoleNestedInput = {
+    create?: XOR<UserOrganizationCreateWithoutRoleInput, UserOrganizationUncheckedCreateWithoutRoleInput> | UserOrganizationCreateWithoutRoleInput[] | UserOrganizationUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: UserOrganizationCreateOrConnectWithoutRoleInput | UserOrganizationCreateOrConnectWithoutRoleInput[]
+    upsert?: UserOrganizationUpsertWithWhereUniqueWithoutRoleInput | UserOrganizationUpsertWithWhereUniqueWithoutRoleInput[]
+    createMany?: UserOrganizationCreateManyRoleInputEnvelope
+    set?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    disconnect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    delete?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    connect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    update?: UserOrganizationUpdateWithWhereUniqueWithoutRoleInput | UserOrganizationUpdateWithWhereUniqueWithoutRoleInput[]
+    updateMany?: UserOrganizationUpdateManyWithWhereWithoutRoleInput | UserOrganizationUpdateManyWithWhereWithoutRoleInput[]
+    deleteMany?: UserOrganizationScalarWhereInput | UserOrganizationScalarWhereInput[]
   }
 
   export type PermissionsUncheckedUpdateManyWithoutRolesNestedInput = {
@@ -8578,6 +12990,20 @@ export namespace Prisma {
     update?: PermissionsUpdateWithWhereUniqueWithoutRolesInput | PermissionsUpdateWithWhereUniqueWithoutRolesInput[]
     updateMany?: PermissionsUpdateManyWithWhereWithoutRolesInput | PermissionsUpdateManyWithWhereWithoutRolesInput[]
     deleteMany?: PermissionsScalarWhereInput | PermissionsScalarWhereInput[]
+  }
+
+  export type UserOrganizationUncheckedUpdateManyWithoutRoleNestedInput = {
+    create?: XOR<UserOrganizationCreateWithoutRoleInput, UserOrganizationUncheckedCreateWithoutRoleInput> | UserOrganizationCreateWithoutRoleInput[] | UserOrganizationUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: UserOrganizationCreateOrConnectWithoutRoleInput | UserOrganizationCreateOrConnectWithoutRoleInput[]
+    upsert?: UserOrganizationUpsertWithWhereUniqueWithoutRoleInput | UserOrganizationUpsertWithWhereUniqueWithoutRoleInput[]
+    createMany?: UserOrganizationCreateManyRoleInputEnvelope
+    set?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    disconnect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    delete?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    connect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    update?: UserOrganizationUpdateWithWhereUniqueWithoutRoleInput | UserOrganizationUpdateWithWhereUniqueWithoutRoleInput[]
+    updateMany?: UserOrganizationUpdateManyWithWhereWithoutRoleInput | UserOrganizationUpdateManyWithWhereWithoutRoleInput[]
+    deleteMany?: UserOrganizationScalarWhereInput | UserOrganizationScalarWhereInput[]
   }
 
   export type RolesCreateNestedManyWithoutPermissionsInput = {
@@ -8616,6 +13042,248 @@ export namespace Prisma {
     update?: RolesUpdateWithWhereUniqueWithoutPermissionsInput | RolesUpdateWithWhereUniqueWithoutPermissionsInput[]
     updateMany?: RolesUpdateManyWithWhereWithoutPermissionsInput | RolesUpdateManyWithWhereWithoutPermissionsInput[]
     deleteMany?: RolesScalarWhereInput | RolesScalarWhereInput[]
+  }
+
+  export type UserOrganizationCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<UserOrganizationCreateWithoutOrganizationInput, UserOrganizationUncheckedCreateWithoutOrganizationInput> | UserOrganizationCreateWithoutOrganizationInput[] | UserOrganizationUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: UserOrganizationCreateOrConnectWithoutOrganizationInput | UserOrganizationCreateOrConnectWithoutOrganizationInput[]
+    createMany?: UserOrganizationCreateManyOrganizationInputEnvelope
+    connect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+  }
+
+  export type TaskCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<TaskCreateWithoutOrganizationInput, TaskUncheckedCreateWithoutOrganizationInput> | TaskCreateWithoutOrganizationInput[] | TaskUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: TaskCreateOrConnectWithoutOrganizationInput | TaskCreateOrConnectWithoutOrganizationInput[]
+    createMany?: TaskCreateManyOrganizationInputEnvelope
+    connect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+  }
+
+  export type RolesCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<RolesCreateWithoutOrganizationInput, RolesUncheckedCreateWithoutOrganizationInput> | RolesCreateWithoutOrganizationInput[] | RolesUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: RolesCreateOrConnectWithoutOrganizationInput | RolesCreateOrConnectWithoutOrganizationInput[]
+    createMany?: RolesCreateManyOrganizationInputEnvelope
+    connect?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
+  }
+
+  export type InviteCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<InviteCreateWithoutOrganizationInput, InviteUncheckedCreateWithoutOrganizationInput> | InviteCreateWithoutOrganizationInput[] | InviteUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: InviteCreateOrConnectWithoutOrganizationInput | InviteCreateOrConnectWithoutOrganizationInput[]
+    createMany?: InviteCreateManyOrganizationInputEnvelope
+    connect?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+  }
+
+  export type UserOrganizationUncheckedCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<UserOrganizationCreateWithoutOrganizationInput, UserOrganizationUncheckedCreateWithoutOrganizationInput> | UserOrganizationCreateWithoutOrganizationInput[] | UserOrganizationUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: UserOrganizationCreateOrConnectWithoutOrganizationInput | UserOrganizationCreateOrConnectWithoutOrganizationInput[]
+    createMany?: UserOrganizationCreateManyOrganizationInputEnvelope
+    connect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+  }
+
+  export type TaskUncheckedCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<TaskCreateWithoutOrganizationInput, TaskUncheckedCreateWithoutOrganizationInput> | TaskCreateWithoutOrganizationInput[] | TaskUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: TaskCreateOrConnectWithoutOrganizationInput | TaskCreateOrConnectWithoutOrganizationInput[]
+    createMany?: TaskCreateManyOrganizationInputEnvelope
+    connect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+  }
+
+  export type RolesUncheckedCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<RolesCreateWithoutOrganizationInput, RolesUncheckedCreateWithoutOrganizationInput> | RolesCreateWithoutOrganizationInput[] | RolesUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: RolesCreateOrConnectWithoutOrganizationInput | RolesCreateOrConnectWithoutOrganizationInput[]
+    createMany?: RolesCreateManyOrganizationInputEnvelope
+    connect?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
+  }
+
+  export type InviteUncheckedCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<InviteCreateWithoutOrganizationInput, InviteUncheckedCreateWithoutOrganizationInput> | InviteCreateWithoutOrganizationInput[] | InviteUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: InviteCreateOrConnectWithoutOrganizationInput | InviteCreateOrConnectWithoutOrganizationInput[]
+    createMany?: InviteCreateManyOrganizationInputEnvelope
+    connect?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+  }
+
+  export type UserOrganizationUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<UserOrganizationCreateWithoutOrganizationInput, UserOrganizationUncheckedCreateWithoutOrganizationInput> | UserOrganizationCreateWithoutOrganizationInput[] | UserOrganizationUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: UserOrganizationCreateOrConnectWithoutOrganizationInput | UserOrganizationCreateOrConnectWithoutOrganizationInput[]
+    upsert?: UserOrganizationUpsertWithWhereUniqueWithoutOrganizationInput | UserOrganizationUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: UserOrganizationCreateManyOrganizationInputEnvelope
+    set?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    disconnect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    delete?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    connect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    update?: UserOrganizationUpdateWithWhereUniqueWithoutOrganizationInput | UserOrganizationUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: UserOrganizationUpdateManyWithWhereWithoutOrganizationInput | UserOrganizationUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: UserOrganizationScalarWhereInput | UserOrganizationScalarWhereInput[]
+  }
+
+  export type TaskUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<TaskCreateWithoutOrganizationInput, TaskUncheckedCreateWithoutOrganizationInput> | TaskCreateWithoutOrganizationInput[] | TaskUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: TaskCreateOrConnectWithoutOrganizationInput | TaskCreateOrConnectWithoutOrganizationInput[]
+    upsert?: TaskUpsertWithWhereUniqueWithoutOrganizationInput | TaskUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: TaskCreateManyOrganizationInputEnvelope
+    set?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+    disconnect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+    delete?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+    connect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+    update?: TaskUpdateWithWhereUniqueWithoutOrganizationInput | TaskUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: TaskUpdateManyWithWhereWithoutOrganizationInput | TaskUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: TaskScalarWhereInput | TaskScalarWhereInput[]
+  }
+
+  export type RolesUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<RolesCreateWithoutOrganizationInput, RolesUncheckedCreateWithoutOrganizationInput> | RolesCreateWithoutOrganizationInput[] | RolesUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: RolesCreateOrConnectWithoutOrganizationInput | RolesCreateOrConnectWithoutOrganizationInput[]
+    upsert?: RolesUpsertWithWhereUniqueWithoutOrganizationInput | RolesUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: RolesCreateManyOrganizationInputEnvelope
+    set?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
+    disconnect?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
+    delete?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
+    connect?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
+    update?: RolesUpdateWithWhereUniqueWithoutOrganizationInput | RolesUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: RolesUpdateManyWithWhereWithoutOrganizationInput | RolesUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: RolesScalarWhereInput | RolesScalarWhereInput[]
+  }
+
+  export type InviteUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<InviteCreateWithoutOrganizationInput, InviteUncheckedCreateWithoutOrganizationInput> | InviteCreateWithoutOrganizationInput[] | InviteUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: InviteCreateOrConnectWithoutOrganizationInput | InviteCreateOrConnectWithoutOrganizationInput[]
+    upsert?: InviteUpsertWithWhereUniqueWithoutOrganizationInput | InviteUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: InviteCreateManyOrganizationInputEnvelope
+    set?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+    disconnect?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+    delete?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+    connect?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+    update?: InviteUpdateWithWhereUniqueWithoutOrganizationInput | InviteUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: InviteUpdateManyWithWhereWithoutOrganizationInput | InviteUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: InviteScalarWhereInput | InviteScalarWhereInput[]
+  }
+
+  export type UserOrganizationUncheckedUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<UserOrganizationCreateWithoutOrganizationInput, UserOrganizationUncheckedCreateWithoutOrganizationInput> | UserOrganizationCreateWithoutOrganizationInput[] | UserOrganizationUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: UserOrganizationCreateOrConnectWithoutOrganizationInput | UserOrganizationCreateOrConnectWithoutOrganizationInput[]
+    upsert?: UserOrganizationUpsertWithWhereUniqueWithoutOrganizationInput | UserOrganizationUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: UserOrganizationCreateManyOrganizationInputEnvelope
+    set?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    disconnect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    delete?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    connect?: UserOrganizationWhereUniqueInput | UserOrganizationWhereUniqueInput[]
+    update?: UserOrganizationUpdateWithWhereUniqueWithoutOrganizationInput | UserOrganizationUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: UserOrganizationUpdateManyWithWhereWithoutOrganizationInput | UserOrganizationUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: UserOrganizationScalarWhereInput | UserOrganizationScalarWhereInput[]
+  }
+
+  export type TaskUncheckedUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<TaskCreateWithoutOrganizationInput, TaskUncheckedCreateWithoutOrganizationInput> | TaskCreateWithoutOrganizationInput[] | TaskUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: TaskCreateOrConnectWithoutOrganizationInput | TaskCreateOrConnectWithoutOrganizationInput[]
+    upsert?: TaskUpsertWithWhereUniqueWithoutOrganizationInput | TaskUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: TaskCreateManyOrganizationInputEnvelope
+    set?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+    disconnect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+    delete?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+    connect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+    update?: TaskUpdateWithWhereUniqueWithoutOrganizationInput | TaskUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: TaskUpdateManyWithWhereWithoutOrganizationInput | TaskUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: TaskScalarWhereInput | TaskScalarWhereInput[]
+  }
+
+  export type RolesUncheckedUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<RolesCreateWithoutOrganizationInput, RolesUncheckedCreateWithoutOrganizationInput> | RolesCreateWithoutOrganizationInput[] | RolesUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: RolesCreateOrConnectWithoutOrganizationInput | RolesCreateOrConnectWithoutOrganizationInput[]
+    upsert?: RolesUpsertWithWhereUniqueWithoutOrganizationInput | RolesUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: RolesCreateManyOrganizationInputEnvelope
+    set?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
+    disconnect?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
+    delete?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
+    connect?: RolesWhereUniqueInput | RolesWhereUniqueInput[]
+    update?: RolesUpdateWithWhereUniqueWithoutOrganizationInput | RolesUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: RolesUpdateManyWithWhereWithoutOrganizationInput | RolesUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: RolesScalarWhereInput | RolesScalarWhereInput[]
+  }
+
+  export type InviteUncheckedUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<InviteCreateWithoutOrganizationInput, InviteUncheckedCreateWithoutOrganizationInput> | InviteCreateWithoutOrganizationInput[] | InviteUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: InviteCreateOrConnectWithoutOrganizationInput | InviteCreateOrConnectWithoutOrganizationInput[]
+    upsert?: InviteUpsertWithWhereUniqueWithoutOrganizationInput | InviteUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: InviteCreateManyOrganizationInputEnvelope
+    set?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+    disconnect?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+    delete?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+    connect?: InviteWhereUniqueInput | InviteWhereUniqueInput[]
+    update?: InviteUpdateWithWhereUniqueWithoutOrganizationInput | InviteUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: InviteUpdateManyWithWhereWithoutOrganizationInput | InviteUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: InviteScalarWhereInput | InviteScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutMembershipsInput = {
+    create?: XOR<UserCreateWithoutMembershipsInput, UserUncheckedCreateWithoutMembershipsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMembershipsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type OrganizationCreateNestedOneWithoutMembershipsInput = {
+    create?: XOR<OrganizationCreateWithoutMembershipsInput, OrganizationUncheckedCreateWithoutMembershipsInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutMembershipsInput
+    connect?: OrganizationWhereUniqueInput
+  }
+
+  export type RolesCreateNestedOneWithoutMembershipsInput = {
+    create?: XOR<RolesCreateWithoutMembershipsInput, RolesUncheckedCreateWithoutMembershipsInput>
+    connectOrCreate?: RolesCreateOrConnectWithoutMembershipsInput
+    connect?: RolesWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutMembershipsNestedInput = {
+    create?: XOR<UserCreateWithoutMembershipsInput, UserUncheckedCreateWithoutMembershipsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMembershipsInput
+    upsert?: UserUpsertWithoutMembershipsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMembershipsInput, UserUpdateWithoutMembershipsInput>, UserUncheckedUpdateWithoutMembershipsInput>
+  }
+
+  export type OrganizationUpdateOneRequiredWithoutMembershipsNestedInput = {
+    create?: XOR<OrganizationCreateWithoutMembershipsInput, OrganizationUncheckedCreateWithoutMembershipsInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutMembershipsInput
+    upsert?: OrganizationUpsertWithoutMembershipsInput
+    connect?: OrganizationWhereUniqueInput
+    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutMembershipsInput, OrganizationUpdateWithoutMembershipsInput>, OrganizationUncheckedUpdateWithoutMembershipsInput>
+  }
+
+  export type RolesUpdateOneRequiredWithoutMembershipsNestedInput = {
+    create?: XOR<RolesCreateWithoutMembershipsInput, RolesUncheckedCreateWithoutMembershipsInput>
+    connectOrCreate?: RolesCreateOrConnectWithoutMembershipsInput
+    upsert?: RolesUpsertWithoutMembershipsInput
+    connect?: RolesWhereUniqueInput
+    update?: XOR<XOR<RolesUpdateToOneWithWhereWithoutMembershipsInput, RolesUpdateWithoutMembershipsInput>, RolesUncheckedUpdateWithoutMembershipsInput>
+  }
+
+  export type OrganizationCreateNestedOneWithoutInvitesInput = {
+    create?: XOR<OrganizationCreateWithoutInvitesInput, OrganizationUncheckedCreateWithoutInvitesInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutInvitesInput
+    connect?: OrganizationWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutInvitationsInput = {
+    create?: XOR<UserCreateWithoutInvitationsInput, UserUncheckedCreateWithoutInvitationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInvitationsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type OrganizationUpdateOneRequiredWithoutInvitesNestedInput = {
+    create?: XOR<OrganizationCreateWithoutInvitesInput, OrganizationUncheckedCreateWithoutInvitesInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutInvitesInput
+    upsert?: OrganizationUpsertWithoutInvitesInput
+    connect?: OrganizationWhereUniqueInput
+    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutInvitesInput, OrganizationUpdateWithoutInvitesInput>, OrganizationUncheckedUpdateWithoutInvitesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutInvitationsNestedInput = {
+    create?: XOR<UserCreateWithoutInvitationsInput, UserUncheckedCreateWithoutInvitationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInvitationsInput
+    upsert?: UserUpsertWithoutInvitationsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInvitationsInput, UserUpdateWithoutInvitationsInput>, UserUncheckedUpdateWithoutInvitationsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -8786,6 +13454,19 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type TaskCreateWithoutAssigneeInput = {
     id?: string
     title: string
@@ -8797,6 +13478,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCreatedTasksInput
     comments?: TaskCommentCreateNestedManyWithoutTaskInput
+    organization: OrganizationCreateNestedOneWithoutTasksInput
   }
 
   export type TaskUncheckedCreateWithoutAssigneeInput = {
@@ -8809,6 +13491,7 @@ export namespace Prisma {
     dueDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    organizationId: string
     comments?: TaskCommentUncheckedCreateNestedManyWithoutTaskInput
   }
 
@@ -8833,6 +13516,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     assignee?: UserCreateNestedOneWithoutAssignedTasksInput
     comments?: TaskCommentCreateNestedManyWithoutTaskInput
+    organization: OrganizationCreateNestedOneWithoutTasksInput
   }
 
   export type TaskUncheckedCreateWithoutCreatedByInput = {
@@ -8845,6 +13529,7 @@ export namespace Prisma {
     dueDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    organizationId: string
     comments?: TaskCommentUncheckedCreateNestedManyWithoutTaskInput
   }
 
@@ -8858,27 +13543,34 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type RolesCreateWithoutUsersInput = {
+  export type InviteCreateWithoutInvitedByInput = {
     id?: string
-    name: string
-    description: string
+    email: string
+    token: string
+    accepted?: boolean
     createdAt?: Date | string
-    updatedAt?: Date | string
-    permissions?: PermissionsCreateNestedManyWithoutRolesInput
+    expiresAt: Date | string
+    organization: OrganizationCreateNestedOneWithoutInvitesInput
   }
 
-  export type RolesUncheckedCreateWithoutUsersInput = {
+  export type InviteUncheckedCreateWithoutInvitedByInput = {
     id?: string
-    name: string
-    description: string
+    email: string
+    organizationId: string
+    token: string
+    accepted?: boolean
     createdAt?: Date | string
-    updatedAt?: Date | string
-    permissions?: PermissionsUncheckedCreateNestedManyWithoutRolesInput
+    expiresAt: Date | string
   }
 
-  export type RolesCreateOrConnectWithoutUsersInput = {
-    where: RolesWhereUniqueInput
-    create: XOR<RolesCreateWithoutUsersInput, RolesUncheckedCreateWithoutUsersInput>
+  export type InviteCreateOrConnectWithoutInvitedByInput = {
+    where: InviteWhereUniqueInput
+    create: XOR<InviteCreateWithoutInvitedByInput, InviteUncheckedCreateWithoutInvitedByInput>
+  }
+
+  export type InviteCreateManyInvitedByInputEnvelope = {
+    data: InviteCreateManyInvitedByInput | InviteCreateManyInvitedByInput[]
+    skipDuplicates?: boolean
   }
 
   export type TaskCommentCreateWithoutUserInput = {
@@ -8904,6 +13596,30 @@ export namespace Prisma {
 
   export type TaskCommentCreateManyUserInputEnvelope = {
     data: TaskCommentCreateManyUserInput | TaskCommentCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserOrganizationCreateWithoutUserInput = {
+    id?: string
+    joinedAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutMembershipsInput
+    role: RolesCreateNestedOneWithoutMembershipsInput
+  }
+
+  export type UserOrganizationUncheckedCreateWithoutUserInput = {
+    id?: string
+    organizationId: string
+    roleId: string
+    joinedAt?: Date | string
+  }
+
+  export type UserOrganizationCreateOrConnectWithoutUserInput = {
+    where: UserOrganizationWhereUniqueInput
+    create: XOR<UserOrganizationCreateWithoutUserInput, UserOrganizationUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserOrganizationCreateManyUserInputEnvelope = {
+    data: UserOrganizationCreateManyUserInput | UserOrganizationCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -8937,6 +13653,7 @@ export namespace Prisma {
     dueDate?: DateTimeNullableFilter<"Task"> | Date | string | null
     createdAt?: DateTimeFilter<"Task"> | Date | string
     updatedAt?: DateTimeFilter<"Task"> | Date | string
+    organizationId?: StringFilter<"Task"> | string
   }
 
   export type TaskUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -8955,31 +13672,34 @@ export namespace Prisma {
     data: XOR<TaskUpdateManyMutationInput, TaskUncheckedUpdateManyWithoutCreatedByInput>
   }
 
-  export type RolesUpsertWithWhereUniqueWithoutUsersInput = {
-    where: RolesWhereUniqueInput
-    update: XOR<RolesUpdateWithoutUsersInput, RolesUncheckedUpdateWithoutUsersInput>
-    create: XOR<RolesCreateWithoutUsersInput, RolesUncheckedCreateWithoutUsersInput>
+  export type InviteUpsertWithWhereUniqueWithoutInvitedByInput = {
+    where: InviteWhereUniqueInput
+    update: XOR<InviteUpdateWithoutInvitedByInput, InviteUncheckedUpdateWithoutInvitedByInput>
+    create: XOR<InviteCreateWithoutInvitedByInput, InviteUncheckedCreateWithoutInvitedByInput>
   }
 
-  export type RolesUpdateWithWhereUniqueWithoutUsersInput = {
-    where: RolesWhereUniqueInput
-    data: XOR<RolesUpdateWithoutUsersInput, RolesUncheckedUpdateWithoutUsersInput>
+  export type InviteUpdateWithWhereUniqueWithoutInvitedByInput = {
+    where: InviteWhereUniqueInput
+    data: XOR<InviteUpdateWithoutInvitedByInput, InviteUncheckedUpdateWithoutInvitedByInput>
   }
 
-  export type RolesUpdateManyWithWhereWithoutUsersInput = {
-    where: RolesScalarWhereInput
-    data: XOR<RolesUpdateManyMutationInput, RolesUncheckedUpdateManyWithoutUsersInput>
+  export type InviteUpdateManyWithWhereWithoutInvitedByInput = {
+    where: InviteScalarWhereInput
+    data: XOR<InviteUpdateManyMutationInput, InviteUncheckedUpdateManyWithoutInvitedByInput>
   }
 
-  export type RolesScalarWhereInput = {
-    AND?: RolesScalarWhereInput | RolesScalarWhereInput[]
-    OR?: RolesScalarWhereInput[]
-    NOT?: RolesScalarWhereInput | RolesScalarWhereInput[]
-    id?: StringFilter<"Roles"> | string
-    name?: StringFilter<"Roles"> | string
-    description?: StringFilter<"Roles"> | string
-    createdAt?: DateTimeFilter<"Roles"> | Date | string
-    updatedAt?: DateTimeFilter<"Roles"> | Date | string
+  export type InviteScalarWhereInput = {
+    AND?: InviteScalarWhereInput | InviteScalarWhereInput[]
+    OR?: InviteScalarWhereInput[]
+    NOT?: InviteScalarWhereInput | InviteScalarWhereInput[]
+    id?: StringFilter<"Invite"> | string
+    email?: StringFilter<"Invite"> | string
+    organizationId?: StringFilter<"Invite"> | string
+    invitedById?: StringFilter<"Invite"> | string
+    token?: StringFilter<"Invite"> | string
+    accepted?: BoolFilter<"Invite"> | boolean
+    createdAt?: DateTimeFilter<"Invite"> | Date | string
+    expiresAt?: DateTimeFilter<"Invite"> | Date | string
   }
 
   export type TaskCommentUpsertWithWhereUniqueWithoutUserInput = {
@@ -9010,6 +13730,33 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"TaskComment"> | Date | string
   }
 
+  export type UserOrganizationUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserOrganizationWhereUniqueInput
+    update: XOR<UserOrganizationUpdateWithoutUserInput, UserOrganizationUncheckedUpdateWithoutUserInput>
+    create: XOR<UserOrganizationCreateWithoutUserInput, UserOrganizationUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserOrganizationUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserOrganizationWhereUniqueInput
+    data: XOR<UserOrganizationUpdateWithoutUserInput, UserOrganizationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserOrganizationUpdateManyWithWhereWithoutUserInput = {
+    where: UserOrganizationScalarWhereInput
+    data: XOR<UserOrganizationUpdateManyMutationInput, UserOrganizationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserOrganizationScalarWhereInput = {
+    AND?: UserOrganizationScalarWhereInput | UserOrganizationScalarWhereInput[]
+    OR?: UserOrganizationScalarWhereInput[]
+    NOT?: UserOrganizationScalarWhereInput | UserOrganizationScalarWhereInput[]
+    id?: StringFilter<"UserOrganization"> | string
+    userId?: StringFilter<"UserOrganization"> | string
+    organizationId?: StringFilter<"UserOrganization"> | string
+    roleId?: StringFilter<"UserOrganization"> | string
+    joinedAt?: DateTimeFilter<"UserOrganization"> | Date | string
+  }
+
   export type UserCreateWithoutCreatedTasksInput = {
     id?: string
     email: string
@@ -9017,8 +13764,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
-    roles?: RolesCreateNestedManyWithoutUsersInput
+    invitations?: InviteCreateNestedManyWithoutInvitedByInput
     comments?: TaskCommentCreateNestedManyWithoutUserInput
+    memberships?: UserOrganizationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCreatedTasksInput = {
@@ -9028,8 +13776,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
-    roles?: RolesUncheckedCreateNestedManyWithoutUsersInput
+    invitations?: InviteUncheckedCreateNestedManyWithoutInvitedByInput
     comments?: TaskCommentUncheckedCreateNestedManyWithoutUserInput
+    memberships?: UserOrganizationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCreatedTasksInput = {
@@ -9044,8 +13793,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     createdTasks?: TaskCreateNestedManyWithoutCreatedByInput
-    roles?: RolesCreateNestedManyWithoutUsersInput
+    invitations?: InviteCreateNestedManyWithoutInvitedByInput
     comments?: TaskCommentCreateNestedManyWithoutUserInput
+    memberships?: UserOrganizationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAssignedTasksInput = {
@@ -9055,8 +13805,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatedByInput
-    roles?: RolesUncheckedCreateNestedManyWithoutUsersInput
+    invitations?: InviteUncheckedCreateNestedManyWithoutInvitedByInput
     comments?: TaskCommentUncheckedCreateNestedManyWithoutUserInput
+    memberships?: UserOrganizationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAssignedTasksInput = {
@@ -9090,6 +13841,31 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type OrganizationCreateWithoutTasksInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    memberships?: UserOrganizationCreateNestedManyWithoutOrganizationInput
+    roles?: RolesCreateNestedManyWithoutOrganizationInput
+    invites?: InviteCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationUncheckedCreateWithoutTasksInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    memberships?: UserOrganizationUncheckedCreateNestedManyWithoutOrganizationInput
+    roles?: RolesUncheckedCreateNestedManyWithoutOrganizationInput
+    invites?: InviteUncheckedCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationCreateOrConnectWithoutTasksInput = {
+    where: OrganizationWhereUniqueInput
+    create: XOR<OrganizationCreateWithoutTasksInput, OrganizationUncheckedCreateWithoutTasksInput>
+  }
+
   export type UserUpsertWithoutCreatedTasksInput = {
     update: XOR<UserUpdateWithoutCreatedTasksInput, UserUncheckedUpdateWithoutCreatedTasksInput>
     create: XOR<UserCreateWithoutCreatedTasksInput, UserUncheckedCreateWithoutCreatedTasksInput>
@@ -9108,8 +13884,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
-    roles?: RolesUpdateManyWithoutUsersNestedInput
+    invitations?: InviteUpdateManyWithoutInvitedByNestedInput
     comments?: TaskCommentUpdateManyWithoutUserNestedInput
+    memberships?: UserOrganizationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedTasksInput = {
@@ -9119,8 +13896,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
-    roles?: RolesUncheckedUpdateManyWithoutUsersNestedInput
+    invitations?: InviteUncheckedUpdateManyWithoutInvitedByNestedInput
     comments?: TaskCommentUncheckedUpdateManyWithoutUserNestedInput
+    memberships?: UserOrganizationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutAssignedTasksInput = {
@@ -9141,8 +13919,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdTasks?: TaskUpdateManyWithoutCreatedByNestedInput
-    roles?: RolesUpdateManyWithoutUsersNestedInput
+    invitations?: InviteUpdateManyWithoutInvitedByNestedInput
     comments?: TaskCommentUpdateManyWithoutUserNestedInput
+    memberships?: UserOrganizationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedTasksInput = {
@@ -9152,8 +13931,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdTasks?: TaskUncheckedUpdateManyWithoutCreatedByNestedInput
-    roles?: RolesUncheckedUpdateManyWithoutUsersNestedInput
+    invitations?: InviteUncheckedUpdateManyWithoutInvitedByNestedInput
     comments?: TaskCommentUncheckedUpdateManyWithoutUserNestedInput
+    memberships?: UserOrganizationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TaskCommentUpsertWithWhereUniqueWithoutTaskInput = {
@@ -9172,6 +13952,37 @@ export namespace Prisma {
     data: XOR<TaskCommentUpdateManyMutationInput, TaskCommentUncheckedUpdateManyWithoutTaskInput>
   }
 
+  export type OrganizationUpsertWithoutTasksInput = {
+    update: XOR<OrganizationUpdateWithoutTasksInput, OrganizationUncheckedUpdateWithoutTasksInput>
+    create: XOR<OrganizationCreateWithoutTasksInput, OrganizationUncheckedCreateWithoutTasksInput>
+    where?: OrganizationWhereInput
+  }
+
+  export type OrganizationUpdateToOneWithWhereWithoutTasksInput = {
+    where?: OrganizationWhereInput
+    data: XOR<OrganizationUpdateWithoutTasksInput, OrganizationUncheckedUpdateWithoutTasksInput>
+  }
+
+  export type OrganizationUpdateWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    memberships?: UserOrganizationUpdateManyWithoutOrganizationNestedInput
+    roles?: RolesUpdateManyWithoutOrganizationNestedInput
+    invites?: InviteUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationUncheckedUpdateWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    memberships?: UserOrganizationUncheckedUpdateManyWithoutOrganizationNestedInput
+    roles?: RolesUncheckedUpdateManyWithoutOrganizationNestedInput
+    invites?: InviteUncheckedUpdateManyWithoutOrganizationNestedInput
+  }
+
   export type TaskCreateWithoutCommentsInput = {
     id?: string
     title: string
@@ -9183,6 +13994,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCreatedTasksInput
     assignee?: UserCreateNestedOneWithoutAssignedTasksInput
+    organization: OrganizationCreateNestedOneWithoutTasksInput
   }
 
   export type TaskUncheckedCreateWithoutCommentsInput = {
@@ -9196,6 +14008,7 @@ export namespace Prisma {
     dueDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    organizationId: string
   }
 
   export type TaskCreateOrConnectWithoutCommentsInput = {
@@ -9211,7 +14024,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
     createdTasks?: TaskCreateNestedManyWithoutCreatedByInput
-    roles?: RolesCreateNestedManyWithoutUsersInput
+    invitations?: InviteCreateNestedManyWithoutInvitedByInput
+    memberships?: UserOrganizationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommentsInput = {
@@ -9222,7 +14036,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
     createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatedByInput
-    roles?: RolesUncheckedCreateNestedManyWithoutUsersInput
+    invitations?: InviteUncheckedCreateNestedManyWithoutInvitedByInput
+    memberships?: UserOrganizationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommentsInput = {
@@ -9252,6 +14067,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCreatedTasksNestedInput
     assignee?: UserUpdateOneWithoutAssignedTasksNestedInput
+    organization?: OrganizationUpdateOneRequiredWithoutTasksNestedInput
   }
 
   export type TaskUncheckedUpdateWithoutCommentsInput = {
@@ -9265,6 +14081,7 @@ export namespace Prisma {
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationId?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUpsertWithoutCommentsInput = {
@@ -9286,7 +14103,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
     createdTasks?: TaskUpdateManyWithoutCreatedByNestedInput
-    roles?: RolesUpdateManyWithoutUsersNestedInput
+    invitations?: InviteUpdateManyWithoutInvitedByNestedInput
+    memberships?: UserOrganizationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -9297,34 +14115,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
     createdTasks?: TaskUncheckedUpdateManyWithoutCreatedByNestedInput
-    roles?: RolesUncheckedUpdateManyWithoutUsersNestedInput
-  }
-
-  export type UserCreateWithoutRolesInput = {
-    id?: string
-    email: string
-    password: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
-    createdTasks?: TaskCreateNestedManyWithoutCreatedByInput
-    comments?: TaskCommentCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutRolesInput = {
-    id?: string
-    email: string
-    password: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
-    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatedByInput
-    comments?: TaskCommentUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutRolesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutRolesInput, UserUncheckedCreateWithoutRolesInput>
+    invitations?: InviteUncheckedUpdateManyWithoutInvitedByNestedInput
+    memberships?: UserOrganizationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PermissionsCreateWithoutRolesInput = {
@@ -9348,31 +14140,53 @@ export namespace Prisma {
     create: XOR<PermissionsCreateWithoutRolesInput, PermissionsUncheckedCreateWithoutRolesInput>
   }
 
-  export type UserUpsertWithWhereUniqueWithoutRolesInput = {
-    where: UserWhereUniqueInput
-    update: XOR<UserUpdateWithoutRolesInput, UserUncheckedUpdateWithoutRolesInput>
-    create: XOR<UserCreateWithoutRolesInput, UserUncheckedCreateWithoutRolesInput>
+  export type OrganizationCreateWithoutRolesInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    memberships?: UserOrganizationCreateNestedManyWithoutOrganizationInput
+    tasks?: TaskCreateNestedManyWithoutOrganizationInput
+    invites?: InviteCreateNestedManyWithoutOrganizationInput
   }
 
-  export type UserUpdateWithWhereUniqueWithoutRolesInput = {
-    where: UserWhereUniqueInput
-    data: XOR<UserUpdateWithoutRolesInput, UserUncheckedUpdateWithoutRolesInput>
+  export type OrganizationUncheckedCreateWithoutRolesInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    memberships?: UserOrganizationUncheckedCreateNestedManyWithoutOrganizationInput
+    tasks?: TaskUncheckedCreateNestedManyWithoutOrganizationInput
+    invites?: InviteUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
-  export type UserUpdateManyWithWhereWithoutRolesInput = {
-    where: UserScalarWhereInput
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutRolesInput>
+  export type OrganizationCreateOrConnectWithoutRolesInput = {
+    where: OrganizationWhereUniqueInput
+    create: XOR<OrganizationCreateWithoutRolesInput, OrganizationUncheckedCreateWithoutRolesInput>
   }
 
-  export type UserScalarWhereInput = {
-    AND?: UserScalarWhereInput | UserScalarWhereInput[]
-    OR?: UserScalarWhereInput[]
-    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
-    id?: StringFilter<"User"> | string
-    email?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
-    createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
+  export type UserOrganizationCreateWithoutRoleInput = {
+    id?: string
+    joinedAt?: Date | string
+    user: UserCreateNestedOneWithoutMembershipsInput
+    organization: OrganizationCreateNestedOneWithoutMembershipsInput
+  }
+
+  export type UserOrganizationUncheckedCreateWithoutRoleInput = {
+    id?: string
+    userId: string
+    organizationId: string
+    joinedAt?: Date | string
+  }
+
+  export type UserOrganizationCreateOrConnectWithoutRoleInput = {
+    where: UserOrganizationWhereUniqueInput
+    create: XOR<UserOrganizationCreateWithoutRoleInput, UserOrganizationUncheckedCreateWithoutRoleInput>
+  }
+
+  export type UserOrganizationCreateManyRoleInputEnvelope = {
+    data: UserOrganizationCreateManyRoleInput | UserOrganizationCreateManyRoleInput[]
+    skipDuplicates?: boolean
   }
 
   export type PermissionsUpsertWithWhereUniqueWithoutRolesInput = {
@@ -9402,13 +14216,61 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Permissions"> | Date | string
   }
 
+  export type OrganizationUpsertWithoutRolesInput = {
+    update: XOR<OrganizationUpdateWithoutRolesInput, OrganizationUncheckedUpdateWithoutRolesInput>
+    create: XOR<OrganizationCreateWithoutRolesInput, OrganizationUncheckedCreateWithoutRolesInput>
+    where?: OrganizationWhereInput
+  }
+
+  export type OrganizationUpdateToOneWithWhereWithoutRolesInput = {
+    where?: OrganizationWhereInput
+    data: XOR<OrganizationUpdateWithoutRolesInput, OrganizationUncheckedUpdateWithoutRolesInput>
+  }
+
+  export type OrganizationUpdateWithoutRolesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    memberships?: UserOrganizationUpdateManyWithoutOrganizationNestedInput
+    tasks?: TaskUpdateManyWithoutOrganizationNestedInput
+    invites?: InviteUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationUncheckedUpdateWithoutRolesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    memberships?: UserOrganizationUncheckedUpdateManyWithoutOrganizationNestedInput
+    tasks?: TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+    invites?: InviteUncheckedUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type UserOrganizationUpsertWithWhereUniqueWithoutRoleInput = {
+    where: UserOrganizationWhereUniqueInput
+    update: XOR<UserOrganizationUpdateWithoutRoleInput, UserOrganizationUncheckedUpdateWithoutRoleInput>
+    create: XOR<UserOrganizationCreateWithoutRoleInput, UserOrganizationUncheckedCreateWithoutRoleInput>
+  }
+
+  export type UserOrganizationUpdateWithWhereUniqueWithoutRoleInput = {
+    where: UserOrganizationWhereUniqueInput
+    data: XOR<UserOrganizationUpdateWithoutRoleInput, UserOrganizationUncheckedUpdateWithoutRoleInput>
+  }
+
+  export type UserOrganizationUpdateManyWithWhereWithoutRoleInput = {
+    where: UserOrganizationScalarWhereInput
+    data: XOR<UserOrganizationUpdateManyMutationInput, UserOrganizationUncheckedUpdateManyWithoutRoleInput>
+  }
+
   export type RolesCreateWithoutPermissionsInput = {
     id?: string
     name: string
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    users?: UserCreateNestedManyWithoutRolesInput
+    organization?: OrganizationCreateNestedOneWithoutRolesInput
+    memberships?: UserOrganizationCreateNestedManyWithoutRoleInput
   }
 
   export type RolesUncheckedCreateWithoutPermissionsInput = {
@@ -9417,7 +14279,8 @@ export namespace Prisma {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    users?: UserUncheckedCreateNestedManyWithoutRolesInput
+    organizationId?: string | null
+    memberships?: UserOrganizationUncheckedCreateNestedManyWithoutRoleInput
   }
 
   export type RolesCreateOrConnectWithoutPermissionsInput = {
@@ -9441,6 +14304,500 @@ export namespace Prisma {
     data: XOR<RolesUpdateManyMutationInput, RolesUncheckedUpdateManyWithoutPermissionsInput>
   }
 
+  export type RolesScalarWhereInput = {
+    AND?: RolesScalarWhereInput | RolesScalarWhereInput[]
+    OR?: RolesScalarWhereInput[]
+    NOT?: RolesScalarWhereInput | RolesScalarWhereInput[]
+    id?: StringFilter<"Roles"> | string
+    name?: StringFilter<"Roles"> | string
+    description?: StringFilter<"Roles"> | string
+    createdAt?: DateTimeFilter<"Roles"> | Date | string
+    updatedAt?: DateTimeFilter<"Roles"> | Date | string
+    organizationId?: StringNullableFilter<"Roles"> | string | null
+  }
+
+  export type UserOrganizationCreateWithoutOrganizationInput = {
+    id?: string
+    joinedAt?: Date | string
+    user: UserCreateNestedOneWithoutMembershipsInput
+    role: RolesCreateNestedOneWithoutMembershipsInput
+  }
+
+  export type UserOrganizationUncheckedCreateWithoutOrganizationInput = {
+    id?: string
+    userId: string
+    roleId: string
+    joinedAt?: Date | string
+  }
+
+  export type UserOrganizationCreateOrConnectWithoutOrganizationInput = {
+    where: UserOrganizationWhereUniqueInput
+    create: XOR<UserOrganizationCreateWithoutOrganizationInput, UserOrganizationUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type UserOrganizationCreateManyOrganizationInputEnvelope = {
+    data: UserOrganizationCreateManyOrganizationInput | UserOrganizationCreateManyOrganizationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TaskCreateWithoutOrganizationInput = {
+    id?: string
+    title: string
+    description?: string | null
+    status: $Enums.TaskStatus
+    priority: $Enums.TaskPriority
+    dueDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedTasksInput
+    assignee?: UserCreateNestedOneWithoutAssignedTasksInput
+    comments?: TaskCommentCreateNestedManyWithoutTaskInput
+  }
+
+  export type TaskUncheckedCreateWithoutOrganizationInput = {
+    id?: string
+    title: string
+    description?: string | null
+    status: $Enums.TaskStatus
+    priority: $Enums.TaskPriority
+    assigneeId?: string | null
+    createdById: string
+    dueDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    comments?: TaskCommentUncheckedCreateNestedManyWithoutTaskInput
+  }
+
+  export type TaskCreateOrConnectWithoutOrganizationInput = {
+    where: TaskWhereUniqueInput
+    create: XOR<TaskCreateWithoutOrganizationInput, TaskUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type TaskCreateManyOrganizationInputEnvelope = {
+    data: TaskCreateManyOrganizationInput | TaskCreateManyOrganizationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RolesCreateWithoutOrganizationInput = {
+    id?: string
+    name: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    permissions?: PermissionsCreateNestedManyWithoutRolesInput
+    memberships?: UserOrganizationCreateNestedManyWithoutRoleInput
+  }
+
+  export type RolesUncheckedCreateWithoutOrganizationInput = {
+    id?: string
+    name: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    permissions?: PermissionsUncheckedCreateNestedManyWithoutRolesInput
+    memberships?: UserOrganizationUncheckedCreateNestedManyWithoutRoleInput
+  }
+
+  export type RolesCreateOrConnectWithoutOrganizationInput = {
+    where: RolesWhereUniqueInput
+    create: XOR<RolesCreateWithoutOrganizationInput, RolesUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type RolesCreateManyOrganizationInputEnvelope = {
+    data: RolesCreateManyOrganizationInput | RolesCreateManyOrganizationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InviteCreateWithoutOrganizationInput = {
+    id?: string
+    email: string
+    token: string
+    accepted?: boolean
+    createdAt?: Date | string
+    expiresAt: Date | string
+    invitedBy: UserCreateNestedOneWithoutInvitationsInput
+  }
+
+  export type InviteUncheckedCreateWithoutOrganizationInput = {
+    id?: string
+    email: string
+    invitedById: string
+    token: string
+    accepted?: boolean
+    createdAt?: Date | string
+    expiresAt: Date | string
+  }
+
+  export type InviteCreateOrConnectWithoutOrganizationInput = {
+    where: InviteWhereUniqueInput
+    create: XOR<InviteCreateWithoutOrganizationInput, InviteUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type InviteCreateManyOrganizationInputEnvelope = {
+    data: InviteCreateManyOrganizationInput | InviteCreateManyOrganizationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserOrganizationUpsertWithWhereUniqueWithoutOrganizationInput = {
+    where: UserOrganizationWhereUniqueInput
+    update: XOR<UserOrganizationUpdateWithoutOrganizationInput, UserOrganizationUncheckedUpdateWithoutOrganizationInput>
+    create: XOR<UserOrganizationCreateWithoutOrganizationInput, UserOrganizationUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type UserOrganizationUpdateWithWhereUniqueWithoutOrganizationInput = {
+    where: UserOrganizationWhereUniqueInput
+    data: XOR<UserOrganizationUpdateWithoutOrganizationInput, UserOrganizationUncheckedUpdateWithoutOrganizationInput>
+  }
+
+  export type UserOrganizationUpdateManyWithWhereWithoutOrganizationInput = {
+    where: UserOrganizationScalarWhereInput
+    data: XOR<UserOrganizationUpdateManyMutationInput, UserOrganizationUncheckedUpdateManyWithoutOrganizationInput>
+  }
+
+  export type TaskUpsertWithWhereUniqueWithoutOrganizationInput = {
+    where: TaskWhereUniqueInput
+    update: XOR<TaskUpdateWithoutOrganizationInput, TaskUncheckedUpdateWithoutOrganizationInput>
+    create: XOR<TaskCreateWithoutOrganizationInput, TaskUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type TaskUpdateWithWhereUniqueWithoutOrganizationInput = {
+    where: TaskWhereUniqueInput
+    data: XOR<TaskUpdateWithoutOrganizationInput, TaskUncheckedUpdateWithoutOrganizationInput>
+  }
+
+  export type TaskUpdateManyWithWhereWithoutOrganizationInput = {
+    where: TaskScalarWhereInput
+    data: XOR<TaskUpdateManyMutationInput, TaskUncheckedUpdateManyWithoutOrganizationInput>
+  }
+
+  export type RolesUpsertWithWhereUniqueWithoutOrganizationInput = {
+    where: RolesWhereUniqueInput
+    update: XOR<RolesUpdateWithoutOrganizationInput, RolesUncheckedUpdateWithoutOrganizationInput>
+    create: XOR<RolesCreateWithoutOrganizationInput, RolesUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type RolesUpdateWithWhereUniqueWithoutOrganizationInput = {
+    where: RolesWhereUniqueInput
+    data: XOR<RolesUpdateWithoutOrganizationInput, RolesUncheckedUpdateWithoutOrganizationInput>
+  }
+
+  export type RolesUpdateManyWithWhereWithoutOrganizationInput = {
+    where: RolesScalarWhereInput
+    data: XOR<RolesUpdateManyMutationInput, RolesUncheckedUpdateManyWithoutOrganizationInput>
+  }
+
+  export type InviteUpsertWithWhereUniqueWithoutOrganizationInput = {
+    where: InviteWhereUniqueInput
+    update: XOR<InviteUpdateWithoutOrganizationInput, InviteUncheckedUpdateWithoutOrganizationInput>
+    create: XOR<InviteCreateWithoutOrganizationInput, InviteUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type InviteUpdateWithWhereUniqueWithoutOrganizationInput = {
+    where: InviteWhereUniqueInput
+    data: XOR<InviteUpdateWithoutOrganizationInput, InviteUncheckedUpdateWithoutOrganizationInput>
+  }
+
+  export type InviteUpdateManyWithWhereWithoutOrganizationInput = {
+    where: InviteScalarWhereInput
+    data: XOR<InviteUpdateManyMutationInput, InviteUncheckedUpdateManyWithoutOrganizationInput>
+  }
+
+  export type UserCreateWithoutMembershipsInput = {
+    id?: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatedByInput
+    invitations?: InviteCreateNestedManyWithoutInvitedByInput
+    comments?: TaskCommentCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutMembershipsInput = {
+    id?: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatedByInput
+    invitations?: InviteUncheckedCreateNestedManyWithoutInvitedByInput
+    comments?: TaskCommentUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutMembershipsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMembershipsInput, UserUncheckedCreateWithoutMembershipsInput>
+  }
+
+  export type OrganizationCreateWithoutMembershipsInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: TaskCreateNestedManyWithoutOrganizationInput
+    roles?: RolesCreateNestedManyWithoutOrganizationInput
+    invites?: InviteCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationUncheckedCreateWithoutMembershipsInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: TaskUncheckedCreateNestedManyWithoutOrganizationInput
+    roles?: RolesUncheckedCreateNestedManyWithoutOrganizationInput
+    invites?: InviteUncheckedCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationCreateOrConnectWithoutMembershipsInput = {
+    where: OrganizationWhereUniqueInput
+    create: XOR<OrganizationCreateWithoutMembershipsInput, OrganizationUncheckedCreateWithoutMembershipsInput>
+  }
+
+  export type RolesCreateWithoutMembershipsInput = {
+    id?: string
+    name: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    permissions?: PermissionsCreateNestedManyWithoutRolesInput
+    organization?: OrganizationCreateNestedOneWithoutRolesInput
+  }
+
+  export type RolesUncheckedCreateWithoutMembershipsInput = {
+    id?: string
+    name: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organizationId?: string | null
+    permissions?: PermissionsUncheckedCreateNestedManyWithoutRolesInput
+  }
+
+  export type RolesCreateOrConnectWithoutMembershipsInput = {
+    where: RolesWhereUniqueInput
+    create: XOR<RolesCreateWithoutMembershipsInput, RolesUncheckedCreateWithoutMembershipsInput>
+  }
+
+  export type UserUpsertWithoutMembershipsInput = {
+    update: XOR<UserUpdateWithoutMembershipsInput, UserUncheckedUpdateWithoutMembershipsInput>
+    create: XOR<UserCreateWithoutMembershipsInput, UserUncheckedCreateWithoutMembershipsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMembershipsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMembershipsInput, UserUncheckedUpdateWithoutMembershipsInput>
+  }
+
+  export type UserUpdateWithoutMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatedByNestedInput
+    invitations?: InviteUpdateManyWithoutInvitedByNestedInput
+    comments?: TaskCommentUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+    invitations?: InviteUncheckedUpdateManyWithoutInvitedByNestedInput
+    comments?: TaskCommentUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type OrganizationUpsertWithoutMembershipsInput = {
+    update: XOR<OrganizationUpdateWithoutMembershipsInput, OrganizationUncheckedUpdateWithoutMembershipsInput>
+    create: XOR<OrganizationCreateWithoutMembershipsInput, OrganizationUncheckedCreateWithoutMembershipsInput>
+    where?: OrganizationWhereInput
+  }
+
+  export type OrganizationUpdateToOneWithWhereWithoutMembershipsInput = {
+    where?: OrganizationWhereInput
+    data: XOR<OrganizationUpdateWithoutMembershipsInput, OrganizationUncheckedUpdateWithoutMembershipsInput>
+  }
+
+  export type OrganizationUpdateWithoutMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: TaskUpdateManyWithoutOrganizationNestedInput
+    roles?: RolesUpdateManyWithoutOrganizationNestedInput
+    invites?: InviteUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationUncheckedUpdateWithoutMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+    roles?: RolesUncheckedUpdateManyWithoutOrganizationNestedInput
+    invites?: InviteUncheckedUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type RolesUpsertWithoutMembershipsInput = {
+    update: XOR<RolesUpdateWithoutMembershipsInput, RolesUncheckedUpdateWithoutMembershipsInput>
+    create: XOR<RolesCreateWithoutMembershipsInput, RolesUncheckedCreateWithoutMembershipsInput>
+    where?: RolesWhereInput
+  }
+
+  export type RolesUpdateToOneWithWhereWithoutMembershipsInput = {
+    where?: RolesWhereInput
+    data: XOR<RolesUpdateWithoutMembershipsInput, RolesUncheckedUpdateWithoutMembershipsInput>
+  }
+
+  export type RolesUpdateWithoutMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: PermissionsUpdateManyWithoutRolesNestedInput
+    organization?: OrganizationUpdateOneWithoutRolesNestedInput
+  }
+
+  export type RolesUncheckedUpdateWithoutMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationId?: NullableStringFieldUpdateOperationsInput | string | null
+    permissions?: PermissionsUncheckedUpdateManyWithoutRolesNestedInput
+  }
+
+  export type OrganizationCreateWithoutInvitesInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    memberships?: UserOrganizationCreateNestedManyWithoutOrganizationInput
+    tasks?: TaskCreateNestedManyWithoutOrganizationInput
+    roles?: RolesCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationUncheckedCreateWithoutInvitesInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    memberships?: UserOrganizationUncheckedCreateNestedManyWithoutOrganizationInput
+    tasks?: TaskUncheckedCreateNestedManyWithoutOrganizationInput
+    roles?: RolesUncheckedCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationCreateOrConnectWithoutInvitesInput = {
+    where: OrganizationWhereUniqueInput
+    create: XOR<OrganizationCreateWithoutInvitesInput, OrganizationUncheckedCreateWithoutInvitesInput>
+  }
+
+  export type UserCreateWithoutInvitationsInput = {
+    id?: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatedByInput
+    comments?: TaskCommentCreateNestedManyWithoutUserInput
+    memberships?: UserOrganizationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutInvitationsInput = {
+    id?: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatedByInput
+    comments?: TaskCommentUncheckedCreateNestedManyWithoutUserInput
+    memberships?: UserOrganizationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutInvitationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutInvitationsInput, UserUncheckedCreateWithoutInvitationsInput>
+  }
+
+  export type OrganizationUpsertWithoutInvitesInput = {
+    update: XOR<OrganizationUpdateWithoutInvitesInput, OrganizationUncheckedUpdateWithoutInvitesInput>
+    create: XOR<OrganizationCreateWithoutInvitesInput, OrganizationUncheckedCreateWithoutInvitesInput>
+    where?: OrganizationWhereInput
+  }
+
+  export type OrganizationUpdateToOneWithWhereWithoutInvitesInput = {
+    where?: OrganizationWhereInput
+    data: XOR<OrganizationUpdateWithoutInvitesInput, OrganizationUncheckedUpdateWithoutInvitesInput>
+  }
+
+  export type OrganizationUpdateWithoutInvitesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    memberships?: UserOrganizationUpdateManyWithoutOrganizationNestedInput
+    tasks?: TaskUpdateManyWithoutOrganizationNestedInput
+    roles?: RolesUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationUncheckedUpdateWithoutInvitesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    memberships?: UserOrganizationUncheckedUpdateManyWithoutOrganizationNestedInput
+    tasks?: TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+    roles?: RolesUncheckedUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type UserUpsertWithoutInvitationsInput = {
+    update: XOR<UserUpdateWithoutInvitationsInput, UserUncheckedUpdateWithoutInvitationsInput>
+    create: XOR<UserCreateWithoutInvitationsInput, UserUncheckedCreateWithoutInvitationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutInvitationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutInvitationsInput, UserUncheckedUpdateWithoutInvitationsInput>
+  }
+
+  export type UserUpdateWithoutInvitationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatedByNestedInput
+    comments?: TaskCommentUpdateManyWithoutUserNestedInput
+    memberships?: UserOrganizationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutInvitationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+    comments?: TaskCommentUncheckedUpdateManyWithoutUserNestedInput
+    memberships?: UserOrganizationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type TaskCreateManyAssigneeInput = {
     id?: string
     title: string
@@ -9451,6 +14808,7 @@ export namespace Prisma {
     dueDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    organizationId: string
   }
 
   export type TaskCreateManyCreatedByInput = {
@@ -9463,6 +14821,17 @@ export namespace Prisma {
     dueDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    organizationId: string
+  }
+
+  export type InviteCreateManyInvitedByInput = {
+    id?: string
+    email: string
+    organizationId: string
+    token: string
+    accepted?: boolean
+    createdAt?: Date | string
+    expiresAt: Date | string
   }
 
   export type TaskCommentCreateManyUserInput = {
@@ -9471,6 +14840,13 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type UserOrganizationCreateManyUserInput = {
+    id?: string
+    organizationId: string
+    roleId: string
+    joinedAt?: Date | string
   }
 
   export type TaskUpdateWithoutAssigneeInput = {
@@ -9484,6 +14860,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCreatedTasksNestedInput
     comments?: TaskCommentUpdateManyWithoutTaskNestedInput
+    organization?: OrganizationUpdateOneRequiredWithoutTasksNestedInput
   }
 
   export type TaskUncheckedUpdateWithoutAssigneeInput = {
@@ -9496,6 +14873,7 @@ export namespace Prisma {
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationId?: StringFieldUpdateOperationsInput | string
     comments?: TaskCommentUncheckedUpdateManyWithoutTaskNestedInput
   }
 
@@ -9509,6 +14887,7 @@ export namespace Prisma {
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationId?: StringFieldUpdateOperationsInput | string
   }
 
   export type TaskUpdateWithoutCreatedByInput = {
@@ -9522,6 +14901,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignee?: UserUpdateOneWithoutAssignedTasksNestedInput
     comments?: TaskCommentUpdateManyWithoutTaskNestedInput
+    organization?: OrganizationUpdateOneRequiredWithoutTasksNestedInput
   }
 
   export type TaskUncheckedUpdateWithoutCreatedByInput = {
@@ -9534,6 +14914,7 @@ export namespace Prisma {
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationId?: StringFieldUpdateOperationsInput | string
     comments?: TaskCommentUncheckedUpdateManyWithoutTaskNestedInput
   }
 
@@ -9547,32 +14928,37 @@ export namespace Prisma {
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type RolesUpdateWithoutUsersInput = {
+  export type InviteUpdateWithoutInvitedByInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    accepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    permissions?: PermissionsUpdateManyWithoutRolesNestedInput
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutInvitesNestedInput
   }
 
-  export type RolesUncheckedUpdateWithoutUsersInput = {
+  export type InviteUncheckedUpdateWithoutInvitedByInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    accepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    permissions?: PermissionsUncheckedUpdateManyWithoutRolesNestedInput
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type RolesUncheckedUpdateManyWithoutUsersInput = {
+  export type InviteUncheckedUpdateManyWithoutInvitedByInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    accepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TaskCommentUpdateWithoutUserInput = {
@@ -9597,6 +14983,27 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserOrganizationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutMembershipsNestedInput
+    role?: RolesUpdateOneRequiredWithoutMembershipsNestedInput
+  }
+
+  export type UserOrganizationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    roleId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserOrganizationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    roleId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TaskCommentCreateManyTaskInput = {
@@ -9631,34 +15038,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserUpdateWithoutRolesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
-    createdTasks?: TaskUpdateManyWithoutCreatedByNestedInput
-    comments?: TaskCommentUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutRolesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
-    createdTasks?: TaskUncheckedUpdateManyWithoutCreatedByNestedInput
-    comments?: TaskCommentUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateManyWithoutRolesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type UserOrganizationCreateManyRoleInput = {
+    id?: string
+    userId: string
+    organizationId: string
+    joinedAt?: Date | string
   }
 
   export type PermissionsUpdateWithoutRolesInput = {
@@ -9685,13 +15069,35 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserOrganizationUpdateWithoutRoleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutMembershipsNestedInput
+    organization?: OrganizationUpdateOneRequiredWithoutMembershipsNestedInput
+  }
+
+  export type UserOrganizationUncheckedUpdateWithoutRoleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserOrganizationUncheckedUpdateManyWithoutRoleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type RolesUpdateWithoutPermissionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserUpdateManyWithoutRolesNestedInput
+    organization?: OrganizationUpdateOneWithoutRolesNestedInput
+    memberships?: UserOrganizationUpdateManyWithoutRoleNestedInput
   }
 
   export type RolesUncheckedUpdateWithoutPermissionsInput = {
@@ -9700,7 +15106,8 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserUncheckedUpdateManyWithoutRolesNestedInput
+    organizationId?: NullableStringFieldUpdateOperationsInput | string | null
+    memberships?: UserOrganizationUncheckedUpdateManyWithoutRoleNestedInput
   }
 
   export type RolesUncheckedUpdateManyWithoutPermissionsInput = {
@@ -9709,6 +15116,165 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organizationId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UserOrganizationCreateManyOrganizationInput = {
+    id?: string
+    userId: string
+    roleId: string
+    joinedAt?: Date | string
+  }
+
+  export type TaskCreateManyOrganizationInput = {
+    id?: string
+    title: string
+    description?: string | null
+    status: $Enums.TaskStatus
+    priority: $Enums.TaskPriority
+    assigneeId?: string | null
+    createdById: string
+    dueDate?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RolesCreateManyOrganizationInput = {
+    id?: string
+    name: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InviteCreateManyOrganizationInput = {
+    id?: string
+    email: string
+    invitedById: string
+    token: string
+    accepted?: boolean
+    createdAt?: Date | string
+    expiresAt: Date | string
+  }
+
+  export type UserOrganizationUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutMembershipsNestedInput
+    role?: RolesUpdateOneRequiredWithoutMembershipsNestedInput
+  }
+
+  export type UserOrganizationUncheckedUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    roleId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserOrganizationUncheckedUpdateManyWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    roleId?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TaskUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedTasksNestedInput
+    assignee?: UserUpdateOneWithoutAssignedTasksNestedInput
+    comments?: TaskCommentUpdateManyWithoutTaskNestedInput
+  }
+
+  export type TaskUncheckedUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: TaskCommentUncheckedUpdateManyWithoutTaskNestedInput
+  }
+
+  export type TaskUncheckedUpdateManyWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RolesUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: PermissionsUpdateManyWithoutRolesNestedInput
+    memberships?: UserOrganizationUpdateManyWithoutRoleNestedInput
+  }
+
+  export type RolesUncheckedUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: PermissionsUncheckedUpdateManyWithoutRolesNestedInput
+    memberships?: UserOrganizationUncheckedUpdateManyWithoutRoleNestedInput
+  }
+
+  export type RolesUncheckedUpdateManyWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InviteUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    accepted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invitedBy?: UserUpdateOneRequiredWithoutInvitationsNestedInput
+  }
+
+  export type InviteUncheckedUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    invitedById?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    accepted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InviteUncheckedUpdateManyWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    invitedById?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    accepted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

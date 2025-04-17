@@ -26,26 +26,30 @@ model User {
   createdTasks  Task[] @relation("CreatedTasks")
 
   // tasks     UserTask[]
-  roles    Roles[]
-  comments TaskComment[]
+  // roles     Roles[] 
+  invitations Invite[]
+  comments    TaskComment[]
+  memberships UserOrganization[]
 }
 
 model Task {
-  id          String       @id @default(uuid())
-  title       String
-  description String?
-  status      TaskStatus
-  priority    TaskPriority
-  assigneeId  String?
-  createdById String
-  dueDate     DateTime?
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  id             String       @id @default(uuid())
+  title          String
+  description    String?
+  status         TaskStatus
+  priority       TaskPriority
+  assigneeId     String?
+  createdById    String
+  dueDate        DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  organizationId String
 
-  createdBy User          @relation("CreatedTasks", fields: [createdById], references: [id])
-  assignee  User?         @relation("AssignedTasks", fields: [assigneeId], references: [id])
+  createdBy    User          @relation("CreatedTasks", fields: [createdById], references: [id])
+  assignee     User?         @relation("AssignedTasks", fields: [assigneeId], references: [id])
   // users     UserTask[]
-  comments  TaskComment[]
+  comments     TaskComment[]
+  organization Organization  @relation(fields: [organizationId], references: [id])
 }
 
 model TaskComment {
@@ -74,48 +78,18 @@ enum TaskPriority {
 }
 
 model Roles {
-  id          String   @id @default(uuid())
-  name        String   @unique
-  description String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id             String   @id @default(uuid())
+  name           String   @unique
+  description    String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  organizationId String?
 
-  users       User[]
-  permissions Permissions[]
+  // users       User[]
+  permissions  Permissions[]
+  organization Organization?      @relation(fields: [organizationId], references: [id])
+  memberships  UserOrganization[]
 }
-
-// model UserTask {
-//   id        String   @id @default(uuid())
-//   userId    String
-//   taskId    String
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-
-//   user User @relation(fields: [userId], references: [id])
-//   task Task @relation(fields: [taskId], references: [id])
-// }
-
-// model RolePermissions {
-//   id        String   @id @default(uuid())
-//   roleId    String
-//   permissionId String
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-
-//   role Roles @relation(fields: [roleId], references: [id])
-//   permission Permissions @relation(fields: [permissionId], references: [id])
-// }
-
-// model UserRoles {
-//   id        String   @id @default(uuid())
-//   userId    String
-//   roleId    String
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-
-//   user User @relation(fields: [userId], references: [id])
-//   role Roles @relation(fields: [roleId], references: [id])
-// }
 
 model Permissions {
   id        String   @id @default(uuid())
@@ -125,4 +99,41 @@ model Permissions {
   updatedAt DateTime @updatedAt
 
   roles Roles[]
+}
+
+model Organization {
+  id          String             @id @default(uuid())
+  name        String
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  memberships UserOrganization[]
+  tasks       Task[]
+  roles       Roles[]
+  invites     Invite[]
+}
+
+model UserOrganization {
+  id             String   @id @default(uuid())
+  userId         String
+  organizationId String
+  roleId         String
+  joinedAt       DateTime @default(now())
+
+  user         User         @relation(fields: [userId], references: [id])
+  organization Organization @relation(fields: [organizationId], references: [id])
+  role         Roles        @relation(fields: [roleId], references: [id])
+}
+
+model Invite {
+  id             String   @id @default(uuid())
+  email          String
+  organizationId String
+  invitedById    String
+  token          String   @unique
+  accepted       Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  expiresAt      DateTime
+
+  organization Organization @relation(fields: [organizationId], references: [id])
+  invitedBy    User         @relation(fields: [invitedById], references: [id])
 }

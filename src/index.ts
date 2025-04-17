@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import auth from "./api/auth";
+import organization from "./api/organization";
 import { roles } from "./api/roles";
 import { seed } from "./api/seed";
 import { tasks } from "./api/task";
@@ -12,6 +13,7 @@ export type AppBindings = {
     JWT_SECRET: string;
     ENVIRONMENT: "development" | "production";
     FRONTEND_URL: string;
+    RESEND_API_KEY: string;
   };
   Variables: {
     userId: string;
@@ -36,6 +38,7 @@ app.route("/api/auth", auth);
 app.route("/api/tasks", tasks);
 app.route("/api/roles", roles);
 app.route("/api/users", users);
+app.route("/api/organization", organization);
 
 app.get("/", async (c) => {
   return c.json({ hi: "Hello Hono!" });

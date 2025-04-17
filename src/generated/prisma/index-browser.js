@@ -135,7 +135,8 @@ exports.Prisma.TaskScalarFieldEnum = {
   createdById: 'createdById',
   dueDate: 'dueDate',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  organizationId: 'organizationId'
 };
 
 exports.Prisma.TaskCommentScalarFieldEnum = {
@@ -152,7 +153,8 @@ exports.Prisma.RolesScalarFieldEnum = {
   name: 'name',
   description: 'description',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  organizationId: 'organizationId'
 };
 
 exports.Prisma.PermissionsScalarFieldEnum = {
@@ -161,6 +163,32 @@ exports.Prisma.PermissionsScalarFieldEnum = {
   action: 'action',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrganizationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserOrganizationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  organizationId: 'organizationId',
+  roleId: 'roleId',
+  joinedAt: 'joinedAt'
+};
+
+exports.Prisma.InviteScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  organizationId: 'organizationId',
+  invitedById: 'invitedById',
+  token: 'token',
+  accepted: 'accepted',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -195,7 +223,10 @@ exports.Prisma.ModelName = {
   Task: 'Task',
   TaskComment: 'TaskComment',
   Roles: 'Roles',
-  Permissions: 'Permissions'
+  Permissions: 'Permissions',
+  Organization: 'Organization',
+  UserOrganization: 'UserOrganization',
+  Invite: 'Invite'
 };
 
 /**

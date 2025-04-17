@@ -16,11 +16,24 @@ const updateUserSchema = z.object({
   }),
 });
 
-// Get all users
+// Get all users (organization-aware)
 users.get("/", async (c) => {
   const db = getPrisma(c.env.DATABASE_URL);
+  const organizationId = c.req.query("organizationId");
+  if (!organizationId) {
+    return c.json({
+      message: "Missing organizationId",
+      status: 400,
+      ok: false,
+    });
+  }
   try {
-    const users = await db.user.findMany({ include: { roles: true } });
+    // Find all user memberships for this org, then fetch users
+    const memberships = await db.userOrganization.findMany({
+      where: { organizationId },
+      include: { user: true, role: true },
+    });
+    const users = memberships.map((m) => ({ ...m.user, orgRole: m.role }));
     return c.json({ data: users, status: 200, ok: true }, 200);
   } catch (error) {
     return c.json(
@@ -30,76 +43,122 @@ users.get("/", async (c) => {
   }
 });
 
-// Get a user by ID
+// Get a user by ID (organization-aware)
 users.get("/:id", async (c) => {
   const db = getPrisma(c.env.DATABASE_URL);
-
   const id = c.req.param("id");
-  try {
-    const user = await db.user.findUnique({
-      where: { id },
-      include: { roles: true },
+  const organizationId = c.req.query("organizationId");
+  if (!organizationId) {
+    return c.json({
+      message: "Missing organizationId",
+      status: 400,
+      ok: false,
     });
-    if (!user) {
-      return c.json({ message: "User not found", ok: true, status: 404 }, 404);
+  }
+  try {
+    const membership = await db.userOrganization.findFirst({
+      where: { userId: id, organizationId },
+      include: { user: true, role: true },
+    });
+    if (!membership) {
+      return c.json(
+        { message: "User not found in organization", ok: false, status: 404 },
+        404
+      );
     }
-    return c.json(user);
+    return c.json({
+      data: { ...membership.user, orgRole: membership.role },
+      status: 200,
+      ok: true,
+    });
   } catch (error) {
     return c.json({ message: `Failed to fetch user ${error}` }, 500);
   }
 });
 
-// // Create a new user
-// users.post('/',
-//     zValidator('json', z.object({
-//         body: z.object(updateUserSchema)
-//     })),
-//     async (c) => {
-//     const db = getPrisma(c.env.DATABASE_URL);
-
-//     const body = await c.req.json();
-//     try {
-//         const newUser = await db.user.create({ data: body });
-//         return c.json(newUser, 201);
-//     } catch (error) {
-//         return c.json({ error: 'Failed to create user' }, 500);
-//     }
-// });
-
-// Update a user by ID
+// Update a user by ID (organization-aware)
 users.put("/:id", zValidator("json", updateUserSchema), async (c) => {
   const db = getPrisma(c.env.DATABASE_URL);
-
   const id = c.req.param("id");
+  const organizationId = c.req.query("organizationId");
   const body = c.req.valid("json");
-  console.log(body);
-
+  if (!organizationId) {
+    return c.json({
+      message: "Missing organizationId",
+      status: 400,
+      ok: false,
+    });
+  }
   try {
+    // Only update if user is in org
+    const membership = await db.userOrganization.findFirst({
+      where: { userId: id, organizationId },
+    });
+    if (!membership) {
+      return c.json(
+        { message: "User not found in organization", status: 404 },
+        404
+      );
+    }
+    // Update user fields
     const updatedUser = await db.user.update({
       where: { id },
-      include: { roles: true },
-      data: { ...body },
+      data: { ...body.user },
+      // include: { roles: true },
     });
+    // Optionally update org role
+    if (body.role?.name) {
+      const role = await db.roles.findFirst({
+        where: { name: body.role.name, organizationId },
+      });
+      if (role) {
+        await db.userOrganization.update({
+          where: { id: membership.id },
+          data: { roleId: role.id },
+        });
+      }
+    }
     return c.json({ data: updatedUser, status: 200, ok: true }, 200);
   } catch (error) {
     return c.json({ message: "Failed to update user", status: 500 }, 500);
   }
 });
 
-// Delete a user by ID
+// Delete a user by ID (organization-aware)
 users.delete("/:id", async (c) => {
   const db = getPrisma(c.env.DATABASE_URL);
-
   const id = c.req.param("id");
+  const organizationId = c.req.query("organizationId");
+  if (!organizationId) {
+    return c.json({
+      message: "Missing organizationId",
+      status: 400,
+      ok: false,
+    });
+  }
   try {
-    await db.user.delete({ where: { id } });
+    // Only delete membership, not the user globally
+    const membership = await db.userOrganization.findFirst({
+      where: { userId: id, organizationId },
+    });
+    if (!membership) {
+      return c.json(
+        { message: "User not found in organization", status: 404 },
+        404
+      );
+    }
+    await db.userOrganization.delete({ where: { id: membership.id } });
     return c.json(
-      { message: "User deleted successfully", ok: true, status: 200 },
+      { message: "User removed from organization", ok: true, status: 200 },
       200
     );
   } catch (error) {
     return c.json(
-      { message: "Failed to delete user", ok: true, status: 500 },
+      {
+        message: "Failed to remove user from organization",
+        ok: false,
+        status: 500,
+      },
       500
     );
   }

@@ -54,13 +54,25 @@ const createCommentSchema = z.object({
 tasks.get("/", async (c) => {
   const db = getPrisma(c.env.DATABASE_URL);
   const userId = c.req.query("assigneeId");
+  const organizationId = c.req.query("organizationId");
+
+  if (!organizationId) {
+    return c.json({
+      message: "Missing organizationId",
+      status: 400,
+      ok: false,
+    });
+  }
 
   const allTasks = userId
     ? await db.task.findMany({
-        where: { assigneeId: userId },
+        where: { assigneeId: userId, organizationId },
         orderBy: { createdAt: "desc" },
       })
-    : await db.task.findMany({});
+    : await db.task.findMany({
+        where: { organizationId },
+        orderBy: { createdAt: "desc" },
+      });
 
   return c.json({ data: allTasks, status: 200, ok: true });
 });
@@ -68,8 +80,18 @@ tasks.get("/", async (c) => {
 // GET /tasks/:id - fetch single task
 tasks.get("/:id", async (c) => {
   const id = c.req.param("id");
+  const organizationId = c.req.query("organizationId");
+
+  if (!organizationId) {
+    return c.json({
+      message: "Missing organizationId",
+      status: 400,
+      ok: false,
+    });
+  }
+
   const db = getPrisma(c.env.DATABASE_URL);
-  const task = await db.task.findUnique({ where: { id } });
+  const task = await db.task.findFirst({ where: { id, organizationId } });
 
   if (!task) return c.notFound();
 
@@ -77,51 +99,92 @@ tasks.get("/:id", async (c) => {
 });
 
 // POST /tasks - create a new task
-tasks.post("/", zValidator("json", createTaskSchema), async (c) => {
-  const db = getPrisma(c.env.DATABASE_URL);
-  const body = c.req.valid("json");
+tasks.post(
+  "/",
+  zValidator("json", createTaskSchema.extend({ organizationId: z.string() })),
+  async (c) => {
+    const db = getPrisma(c.env.DATABASE_URL);
+    const body = c.req.valid("json");
 
-  console.log(body, "body");
+    if (!body.organizationId) {
+      return c.json({
+        message: "Missing organizationId",
+        status: 400,
+        ok: false,
+      });
+    }
 
-  const newTask = await db.task.create({
-    data: {
-      ...body,
-      comments: {
-        create:
-          body.comment?.map((comment) => ({
-            userId: comment.userId,
-            content: comment.content,
-          })) || [],
+    const newTask = await db.task.create({
+      data: {
+        ...body,
+        organizationId: body.organizationId,
+        comments: {
+          create:
+            body.comment?.map((comment) => ({
+              userId: comment.userId,
+              content: comment.content,
+            })) || [],
+        },
       },
-    },
-  });
+    });
 
-  return c.json({ data: newTask, status: 200, ok: true });
-});
+    return c.json({ data: newTask, status: 200, ok: true });
+  }
+);
 
 // PUT /tasks/:id - update a task
-tasks.put("/:id", zValidator("json", updateTaskSchemea), async (c) => {
-  const db = getPrisma(c.env.DATABASE_URL);
+tasks.put(
+  "/:id",
+  zValidator("json", updateTaskSchemea.extend({ organizationId: z.string() })),
+  async (c) => {
+    const db = getPrisma(c.env.DATABASE_URL);
 
-  const id = c.req.param("id");
-  const body = c.req.valid("json");
+    const id = c.req.param("id");
+    const body = c.req.valid("json");
 
-  // taskWithoutComments
-  const newTask = await db.task.update({
-    where: { id },
-    data: {
-      ...body,
-    },
-  });
+    if (!body.organizationId) {
+      return c.json({
+        message: "Missing organizationId",
+        status: 400,
+        ok: false,
+      });
+    }
 
-  return c.json({ data: newTask, status: 200, ok: true });
-});
+    const task = await db.task.findFirst({
+      where: { id, organizationId: body.organizationId },
+    });
+
+    if (!task) return c.notFound();
+
+    const newTask = await db.task.update({
+      where: { id },
+      data: {
+        ...body,
+      },
+    });
+
+    return c.json({ data: newTask, status: 200, ok: true });
+  }
+);
 
 // DELETE /tasks/:id - delete a task
 tasks.delete("/:id", async (c) => {
   const db = getPrisma(c.env.DATABASE_URL);
 
   const id = c.req.param("id");
+  const organizationId = c.req.query("organizationId");
+
+  if (!organizationId) {
+    return c.json({
+      message: "Missing organizationId",
+      status: 400,
+      ok: false,
+    });
+  }
+
+  const task = await db.task.findFirst({ where: { id, organizationId } });
+
+  if (!task) return c.notFound();
 
   await db.task.delete({ where: { id } });
 
