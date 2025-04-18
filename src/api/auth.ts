@@ -18,6 +18,7 @@ auth.post("/me", async (ctx) => {
   // Verify the token
   const decoded = (await verifyToken(token, ctx.env.JWT_SECRET)) as {
     userId: string;
+    organizationId?: string;
   } | null;
   if (!decoded) {
     return ctx.json({
@@ -27,67 +28,99 @@ auth.post("/me", async (ctx) => {
     });
   }
 
-  // Fetch the user from the database using the user ID from the decoded token
+  // Fetch the user and their memberships (orgs)
   const user = await db.user.findUnique({
     where: { id: decoded.userId },
-    select: { id: true, email: true },
+    select: {
+      id: true,
+      email: true,
+      // roles: true,
+      memberships: {
+        select: {
+          organization: { select: { id: true, name: true } },
+          organizationId: true,
+          role: { select: { name: true } },
+        },
+      },
+    },
   });
-  // ctx.var.userId = decoded.userId
   if (!user) {
     return ctx.json({ message: "User not found", status: 404, ok: false });
   }
 
-  return ctx.json({ data: user, status: 200, ok: true });
+  // Format memberships for frontend
+  const memberships = user.memberships.map((m) => ({
+    organizationId: m.organizationId,
+    organizationName: m.organization.name,
+    role: m.role.name,
+    isCurrent: m.organizationId === decoded.organizationId,
+  }));
+
+  return ctx.json({
+    data: {
+      id: user.id,
+      email: user.email,
+      // roles: user.roles,
+      memberships,
+    },
+    status: 200,
+    ok: true,
+  });
 });
 
-// auth.post("/checkPermissions", async (ctx) => {
-//   const db = getPrisma(ctx.env.DATABASE_URL);
-//   const { token, actions, resources } = (await ctx.req.json()) as {
-//     token: string;
-//     actions: string[];
-//     resources: string[];
-//   };
+// POST /api/auth/checkPermissions { token, actions, resources }
+auth.post("/checkPermissions", async (ctx) => {
+  const db = getPrisma(ctx.env.DATABASE_URL);
+  const { token, actions, resources } = (await ctx.req.json()) as {
+    token: string;
+    actions: string[];
+    resources: string[];
+  };
 
-//   if (!token) {
-//     return ctx.json({ message: "Not authenticated", status: 401, ok: false });
-//   }
+  if (!token) {
+    return ctx.json({ message: "Not authenticated", status: 401, ok: false });
+  }
 
-//   // Verify the token
-//   const decoded = (await verifyToken(token, ctx.env.JWT_SECRET)) as {
-//     userId: string;
-//   } | null;
-//   if (!decoded) {
-//     return ctx.json({
-//       message: "Invalid or expired token",
-//       status: 401,
-//       ok: false,
-//     });
-//   }
+  // Verify the token
+  const decoded = (await verifyToken(token, ctx.env.JWT_SECRET)) as {
+    userId: string;
+    organizationId: string;
+  } | null;
+  if (!decoded) {
+    return ctx.json({
+      message: "Invalid or expired token",
+      status: 401,
+      ok: false,
+    });
+  }
 
-//   // Fetch the user from the database using the user ID from the decoded token
-//   const user = await db.user.findUnique({
-//     where: { id: decoded.userId },
-//     include: { roles: { include: { permissions: true } } },
-//   });
-//   // ctx.var.userId = decoded.userId
-//   if (!user) {
-//     return ctx.json({ message: "User not found", status: 404, ok: false });
-//   }
+  // Find the user's membership for the current org
+  const membership = await db.userOrganization.findFirst({
+    where: { userId: decoded.userId, organizationId: decoded.organizationId },
+    include: { role: { include: { permissions: true } } },
+  });
+  if (!membership) {
+    return ctx.json({
+      message: "Not a member of this organization",
+      status: 403,
+      ok: false,
+    });
+  }
 
-//   // Check if the user has the required permissions
-//   const hasPermission = user.roles[0].permissions.some((permission) => {
-//     return (
-//       actions.includes(permission.action) &&
-//       resources.includes(permission.resource)
-//     );
-//   });
+  // Check if the user's role has the required permissions
+  const hasPermission = membership.role.permissions.some((permission) => {
+    return (
+      actions.includes(permission.action) &&
+      resources.includes(permission.resource)
+    );
+  });
 
-//   if (!hasPermission) {
-//     return ctx.json({ message: "Forbidden", status: 403, ok: false });
-//   }
+  if (!hasPermission) {
+    return ctx.json({ message: "Forbidden", status: 403, ok: false });
+  }
 
-//   return ctx.json({ data: true, status: 200, ok: true });
-// });
+  return ctx.json({ data: true, status: 200, ok: true });
+});
 
 auth.use(preventLoggedInUser);
 
@@ -133,6 +166,53 @@ auth.post("/login", async (ctx) => {
   );
 
   return ctx.json({ data: { token }, status: 200, ok: true });
+});
+
+// Endpoint to switch organization and issue a new JWT
+// POST /api/auth/switch-organization { token, organizationId }
+auth.post("/switch-organization", async (ctx) => {
+  const db = getPrisma(ctx.env.DATABASE_URL);
+  const { token, organizationId } = await ctx.req.json();
+
+  if (!token || !organizationId) {
+    return ctx.json({
+      message: "Missing token or organizationId",
+      status: 400,
+      ok: false,
+    });
+  }
+
+  // Verify the token
+  const decoded = (await verifyToken(token, ctx.env.JWT_SECRET)) as {
+    userId: string;
+  } | null;
+  if (!decoded) {
+    return ctx.json({
+      message: "Invalid or expired token",
+      status: 401,
+      ok: false,
+    });
+  }
+
+  // Check if user is a member of the organization
+  const membership = await db.userOrganization.findFirst({
+    where: { userId: decoded.userId, organizationId },
+  });
+  if (!membership) {
+    return ctx.json({
+      message: "Not a member of this organization",
+      status: 403,
+      ok: false,
+    });
+  }
+
+  // Issue new JWT for the selected organization
+  const newToken = await generateToken(
+    decoded.userId,
+    organizationId,
+    ctx.env.JWT_SECRET
+  );
+  return ctx.json({ data: { token: newToken }, status: 200, ok: true });
 });
 
 export default auth;
