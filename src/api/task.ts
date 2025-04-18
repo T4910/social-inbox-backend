@@ -68,10 +68,12 @@ tasks.get("/", async (c) => {
     ? await db.task.findMany({
         where: { assigneeId: userId, organizationId },
         orderBy: { createdAt: "desc" },
+        include: { comments: true },
       })
     : await db.task.findMany({
         where: { organizationId },
         orderBy: { createdAt: "desc" },
+        include: { comments: true },
       });
 
   return c.json({ data: allTasks, status: 200, ok: true });
@@ -91,7 +93,10 @@ tasks.get("/:id", async (c) => {
   }
 
   const db = getPrisma(c.env.DATABASE_URL);
-  const task = await db.task.findFirst({ where: { id, organizationId } });
+  const task = await db.task.findFirst({
+    where: { id, organizationId },
+    include: { comments: true },
+  });
 
   if (!task) return c.notFound();
 
