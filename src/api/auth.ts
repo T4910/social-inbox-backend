@@ -18,7 +18,7 @@ auth.post("/me", async (ctx) => {
   // Verify the token
   const decoded = (await verifyToken(token, ctx.env.JWT_SECRET)) as {
     userId: string;
-    organizationId?: string;
+    currentOrgId?: string;
   } | null;
   if (!decoded) {
     return ctx.json({
@@ -49,12 +49,21 @@ auth.post("/me", async (ctx) => {
   }
 
   // Format memberships for frontend
-  const memberships = user.memberships.map((m) => ({
-    organizationId: m.organizationId,
-    organizationName: m.organization.name,
-    role: m.role.name,
-    isCurrent: m.organizationId === decoded.organizationId,
-  }));
+  const memberships = user.memberships.map((m) => {
+    console.log(
+      m.organizationId,
+      decoded,
+      m.organizationId === decoded.currentOrgId,
+      " from token in auth.ts"
+    );
+
+    return {
+      organizationId: m.organizationId,
+      organizationName: m.organization.name,
+      role: m.role.name,
+      isCurrent: m.organizationId === decoded.currentOrgId,
+    };
+  });
 
   return ctx.json({
     data: {
@@ -84,7 +93,7 @@ auth.post("/checkPermissions", async (ctx) => {
   // Verify the token
   const decoded = (await verifyToken(token, ctx.env.JWT_SECRET)) as {
     userId: string;
-    organizationId: string;
+    currentOrgId: string;
   } | null;
   if (!decoded) {
     return ctx.json({
@@ -96,7 +105,7 @@ auth.post("/checkPermissions", async (ctx) => {
 
   // Find the user's membership for the current org
   const membership = await db.userOrganization.findFirst({
-    where: { userId: decoded.userId, organizationId: decoded.organizationId },
+    where: { userId: decoded.userId, organizationId: decoded.currentOrgId },
     include: { role: { include: { permissions: true } } },
   });
   if (!membership) {
@@ -114,6 +123,17 @@ auth.post("/checkPermissions", async (ctx) => {
       resources.includes(permission.resource)
     );
   });
+
+  console.log(
+    "Membaership: ",
+    membership,
+    "Has permission: ",
+    hasPermission,
+    "token",
+    decoded,
+    actions,
+    resources
+  );
 
   if (!hasPermission) {
     return ctx.json({ message: "Forbidden", status: 403, ok: false });

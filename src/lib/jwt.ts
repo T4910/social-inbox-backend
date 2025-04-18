@@ -9,6 +9,11 @@ export function generateToken(
   return sign({ userId, currentOrgId }, secret);
 }
 
+type token = {
+  userId: string;
+  currentOrgId?: string;
+};
+
 // Function to verify JWT token
 export function verifyToken(token: string, secret: string) {
   try {

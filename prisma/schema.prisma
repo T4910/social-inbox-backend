@@ -79,7 +79,7 @@ enum TaskPriority {
 
 model Roles {
   id        String   @id @default(uuid())
-  name      String   @unique
+  name      String   
   description String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

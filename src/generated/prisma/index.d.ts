@@ -11238,10 +11238,10 @@ export namespace Prisma {
 
   export type RolesWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    name?: string
     AND?: RolesWhereInput | RolesWhereInput[]
     OR?: RolesWhereInput[]
     NOT?: RolesWhereInput | RolesWhereInput[]
+    name?: StringFilter<"Roles"> | string
     description?: StringFilter<"Roles"> | string
     createdAt?: DateTimeFilter<"Roles"> | Date | string
     updatedAt?: DateTimeFilter<"Roles"> | Date | string
@@ -11249,7 +11249,7 @@ export namespace Prisma {
     permissions?: PermissionsListRelationFilter
     organization?: XOR<OrganizationNullableScalarRelationFilter, OrganizationWhereInput> | null
     memberships?: UserOrganizationListRelationFilter
-  }, "id" | "name">
+  }, "id">
 
   export type RolesOrderByWithAggregationInput = {
     id?: SortOrder
