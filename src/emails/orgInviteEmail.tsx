@@ -1,9 +1,13 @@
+import * as React from "react";
+
 interface InviteEmailTemplateProps {
   name: string;
   inviteUrl: string;
 }
 
-export function InviteEmailTemplate(org: InviteEmailTemplateProps) {
+const InviteEmailTemplate: React.FC<Readonly<InviteEmailTemplateProps>> = (
+  org: InviteEmailTemplateProps
+) => {
   return (
     <html>
       <head>
@@ -48,6 +52,6 @@ export function InviteEmailTemplate(org: InviteEmailTemplateProps) {
       </body>
     </html>
   );
-}
+};
 
 export default InviteEmailTemplate;

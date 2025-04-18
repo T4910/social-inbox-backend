@@ -9,7 +9,7 @@ import { generateToken } from "../lib/jwt";
 const orgSchema = z.object({
   userId: z.string(),
   name: z.string().min(2),
-  invites: z.string().email().array(), // comma-separated emails
+  invites: z.string().email().array().optional(), // comma-separated emails
 });
 
 const organization = new Hono<AppBindings>();
@@ -56,6 +56,7 @@ organization.post("/", zValidator("json", orgSchema), async (c) => {
     });
   }
 
+  console.log("somehting wrong with naem", name);
   // Create organization with default roles
   const org = await db.organization.create({
     data: {
@@ -163,7 +164,7 @@ organization.post("/accept-invite/:token", async (c) => {
       data: {
         type: "register-user-first",
         message: "No user found for invite email. Please register first.", // don't change the wording - tightly couples with frontend
-        inviteId: invite.id,
+        inviteToken: invite.token,
       },
       status: 404,
     });
@@ -215,6 +216,8 @@ organization.get("/validate-invite/:token", async (c) => {
         },
       })
     : await db.invite.findUnique({ where: { token } });
+
+  console.log(invite, "invite");
 
   if (!invite || invite.accepted || invite.expiresAt < new Date()) {
     return c.json({

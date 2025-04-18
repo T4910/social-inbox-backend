@@ -1,6 +1,6 @@
-import { JSX } from "hono/jsx";
+import * as React from "react";
 import { Resend } from "resend";
-import { InviteEmailTemplate } from "../emails/orgInviteEmail";
+import InviteEmailTemplate from "../emails/orgInviteEmail";
 
 export const getResend = (
   apiKey: string,
@@ -9,7 +9,7 @@ export const getResend = (
   const resend = new Resend(apiKey);
 
   const emailSender = {
-    send: async (to: string, subject: string, react: JSX.IntrinsicElements) => {
+    send: async (to: string, subject: string, react: React.ReactElement) => {
       await resend.emails.send({
         from: domainEmail,
         to: [to],
@@ -31,4 +31,3 @@ export const getResend = (
 };
 
 export type EmailSender = ReturnType<typeof getResend>;
-// export type EmailSenderType = InstanceType<typeof getResend>;
