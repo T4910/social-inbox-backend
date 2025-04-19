@@ -12,6 +12,11 @@ const orgSchema = z.object({
   invites: z.string().email().array().optional(), // comma-separated emails
 });
 
+const inviteSchema = z.object({
+  userId: z.string(),
+  invites: z.string().email().array(),
+});
+
 const organization = new Hono<AppBindings>();
 
 organization.post("/", zValidator("json", orgSchema), async (c) => {
@@ -138,6 +143,68 @@ organization.post("/", zValidator("json", orgSchema), async (c) => {
   const token = await generateToken(userId, org.id, c.env.JWT_SECRET);
 
   return c.json({ ok: true, data: { token }, status: 200 });
+});
+
+organization.post("/invite", zValidator("json", inviteSchema), async (c) => {
+  const db = getPrisma(c.env.DATABASE_URL);
+  const { orgInvite } = getResend(c.env.RESEND_API_KEY);
+  const { userId, invites } = c.req.valid("json");
+  const organizationId = c.req.query("organizationId");
+
+  if (!organizationId) {
+    return c.json({
+      ok: false,
+      message: "Missing organizationId",
+      status: 400,
+    });
+  }
+
+  // Check if the organization exists
+  const org = await db.organization.findUnique({
+    where: { id: organizationId },
+  });
+
+  if (!org) {
+    return c.json({
+      ok: false,
+      message: "Organization not found",
+      status: 404,
+    });
+  }
+
+  // Handle invites (if any)
+  try {
+    const now = new Date();
+    const expiresAt = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000); // 7 days
+
+    for (const email of invites) {
+      const token = crypto.randomUUID();
+      await db.invite.create({
+        data: {
+          email,
+          organizationId,
+          invitedById: userId,
+          token,
+          expiresAt,
+        },
+      });
+      // Send invite email
+      const inviteUrl = `${c.env.FRONTEND_URL}/invite/${token}`;
+      await orgInvite(email, org.name, inviteUrl);
+    }
+  } catch (error) {
+    return c.json({
+      ok: false,
+      message: "Failed to send invites",
+      status: 500,
+    });
+  }
+
+  return c.json({
+    ok: true,
+    message: "Invites sent successfully",
+    status: 200,
+  });
 });
 
 organization.post("/accept-invite/:token", async (c) => {
