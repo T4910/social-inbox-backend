@@ -8,11 +8,10 @@ const users = new Hono<AppBindings>();
 
 const updateUserSchema = z.object({
   user: z.object({
-    name: z.string(),
     email: z.string(),
   }),
   role: z.object({
-    name: z.string(),
+    id: z.string(),
   }),
 });
 
@@ -104,19 +103,13 @@ users.put("/:id", zValidator("json", updateUserSchema), async (c) => {
     const updatedUser = await db.user.update({
       where: { id },
       data: { ...body.user },
-      // include: { roles: true },
     });
     // Optionally update org role
-    if (body.role?.name) {
-      const role = await db.roles.findFirst({
-        where: { name: body.role.name, organizationId },
+    if (body.role?.id) {
+      await db.userOrganization.update({
+        where: { id: membership.id },
+        data: { roleId: body.role.id },
       });
-      if (role) {
-        await db.userOrganization.update({
-          where: { id: membership.id },
-          data: { roleId: role.id },
-        });
-      }
     }
     return c.json({ data: updatedUser, status: 200, ok: true }, 200);
   } catch (error) {
