@@ -27,6 +27,8 @@ This project is a modern, full-stack platform for managing users, roles, permiss
 # In your terminal
 cd path/to/your/projects
 # (Clone or copy the repo here)
+git clone https://github.com/t4910/social-inbox-frontend.git frontend
+git clone https://github.com/t4910/social-inbox-backend.git backend 
 ```
 
 ### 2. Install dependencies
@@ -47,13 +49,13 @@ pnpm install # or npm install
 
 ### 3. Configure environment variables
 
-- Copy `.env.example` to `.env` in both `backend` and `frontend` if present, and fill in the required values (database URL, JWT secret, etc).
+- Copy `.env.example` to `.env` in the `frontend` and `.env` & `.dev.vars` in the `backend` if present, and fill in the required values (database URL, JWT secret, etc).
 
-### 4. Run database migrations (backend)
+### 4. Run database synchronization (backend)
 
 ```sh
 cd backend
-pnpm run migrate # or npx prisma migrate dev
+pnpm db:push # or npm run db:push
 ```
 
 ### 5. Start the development servers
@@ -94,8 +96,7 @@ pnpm run start
 
 ## Additional Notes
 
-- For Google OAuth, set up credentials in your Google Cloud Console and update your `.env` files accordingly.
-- See `tasks.txt` for ongoing development tasks and roadmap.
+- For Google OAuth, set up credentials in your Google Cloud Console and update your `.env` & `dev.vars` files accordingly.
 - For more details on architecture, see the code comments and documentation in each folder.
 
 ---
