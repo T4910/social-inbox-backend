@@ -1,9 +1,13 @@
+import { googleAuth } from "@hono/oauth-providers/google";
 import { Hono } from "hono";
 import { deleteCookie, getCookie, setCookie } from "hono/cookie"; // Cookie utilities
 import { AppBindings } from "..";
 import { getPrisma } from "../lib/db";
 import { generateToken, verifyToken } from "../lib/jwt"; // JWT utility functions
-import { preventLoggedInUser } from "../middleware/authMiddleware";
+import {
+  googleAuthMiddleware,
+  preventLoggedInUser,
+} from "../middleware/authMiddleware";
 
 const auth = new Hono<AppBindings>();
 
@@ -50,12 +54,12 @@ auth.post("/me", async (ctx) => {
 
   // Format memberships for frontend
   const memberships = user.memberships.map((m) => {
-    console.log(
-      m.organizationId,
-      decoded,
-      m.organizationId === decoded.currentOrgId,
-      " from token in auth.ts"
-    );
+    // console.log(
+    //   m.organizationId,
+    //   decoded,
+    //   m.organizationId === decoded.currentOrgId,
+    //   " from token in auth.ts"
+    // );
 
     return {
       organizationId: m.organizationId,
@@ -124,16 +128,16 @@ auth.post("/checkPermissions", async (ctx) => {
     );
   });
 
-  console.log(
-    "Membaership: ",
-    membership,
-    "Has permission: ",
-    hasPermission,
-    "token",
-    decoded,
-    actions,
-    resources
-  );
+  // console.log(
+  //   "Membaership: ",
+  //   membership,
+  //   "Has permission: ",
+  //   hasPermission,
+  //   "token",
+  //   decoded,
+  //   actions,
+  //   resources
+  // );
 
   if (!hasPermission) {
     return ctx.json({ message: "Forbidden", status: 403, ok: false });
@@ -233,6 +237,53 @@ auth.post("/switch-organization", async (ctx) => {
     ctx.env.JWT_SECRET
   );
   return ctx.json({ data: { token: newToken }, status: 200, ok: true });
+});
+
+// Google OAuth2 login
+// Redirect URI: /api/auth/google
+// Callback: /api/auth/google (handled by middleware)
+auth.use("/google", googleAuthMiddleware, async (c) => {
+  const googleUser = c.get("user-google");
+  if (!googleUser?.email) {
+    return c.json({ ok: false, message: "Google login failed" }, 401);
+  }
+  const db = getPrisma(c.env.DATABASE_URL);
+  // Try to find user by googleId or email
+  let user = await db.user.findFirst({
+    where: {
+      OR: [{ googleId: googleUser.id }, { email: googleUser.email }],
+    },
+  });
+  // If not found, create a new user
+  if (!user) {
+    user = await db.user.create({
+      data: {
+        email: googleUser.email,
+        googleId: googleUser.id,
+        provider: "google",
+        password: "", // Not used for Google users
+      },
+    });
+    // Optionally: prompt for org creation/selection on frontend
+  } else if (!user.googleId) {
+    // Link Google account to existing user
+    await db.user.update({
+      where: { id: user.id },
+      data: { googleId: googleUser.id, provider: "google" },
+    });
+  }
+  // Issue JWT for the user (pick a default org if needed)
+  const memberships = await db.userOrganization.findMany({
+    where: { userId: user.id },
+  });
+  const orgId = memberships[0]?.organizationId;
+  const token = await generateToken(user.id, orgId, c.env.JWT_SECRET);
+  setCookie(c, "auth_token", token, {
+    path: "/",
+    httpOnly: true,
+    secure: true,
+  });
+  return c.redirect(`${c.env.FRONTEND_URL}/dashboard`);
 });
 
 export default auth;

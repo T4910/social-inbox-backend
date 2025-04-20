@@ -19,6 +19,8 @@ model User {
   id        String    @id @default(uuid())
   email     String    @unique
   password  String
+  googleId  String?   @unique
+  provider  String?   // e.g. "google"
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 

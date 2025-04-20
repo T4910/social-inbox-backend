@@ -14,6 +14,8 @@ export type AppBindings = {
     ENVIRONMENT: "development" | "production";
     FRONTEND_URL: string;
     RESEND_API_KEY: string;
+    GOOGLE_ID: string;
+    GOOGLE_SECRET: string;
   };
   Variables: {
     userId: string;

@@ -10,6 +10,7 @@
     "migrate:reset": "prisma migrate reset --force --skip-seed"
   },
   "dependencies": {
+    "@hono/oauth-providers": "^0.7.1",
     "@hono/zod-validator": "^0.4.3",
     "@prisma/client": "^6.6.0",
     "@prisma/extension-accelerate": "^1.3.0",
