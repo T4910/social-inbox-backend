@@ -1,7 +1,7 @@
-import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { createTestServer } from "@cloudflare/vitest-pool-workers";
-import { tasks } from "../src/api/task";
 import { PrismaClient } from "@prisma/client";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { tasks } from "../src/api/task";
 
 const prisma = new PrismaClient();
 
@@ -9,7 +9,9 @@ let org: any, user: any, taskId: string;
 
 beforeAll(async () => {
   org = await prisma.organization.create({ data: { name: "TasksTestOrg" } });
-  user = await prisma.user.create({ data: { email: "taskuser@test.com", password: "testpass123" } });
+  user = await prisma.user.create({
+    data: { email: "taskuser@test.com", password: "testpass123" },
+  });
 });
 
 afterAll(async () => {
@@ -68,9 +70,9 @@ describe("Tasks API", () => {
         status: "IN_PROGRESS",
         priority: "HIGH",
         createdById: user.id,
-        organizationId: org.id
+        organizationId: org.id,
       }),
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
     });
     expect(res.status).toBe(200);
     const data = await res.json();
@@ -87,11 +89,11 @@ describe("Tasks API", () => {
         status: "PENDING",
         priority: "LOW",
         createdById: user.id,
-        organizationId: org.id
-      }
+        organizationId: org.id,
+      },
     });
     const res = await server.fetch(`/${newTask.id}?organizationId=${org.id}`, {
-      method: "DELETE"
+      method: "DELETE",
     });
     expect(res.status).toBe(200);
     const data = await res.json();
@@ -102,7 +104,7 @@ describe("Tasks API", () => {
     const res = await server.fetch(`/${taskId}/comments`, {
       method: "POST",
       body: JSON.stringify({ userId: user.id, content: "Nice work!" }),
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
     });
     expect(res.status).toBe(200);
     const data = await res.json();
@@ -122,10 +124,10 @@ describe("Tasks API", () => {
   it("deletes a comment from a task", async () => {
     // Add a comment to delete
     const comment = await prisma.taskComment.create({
-      data: { taskId, userId: user.id, content: "Delete this comment" }
+      data: { taskId, userId: user.id, content: "Delete this comment" },
     });
     const res = await server.fetch(`/${taskId}/comments/${comment.id}`, {
-      method: "DELETE"
+      method: "DELETE",
     });
     expect(res.status).toBe(200);
     const data = await res.json();

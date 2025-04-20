@@ -55,9 +55,9 @@ describe("Users API", () => {
       method: "PUT",
       body: JSON.stringify({
         user: { email: "updateduser@test.com" },
-        role: { id: role.id }
+        role: { id: role.id },
       }),
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
     });
     expect(res.status).toBe(200);
     const data = await res.json();
@@ -67,9 +67,11 @@ describe("Users API", () => {
 
   it("removes a user from an organization", async () => {
     // Add user back to org for this test
-    await prisma.userOrganization.create({ data: { userId: testUser.id, organizationId: org.id, roleId: role.id } });
+    await prisma.userOrganization.create({
+      data: { userId: testUser.id, organizationId: org.id, roleId: role.id },
+    });
     const res = await server.fetch(`/${testUser.id}?organizationId=${org.id}`, {
-      method: "DELETE"
+      method: "DELETE",
     });
     expect(res.status).toBe(200);
     const data = await res.json();

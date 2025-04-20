@@ -1,7 +1,7 @@
-import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { createTestServer } from "@cloudflare/vitest-pool-workers";
-import { roles } from "../src/api/roles";
 import { PrismaClient } from "@prisma/client";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { roles } from "../src/api/roles";
 
 const prisma = new PrismaClient();
 
@@ -69,7 +69,9 @@ describe("Roles API", () => {
     const data = await res.json();
     expect(data.ok).toBe(true);
     expect(data.data.name).toBe("updatedrole");
-    expect(data.data.permissions.some((p: any) => p.action === "update")).toBe(true);
+    expect(data.data.permissions.some((p: any) => p.action === "update")).toBe(
+      true
+    );
   });
 
   it("deletes a role", async () => {
@@ -85,7 +87,7 @@ describe("Roles API", () => {
       },
     });
     const res = await server.fetch(`/${newRole.id}?organizationId=${org.id}`, {
-      method: "DELETE"
+      method: "DELETE",
     });
     expect(res.status).toBe(200);
     const data = await res.json();

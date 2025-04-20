@@ -1,7 +1,7 @@
-import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { createTestServer } from "@cloudflare/vitest-pool-workers";
-import organization from "../src/api/organization";
 import { PrismaClient } from "@prisma/client";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import organization from "../src/api/organization";
 
 const prisma = new PrismaClient();
 
@@ -17,7 +17,9 @@ beforeAll(async () => {
 afterAll(async () => {
   await prisma.invite.deleteMany({});
   await prisma.userOrganization.deleteMany({ where: { userId: testUser.id } });
-  await prisma.organization.deleteMany({ where: { name: { contains: "TestOrg" } } });
+  await prisma.organization.deleteMany({
+    where: { name: { contains: "TestOrg" } },
+  });
   await prisma.user.deleteMany({ where: { email: { contains: "@test.com" } } });
   await prisma.$disconnect();
 });
@@ -36,7 +38,9 @@ describe("Organization API", () => {
     expect(data.ok).toBe(true);
     expect(data.data.token).toBeDefined();
     // Save orgId for later tests
-    const org = await prisma.organization.findFirst({ where: { name: "TestOrg1" } });
+    const org = await prisma.organization.findFirst({
+      where: { name: "TestOrg1" },
+    });
     orgId = org?.id;
   });
 
@@ -55,7 +59,10 @@ describe("Organization API", () => {
   it("invites a user to an organization", async () => {
     const res = await server.fetch(`/invite?organizationId=${orgId}`, {
       method: "POST",
-      body: JSON.stringify({ userId: testUser.id, invites: ["invitee@test.com"] }),
+      body: JSON.stringify({
+        userId: testUser.id,
+        invites: ["invitee@test.com"],
+      }),
       headers: { "Content-Type": "application/json" },
     });
     expect(res.status).toBe(200);
@@ -84,7 +91,9 @@ describe("Organization API", () => {
 
   it("accepts an invite for a registered user", async () => {
     // Create a user and invite
-    const invitedUser = await prisma.user.create({ data: { email: "acceptme@test.com", password: "x" } });
+    const invitedUser = await prisma.user.create({
+      data: { email: "acceptme@test.com", password: "x" },
+    });
     const invite = await prisma.invite.create({
       data: {
         email: "acceptme@test.com",
@@ -94,7 +103,9 @@ describe("Organization API", () => {
         expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       },
     });
-    const res = await server.fetch(`/accept-invite/${invite.token}`, { method: "POST" });
+    const res = await server.fetch(`/accept-invite/${invite.token}`, {
+      method: "POST",
+    });
     expect(res.status).toBe(200);
     const data = await res.json();
     expect(data.ok).toBe(true);
@@ -111,7 +122,9 @@ describe("Organization API", () => {
         expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       },
     });
-    const res = await server.fetch(`/accept-invite/${invite.token}`, { method: "POST" });
+    const res = await server.fetch(`/accept-invite/${invite.token}`, {
+      method: "POST",
+    });
     expect(res.status).toBe(200);
     const data = await res.json();
     expect(data.ok).toBe(true);
