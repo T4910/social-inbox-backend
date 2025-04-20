@@ -75,7 +75,7 @@ pnpm run dev # or npm run dev
 ```
 
 - The frontend will be available at http://localhost:3000
-- The backend will be available at http://localhost:8787 (or as configured)
+- The backend will be available at http://127.0.0.1:8787 (or as configured)
 
 ## Deployment
 
